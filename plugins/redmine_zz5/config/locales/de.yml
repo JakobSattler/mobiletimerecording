@@ -1,0 +1,147 @@
+# German strings go here
+de:
+  zz5_title: "Zeiterfassung"
+  zz5_menu: "Zeiterfassung"
+  zz5_settings: "Zeiterfassung Einstellungen"
+  zz5_user_preferences: "Zeiterfassung Präferenzen"
+  zz5_time_report: "Stundenauswertung"
+  zz5_project_report: "Projekt-Controlling"
+  zz5_links: "Links"
+
+  # permissions
+  project_module_zz5_module: "ZZ5 Berechtigungen"
+  permission_manage_zz5: "Zeiterfassung Admin"
+  permission_view_zz5: "Zeiterfassung anzeigen"
+
+  # buttons
+  zz5_save: "Speichern"
+  zz5_cancel: "Abbrechen"
+
+  # labels
+  zz5_week_title: "KW"
+  zz5_work_time_label: "Arbeitszeit"
+  zz5_work_start: "Arbeitsbeginn"
+  zz5_work_end: "Arbeitsende"
+  zz5_break_duration: "Pausendauer"
+  zz5_block_entry: "Langzeitabsenz"
+  zz5_time_carry: "Übertrag"
+  zz5_time_carry_forward: "Vortrag"
+  zz5_estimated_time: "Geschätzter Aufwand"
+  zz5_name_column: "Name"
+  zz5_hours_without_tickets: "Fehlende Stunden ohne Tickets"
+  zz5_wrong_work_time: "Fehlende Arbeitszeiten"
+  zz5_wrong_project_time: "Fehlende Projektzeiten"
+  zz5_invalid_worktime: "Ungültige Arbeitszeiten"
+  zz5_last_saved: "Zuletzt gespeichert"
+  zz5_duplicate_tickets: "Folgende Tickets befinden sich bereits in der Liste"
+
+  zz5_actual_time: "Ist-Stunden"
+  zz5_target_time: "Soll-Stunden"
+  zz5_time_difference: "Differenz"
+  zz5_vacation: "Urlaubsanspruch"
+  zz5_time_account: "Stundenkonto"
+  zz5_project_time: "Projektzeiten"
+  zz5_in_days: "(in Tagen)"
+  zz5_comment: "Kommentar (max. 255 Zeichen)"
+
+  zz5_absence_label: "Absenzen"
+  zz5_absence_reason: "Absenzgrund"
+  zz5_absence_duration: "Absenzdauer"
+  zz5_absence_project: "Projekte"
+  zz5_absence_entry: "Längere Absenzdauer"
+  zz5_absence_from: "Von"
+  zz5_absence_to: "Bis"
+
+  zz5_project_ticket_label: "Projekte und Tickets"
+  zz5_favorite_tickets_label: "Favoriten"
+  zz5_own_project_label: "Meine Projekte"
+  zz5_click_here: "Hier klicken"
+  zz5_project_tree: "Projektbaum"
+
+  zz5_saveweek_sucess: "Änderungen erfolgreich gespeichert"
+  zz5_saveweek_failed: "Fehler beim Speichern!"
+  zz5_vie_wweek_failed: "Fehlende Stunden!"
+  zz5_saveweek_not_possible: "Speichern nicht möglich, korrigieren Sie die Eingabe!"
+  zz5_cw: "KW"
+  zz5_monday: "Montag"
+  zz5_tuesday: "Dienstag"
+  zz5_wednesday: "Mittwoch"
+  zz5_thursday: "Donnerstag"
+  zz5_friday: "Freitag"
+  zz5_saturday: "Samstag"
+  zz5_sunday: "Sonntag"
+  zz5_no_work_day: "Kein Arbeitstag"
+
+  # employment
+  zz5_employment_data: "Beschäftigungsdaten"
+  zz5_employment_scope: "Beschäftigungsausmaß"
+  zz5_employment_start: "Eintrittsdatum"
+  zz5_employment_carry: "Zeitübertrag"
+  zz5_employment_allin: "All-In"
+  zz5_employment_new: "Neuer Eintrag"
+  zz5_employment_enter_start: "Doppeltes/Leeres Eintrittsdatum"
+  zz5_employment_enter_scope: "Beschäftigungsausmaß eingeben"
+  zz5_employment_enter_vacation: "Urlaubsanspruch eingeben"
+  zz5_employment_enter_carry: "Zeitübertrag eingeben"
+  zz5_employment_no_entries: "Keine Einträge vorhanden."
+  zz5_employment_overtime: "Überstundenpauschale"
+  zz5_employment_enter_overtime: "Überstundenpauschale eingeben"
+
+  # absences
+  zz5_absence_sick: "Krankenstand"
+  zz5_absence_care: "Pflegefreistellung"
+  zz5_absence_special_vacation: "Sonderurlaub"
+  zz5_absence_vacation: "Urlaub"
+  zz5_absence_comp_time: "Zeitausgleich"
+
+  # tool-tips
+  zz5_begin_err_empty: "Arbeitsbeginn eingeben"
+  zz5_end_err_empty: "Arbeitsende eingeben"
+  zz5_break_err_empty: "Pausendauer eingeben"
+  zz5_worktime_err_empty: "Ungültige Arbeitszeit"
+  zz5_discard_unsaved_changes: "Änderungen verwerfen?"
+  zz5_next_cw: "Nächste Kalenderwoche"
+  zz5_prev_cw: "Vorherige Kalenderwoche"
+  zz5_next_day: "Nächster Tag"
+  zz5_prev_day: "Vorheriger Tag"
+  zz5_invalid_absence_duration: "Ungültige Absenzdauer"
+  zz5_insert_actual_time: "Aktuelle Zeit einfügen"
+  zz5_weekly_time_difference: "Wöchentliche Zeitdifferenz: "
+  zz5_daily_time_difference: "Tägliche Zeitdifferenz: "
+  zz5_label_carry: "Vortrag: "
+  zz5_save_not_possible: "Speichern nicht möglich, korrigieren sie bitte die Eingabe!"
+  zz5_comment_maxlen: "(max. 255 Zeichen)"
+  zz5_target_sum: "Wochensumme Soll-Stunden"
+  zz5_actual_sum: "Wochensumme Ist-Stunden"
+  zz5_project_sum: "Wochensumme Projekt-Stunden"
+
+  # ticket search
+  zz5_hint_text: "Bis zu 3 Ticketnamen/-nummern eingeben"
+  zz5_no_results_text: "Nichts gefunden"
+  zz5_searching_text: "Suche..."
+
+  # preferences
+  field_favorite_tickets: "Anzahl an Favoriten"
+  field_display_days: "Anzahl an Tagen anzeigen"
+  field_display_projects: "Projektbaum anzeigen"
+  field_favorite_ticket_order: "Ticketreihenfolge"
+  field_display_worktimes: "Anzeige der Arbeitszeiten"
+  zz5_order_by_issue_id: "Nach Issue ID"
+  zz5_order_by_updated_on: "Zuletzt bearbeitet"
+  zz5_static_worktimes: "Immer sichtbar"
+  zz5_normal_worktimes: "Normal"
+
+  # date
+  date:
+    day_names: [Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag]
+    month_names: [~, Jänner, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+
+  # messages with place holders
+  message:
+      zz5_report_work_week_sum: "Teilsumme %{calender_week}. KW"
+      zz5_report_work_month_sum: "Teilsumme %{month_name}"
+      zz5_report_work_year_sum: "Teilsumme %{year}"
+      zz5_report_work_period_sum: "Summe der ausgewählten Periode"
+      zz5_wrong_time: "Fehlende Stunden"
+      zz5_invalid_time: "Ungültige Stunden"
+      zz5_invalid_absences: "Ungültige Absenz(en)"

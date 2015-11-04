@@ -1,0 +1,33 @@
+<div class="absences-row absence-reason-row">
+    <div class='time-title'><%= title %>
+    </div>
+    <div class="times times-absence-reason">
+        <div class="absence-reason-column" ng-repeat="day in days track by day.id">
+            <div class="absence-reason" ng-click="day.id_absenceTypes = !day.id_absenceTypes; old_id = day.absence_reason; old_duration = day.absence_time">
+                <input id="{{day.id}}_<%= id%>" ng-model="day.absence_reason" style="display:none;" ng-focus="hasFocus();" ng-blur="lostFocus()" ng-bind="day.id_absence_reason" value="">
+                <img id="{{day.id}}_selectedAbsence" ng-if="day.absence_reason != ''" class="image" ng-src="/plugin_assets/redmine_zz5/images/{{day.absence_reason}}.png">
+                <img id="{{day.id}}_selectedAbsence" ng-if="day.absence_reason == ''" class="image" ng-src="/plugin_assets/redmine_zz5/images/-1.png">
+                <div class="select-arrow">
+                </div>
+            </div>
+            <div id="{{day.id}}-absence-reason-select" class="absence-select" ng-show="day.id_absenceTypes">
+                <div class="absence-type" ng-click="setAbsenceType(day, day.id, '-1', old_id, old_duration); day.id_absence_reason = ''; day.id_absenceTypes = !day.id_absenceTypes;" id="-1">
+                    <div class="absence-type-img"></div>
+                    <div class="absence-type-strings"></div>
+                </div>
+                <% Zz5AbsenceType.find_each do |type| %>
+                <div class="absence-type" ng-click="setAbsenceType(day, day.id, <%= type.id %>, old_id, old_duration); day.id_absence_reason = <%= type.id %>; day.id_absenceTypes = !day.id_absenceTypes;" id="<%= type.id %>">
+                    <div class="absence-type-img">
+                        <img class="image" src='<%= "/plugin_assets/redmine_zz5/images/" + type.id.to_s + ".png"%>'>
+                    </div>
+                    <div class="absence-type-strings"><%= l(type.name) %>
+                    </div>
+                </div>
+                <%end%>
+            </div>
+            <div class="absence-right">
+            </div>
+            <div class="outside-click" ng-show="day.id_absenceTypes" ng-click="day.id_absenceTypes = false"></div>
+        </div>
+    </div>
+</div>      

@@ -1,0 +1,7 @@
+$('#ajax-modal').html('<%= escape_javascript(render :partial => 'absence_dialog') %>');
+showModal('ajax-modal', '400px');
+$('#ajax-modal').addClass('new-watcher');
+
+loadDatePicker();
+
+$('#absence_reason').focus();

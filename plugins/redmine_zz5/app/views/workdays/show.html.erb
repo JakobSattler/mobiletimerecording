@@ -1,0 +1,346 @@
+<% content_for :header_tags do %>
+    <% if @weekview %>
+        <%= stylesheet_link_tag "workdays_angular.css", :plugin => "redmine_zz5" %>
+    <% else %>
+        <%= stylesheet_link_tag "workdays_daily_angular.css", :plugin => "redmine_zz5" %>
+    <% end %>
+    <%= stylesheet_link_tag 'common.css', :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag "dialog.css", :plugin => "redmine_zz5" %>
+    <%= stylesheet_link_tag 'jquery.timeentry.css', :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag 'token-input.css', :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag 'ngDialog.css', :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag 'ngDialog-theme-default.css', :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag 'loading-bar.css', :plugin => 'redmine_zz5' %>
+    <base href="/zz5/" />
+<% end %>
+
+<div ng-app="zz5App" ng-controller="WorkdayCtrl as workday" ng-strict-di>
+    <div class="contextual">
+        <img id="long-absences" src="/plugin_assets/redmine_zz5/images/long-absence.png" ng-click="openAbsencePopup()">
+        <div id="absence-popup-link" ng-click="openAbsencePopup()"><%= l(:zz5_block_entry) %></div>
+    </div>
+    <h2><%= l(:zz5_title) %></h2>
+
+    <div class='table' style="height:75%; overflow:auto;" tabindex="0">
+      <div id="loading-data" ng-show="loading"></div>
+      <div id="init-loading-data" ng-show="loading_init"></div>
+        <div class='header-position'></div>
+            <div class="header-worktimes">
+                <div class='header' sticky sticky-class="sticky-header">
+                    <div class='week-title'>
+                        <a ng-if="!weekview" href="/zz5/{{misc_data.year}}/{{misc_data.week}}" style="text-decoration: none; color: inherit" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
+                        <a ng-if="weekview" style="text-decoration: none; color: inherit; cursor: pointer" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
+                    </div>
+
+                    <div class="calendar-icon">
+                        <label for="week_picker" class="calendar-box">
+                          <input type="hidden" my-datepicker my-datepicker-jump-to="jumpToDate()" dates="minDate: '<%= @min_date %>', maxDate: '<%= @max_date %>'" class="week-picker">
+                          </input>
+                        </label>
+                    </div>
+
+                    <div class="navigation">
+                        <div id='week_change_back' class="lr-arrow" ng-click="goBack(misc_data.day_prev, misc_data.day)">
+                            <img class='img-lr-arrow' src='/plugin_assets/redmine_zz5/images/arrow-back.png'>
+                        </div>
+
+                        <div class="wd-column" ng-repeat="day in days track by day.date">
+                            <a ng-if="weekview" href="/zz5/{{misc_data.year}}/{{misc_data.week}}/{{$index+1}}" style="text-decoration: none; color: inherit">
+                              <div ng-class="getCSSClass(day)" ng-cloak>
+                                {{day.name}}<br>{{day.date}}<br>{{day.holiday_name}}
+                              </div>
+                            </a>
+
+                            <a ng-if="!weekview" style="text-decoration: none; color: inherit; cursor: pointer">
+                              <div ng-class="getCSSClass(day)" ng-cloak>
+                                {{day.name}}, {{day.date}}<label id="comma" ng-if="day.holiday_name">, </label>{{day.holiday_name}}
+                              </div>
+                            </a>
+                        </div>
+
+                        <div id='week_change_forward' class="lr-arrow" ng-click="goForward(misc_data.day_next, misc_data.day)">
+                            <img class='img-lr-arrow' src='/plugin_assets/redmine_zz5/images/arrow-forward.png'>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-absences-container">
+                <div class="work-container">
+                    <!-- WORK START -->
+                        <%= render :partial => "worktimes_row",
+                        :locals => {:title => l(:zz5_work_start),
+                                    :id => 'begin',
+                                    :value => '{{day.begin}}',
+                                    :model => 'day.begin',
+                                    :error_msg => l(:zz5_worktime_err_empty),
+                                    :id_int => 0
+                                }
+                        %>
+                    <!-- WORK END -->
+                        <%= render :partial => "worktimes_row",
+                        :locals => {:title => l(:zz5_work_end),
+                                    :id => 'end',
+                                    :value => '{{day.end}}',
+                                    :model => 'day.end',
+                                    :error_msg => l(:zz5_worktime_err_empty),
+                                    :id_int => 1
+                                }
+                        %>
+                    <!-- WORK BREAK -->
+                        <%= render :partial => "worktimes_row",
+                        :locals => {:title => l(:zz5_break_duration),
+                                    :id => 'break',
+                                    :value => '{{day.break}}' ,
+                                    :model => 'day.break',
+                                    :error_msg => l(:zz5_worktime_err_empty),
+                                    :id_int => 2
+                                }
+                        %>
+
+
+                    <!-- SEPERATOR-->
+                      <div class="seperator" ng-if="weekview"></div>
+
+                    <!-- ACTUAL TIME -->
+                        <%= render :partial => "times_row",
+                        :locals => {:title => l(:zz5_actual_time),
+                                    :id => 'zz5_actual_time',
+                                    :message => l(:zz5_actual_sum),
+                                    :bind => 'day.actual_hours',
+                                    :sumModel => "sums.actual",
+                                    :show => '',
+                                    :warningType => 'day.actual_warning',
+                                    :warningMsg => l(:zz5_wrong_work_time)
+                                }
+                        %>
+
+                    <!-- PROJECT TIMES -->
+                        <%= render :partial => "times_row",
+                        :locals => {:title => l(:zz5_project_time),
+                                    :id => 'zz5_project_time',
+                                    :message => l(:zz5_project_sum),
+                                    :bind => 'day.project_hours',
+                                    :sumModel => "sums.project",
+                                    :show => '',
+                                    :warningType => 'day.project_warning',
+                                    :warningMsg => l(:zz5_wrong_project_time)
+                                }
+                        %>
+                    <!-- TARGET TIMES -->
+                        <%= render :partial => "times_row",
+                        :locals => {:title => l(:zz5_target_time),
+                                    :id => 'zz5_target_time',
+                                    :message => l(:zz5_target_sum),
+                                    :bind => 'day.target',
+                                    :sumModel => "sums.target",
+                                    :show => 'false',
+                                    :warningType => 'dummy',
+                                    :warningMsg => ""
+                                }
+                        %>
+                    <!-- TIME DIFFERENCES-->
+                        <%= render :partial => "times_row",
+                        :locals => {:title => l(:zz5_time_difference),
+                                    :id => 'zz5_time_difference',
+                                    :message => l(:zz5_weekly_time_difference),
+                                    :bind => 'day.time_difference',
+                                    :sumModel => "sums.difference",
+                                    :show => 'false',
+                                    :warningType => 'dummy',
+                                    :warningMsg => ""
+                                }
+                        %>
+
+                    <!-- TIME CARRY (FOR DAILY VIEW) -->
+                    <% if !@weekview %>
+                         <%= render :partial => "times_row",
+                             :locals => {:title => l(:zz5_time_carry),
+                                         :id => 'zz5_time_carry',
+                                         :message => l(:zz5_time_carry),
+                                         :bind => 'day.time_carry',
+                                         :sumModel => "carry_sum",
+                                         :show => 'false',
+                                         :warningType => 'dummy',
+                                         :warningMsg => ""
+                             }
+                         %>
+                      <% end %>
+                </div>
+                <!-- ABSENCES -->
+                <div class="absences-container">
+                    <!-- ABSENCE REASON -->
+                        <%= render :partial => "absence_reason_row",
+                        :locals => {:title => l(:zz5_absence_reason),
+                                    :id => 'absence_reason',
+                                    :value => '{{day.id}}_zz5_absence_reason'
+                                }
+                        %>
+                    <!-- ABSENCE TIME -->
+                        <%= render :partial => "absence_duration_row",
+                        :locals => {:title => l(:zz5_absence_duration),
+                                    :id => 'absence_time',
+                                    :value => '{{day.absence_time}}',
+                                    :bind => 'day.absence_time'
+                                }
+                        %>
+
+                    <!-- VACATION ENTITLEMENT -->
+                  <% if !@weekview %>
+                      <%= render :partial => "times_row",
+                                 :locals => {:title => l(:zz5_vacation),
+                                             :id => 'vac_entitlement',
+                                             :message => l(:zz5_vacation),
+                                             :bind => 'misc_data.vac_entitlement',
+                                             :sumModel => "carry_sum",
+                                             :show => 'false',
+                                             :warningType => 'dummy',
+                                             :warningMsg => ""
+                                 }
+                      %>
+                  <% end %>
+                </div>
+                </div>
+                <!-- FAVORITE ISSUES HEADER -->
+                <div class="project-times-header">
+                    <div class="project-times-title"><%= l(:zz5_favorite_tickets_label) %>
+                    </div>
+                    <div class="ticket-search">
+                        <div class="project-icon">
+                            <img src="/plugin_assets/redmine_zz5/images/project-tree.png" id="project-png" ng-click="openTree()">
+                        </div>
+                        <div class="search-icon">
+                            <img src="/plugin_assets/redmine_zz5/images/search.png" id="search-png">
+                        </div>
+                        <div class="search-input">
+                            <input class="ticket-search-input" type="hidde" id="ticket-search-box">
+                        </div>
+                        <div class="submit-button" style="visibility: hidden;">
+                            <a id="search-add" ng-click="addTicketsToFavorites(tickets)"><img id="add-ticket-search" class="icons-link" src="/plugin_assets/redmine_zz5/images/add.png" alt="add"></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script type="text/ng-template" id="projectTree" style="width: 500px">
+                        <div><h2><%= l(:zz5_absence_project) %></h2></div>
+                        <ul class="project-tree-item">
+                            <li type="disc" ng-repeat="data in tree" ng-include="'treeItemRenderer.html'">
+                            </li>
+                        </ul>
+                </script>
+
+                <script type="text/ng-template"  id="treeItemRenderer.html">
+                        <div>
+                            <div class="project-row" ng-click="loadProjects(data.name.id, data)">
+                                <label id="project-{{data.project.id}}" class="project-tree-label" id="{{data.project.id}}" ng-bind="data.name.name">
+                                </label>
+                            </div>
+                            <ul class="project-tree-item">
+                                <li type="circle" ng-repeat="data in data.nodes" ng-include="'treeItemRenderer.html'"></li>
+                                <li type="none" ng-repeat="issue in data.issues" ng-include="'issueItemRenderer.html'"></li>
+                            </ul>
+                        </div>
+                </script>
+
+                <script type="text/ng-template" id="issueItemRenderer.html">
+                    <div class="issue-row-tree" ng-click="addToSearchBox(issue.name.issue_id, issue.name.issue_subject, data.name.name); closeThisDialog()">
+                        <label class="project-tree-label" id="project-{{issue.name.issue_id}}" ng-bind="'#'+issue.name.issue_id+': '+issue.name.issue_subject">
+                        </label>
+                    </div>
+                </script>
+
+                <script type="text/ng-template" id="absencePopup">
+                  <h2><%= l(:zz5_block_entry) %></h2>
+                      <div class="long-absence-wrapper">
+                        <div class="absence-from-wrapper">
+                          <label class="long-absence-title"><%= l(:zz5_absence_from) %></label>
+                          <input id="from-picker" type="text" ng-model="absences.from_date" my-datepicker-from my-datepicker-set-from="setFromDate()" dates="minDate: '<%= @min_date_absence %>', maxDate: '<%= @max_date_absence %>'" style="width: 85px;"></input>
+                        </div>
+
+                        <div class="absence-to-wrapper">
+                          <label class="long-absence-title"><%= l(:zz5_absence_to) %></label>
+                          <input id="to-picker" type="text" ng-model="absences.to_date" my-datepicker-to my-datepicker-set-to="setToDate()" dates="minDate: '<%= @min_date_absence %>', maxDate: '<%= @max_date_absence %>'" style="width: 85px;"></input>
+                        </div>
+
+                        <div class="absence-reason-wrapper">
+                            <label class="long-absence-title"><%= l(:zz5_absence_reason) %></label>
+                            <select id="absence-reason-select" ng-model="absence.id" ng-options="absence.id as absence.name for absence in absences"></select>
+                        </div>
+                      </div>
+
+                  <div class="absence-submit">
+                    <label id="long-absence-save" ng-click="saveLongAbsences(absence.id, absences.from_date, absences.to_date); closeThisDialog();"><%= l(:zz5_save) %></label>
+                  </div>
+                </script>
+
+
+                <!-- FAVORITE ISSUES -->
+              <div class="duplicate-tickets animation" ng-show="showTicketWarning">{{duplicate_tickets_text}}: {{duplicate_tickets}}</div>
+                <div id="favorite-ticket-table">
+                    <!-- FAVORITE ISSUE -->
+                    <div ng-bind-html="ticketrow"></div>
+                    <%= render :partial => "favorite_issue_row"%>
+                </div>
+                <script type="text/ng-template" id="templateId">
+                    <h1>Template heading</h1>
+                    <p>Content goes here</p>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% content_for :sidebar do %>
+    <h3><%= l(:zz5_title) %></h3>
+    <%= link_to(l(:zz5_time_report), "/zz5/report", :id => 'change_to_report') %>
+    <br>
+    <% if User.current.admin? %>
+        <h3><%= l(:label_administration) %></h3>
+        <%= link_to(l(:zz5_employment_data), "/zz5/employment", :id => 'change_to_employment_data') %>
+    <% end %>
+<% end %>
+
+<script>
+    var data = {"year": <%= @year %>, "week": <%= @week %>, "day": <%= @day %>};
+    var is_weekview = <%= @weekview %>;
+
+    var default_activity_id = "<%=@default_activity.id %>";
+    var activity_arr = new Array();
+    <% @activity_array.each do |activity| %>
+    //activity_arr["<%=activity.id.to_s%>"] = "<%=activity.name.to_s%>";
+    activity_arr.push({id: "<%=activity.id.to_s%>", value: "<%=activity.name.to_s%>"});
+    <% end %>
+
+    // zz5 calculation label array
+    var zz5_calc_array = new Array();
+    <% @zz5_calculation_labels.each do |label| %>
+    zz5_calc_array.push("<%=label%>");
+    <% end %>
+
+    // default work and break values
+    var default_work_start      = "<%= @user.zz5_user_preference.work_start.strftime("%H:%M")%>";
+    var default_end_work        = "<%= @user.zz5_user_preference.end_work.strftime("%H:%M")%>";
+    var default_break_duration  = "<%= @user.zz5_user_preference.break_duration.strftime("%H:%M")%>";
+    var hint_text               = "<%=l(:zz5_hint_text)%>";
+    var no_results_text         = "<%=l(:zz5_no_results_text)%>";
+    var searching_text          = "<%=l(:zz5_searching_text)%>";
+    var duplicate_tickets_text  = "<%=l(:zz5_duplicate_tickets)%>";
+    var projects                = "<%=l(:zz5_absence_project)%>";
+
+    window.csrfToken = jQuery('meta[name="csrf-token"]').attr("content");
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"> </script>
+
+<%= javascript_include_tag "jquery.plugin.js", :plugin => 'redmine_zz5' %>
+<%= javascript_include_tag "jquery.timeentry.js", :plugin => 'redmine_zz5' %>
+<%= javascript_include_tag "jquery.tokeninput.js", :plugin => 'redmine_zz5' %>
+
+<%= javascript_include_tag "zz5_angular.js", :plugin => 'redmine_zz5' %>
+<%= javascript_include_tag "ngDialog.js", :plugin => 'redmine_zz5' %>
+<%= javascript_include_tag "loading-bar.min.js", :plugin => 'redmine_zz5' %>
+<%= javascript_include_tag "sticky.js", :plugin => 'redmine_zz5' %>
+

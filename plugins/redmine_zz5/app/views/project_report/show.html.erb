@@ -1,0 +1,73 @@
+<% content_for :header_tags do %>
+    <script>
+        var current_user = "<%= User.current.id%>";
+        var first_pid="<%= @project.id %>";
+        var max_date="<%= @max_date %>";
+        var min_date="<%= @min_date %>";
+        var estimated_sum = {};
+        var worked_sum = {};
+        var difference = {};
+        var selection = "<%= @selection %>";
+    </script>
+
+    <%= stylesheet_link_tag 'project_report.css', :plugin => 'redmine_zz5' %>
+
+    <%= javascript_include_tag "helpers.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "project_report.js", :plugin => 'redmine_zz5' %>
+<% end %>
+
+
+
+<%= form_tag("/zz5_project_report/" + @project.id.to_s , remote: true, :id => "project_report_form", :name => "project_report_form") do -%>
+            
+  <h2><%=l(:zz5_project_report) %></h2>
+  <fieldset id="filters">
+    <legend><%= l(:label_interval) %></legend>
+      <%= select_tag('period', period_options, :onchange => "comboBoxSelectionChanged();".html_safe) %>
+
+        <label id="from-box" style="display: none" class="calendar-box" >
+        <%= l(:label_date_from) %>:
+        <%= text_field_tag('from', @from, :size => 10, :onchange => "restrictToDatepicker();") %> 
+        <%= calendar_for('from', @min_date, @max_date) %>
+        </label>
+        
+        <label id="to-box" style="display: none" class="calendar-box">
+        <%= l(:label_date_to) %>:
+        <%= text_field_tag('to', @to, :size => 10, :onchange => "restrictFromDatepicker();") %> 
+        <%= calendar_for('to', @min_date, @max_date) %>
+        </label>
+        <div class="apply-btn">
+            <%= link_to_function l(:button_apply), "document.getElementById('project_report_form').submit()", :class => 'icon icon-checked' %>
+        </div>
+  </fieldset>
+<% end %>
+
+
+<table class="list" id="time-report">
+    <thead>
+        <th><%= l(:zz5_name_column) %></th>
+        <th style='width: 150px'><%= l(:zz5_estimated_time) %></th>
+        <th style='width: 150px'><%= l(:zz5_actual_time) %></th>
+        <th style='width: 150px'><%= l(:zz5_time_difference) %></th>
+    </thead>
+
+    <%= printTree(@project) %>
+</table>
+
+<% content_for :sidebar do %>
+    <% if @total_hours.present? %>
+    <h3><%= l(:label_spent_time) %></h3>
+    <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
+    <p>
+    <% if User.current.allowed_to?(:log_time, @project) %>
+      <%= link_to l(:button_log_time), new_project_time_entry_path(@project) %> |
+    <% end %>
+    <%= link_to(l(:label_details), project_time_entries_path(@project)) %> |
+    <%= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>
+    <% end %>
+
+    <h3><%= l(:zz5_title) %></h3>
+    <%= link_to(l(:zz5_title), "/zz5/") %>
+    <br>
+    <%= link_to(l(:zz5_time_report), "/zz5/report") %>
+<% end %>

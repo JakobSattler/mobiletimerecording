@@ -1,0 +1,27 @@
+<!-- separator row -->
+<%= render "separator" %>
+
+<tr>
+    <td class='first-column'>
+         <div class="hours-without-tickets" >
+         <%= l(:zz5_hours_without_tickets) %>
+         </div>
+    </td>
+    
+    <td>
+    </td>
+
+
+    <% @zz5_work_period.workdays.each do |day, date| %>
+
+        <td class='right'>
+            <div class='zz5-time-missing'>
+            	<% sum_day = TimeEntry.sum(:hours, :conditions => ["user_id = ? AND spent_on = ? AND issue_id IS NULL", @user.id.to_s, date.date.to_s]) %>
+            	<%= Zz5GeneralUtil.hoursToTime(sum_day).to_s %>
+            </div>
+        </td>
+
+    <% end %>
+
+    <td></td>
+</tr>

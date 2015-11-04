@@ -1,0 +1,33 @@
+<h3 class="title"><%= l(:zz5_block_entry) %></h3>
+
+<%= form_tag("/zz5/workdays_saveblock", remote: true, :id => "blocks_form", :name => "blocks_form") do %>
+
+    <fieldset class="attributes">
+        <div class="block">
+          <label class="absence_label"><%= l(:zz5_absence_from) %></label>
+          <input class="absence_field" my-datepicker type="text" onchange="restrictDatePickerToDates(this.id)" readonly="readonly" id="start_date" name="start_date" />
+        </div>
+
+        <div class="block">
+          <label class="absence_label"><%= l(:zz5_absence_to) %></label>
+          <input class="absence_field" my-datepicker type="text" readonly="readonly" id="end_date" name="end_date" />
+        </div>
+
+        <div class="block">
+          <label class="absence_label"><%= l(:zz5_absence_reason) %></label>
+          <select id="absence_reason" name="absence_reason" id="absence_reason">
+            <!-- set options -->
+            <option value=" "></option>
+              <% Zz5AbsenceType.find_each do |type| %>
+                <option value="<%= type.id%>"><%= l(type.name)%></option>
+              <% end %>
+            </select>
+        </div>
+    </fieldset>
+
+  <p class="buttons">
+    <%= submit_tag l(:zz5_cancel), :name => nil, :onclick => "hideModal(this);", :type => "button" %>
+    <%= submit_tag l(:zz5_save), :name => nil, :onclick => "hideModal(this); $('#ajax-indicator').show();", :type => "submit" %>
+  </p>
+
+<%end%>

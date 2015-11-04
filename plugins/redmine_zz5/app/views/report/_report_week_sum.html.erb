@@ -1,0 +1,57 @@
+<tr class="subtotal-sum">
+
+    <%
+        diff_time = work_week_sum[Zz5Constants::ACTUAL_TIME] - work_week_sum[Zz5Constants::TARGET_TIME]
+        carry_over = zz5_work_day.carry_over
+    -%>
+
+    <td class="day"><%= t("message.zz5_report_work_week_sum", :calender_week => zz5_work_day.date.cweek) %></td>
+    
+    <td class="report-hours-container">
+            <div class="hours"><div class="target-sum"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::TARGET_TIME]) %>
+        </div></div>
+    </td>
+
+    <td class="report-hours-container">
+        <div class="hours"><div class="actual-sum"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::ACTUAL_TIME]) %>
+        </div></div>
+    </td>
+
+    <td class="total-hours-container"><div class="total-hours"><span class="<%= (diff_time < 0) ? "negative" : "positive"%>"><%= convert_seconds_to_hours_and_minutes(diff_time) %></span>
+        </div>
+    </td>
+
+    <td class="general-hours-container">
+        <div class="comp-hours"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::ABS_COMP_TIME]) %>
+        </div>
+    </td>
+
+    <td class="report-hours-container">
+        <div class="vacation-days">
+            <% if !work_week_sum[Zz5Constants::ABS_VAC_DAY].nil? %>
+                <%= work_week_sum[Zz5Constants::ABS_VAC_DAY].round(2) %>
+            <% else %>
+                <%= "0.0" %>
+            <% end %>
+        </div>
+    </td>
+
+    <td class="general-hours-container">
+        <div class="sick-hours"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::ABS_SICK]) %>
+        </div>
+    </td>
+
+    <td class="general-hours-container">
+        <div class="special-vacation-hours"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::ABS_SPECIAL_VAC]) %>
+        </div>
+    </td>
+
+    <td class="general-hours-container">
+        <div class="care-hours"><%= convert_seconds_to_hours_and_minutes(work_week_sum[Zz5Constants::ABS_CARE]) %>
+        </div>
+    </td>
+
+    <td class="total-hours-container"><div class="total-hours"><span class="<%= (carry_over < 0) ? "negative" : "positive"%>"><%= convert_seconds_to_hours_and_minutes(carry_over) %></span>
+        </div>
+    </td>
+</tr>

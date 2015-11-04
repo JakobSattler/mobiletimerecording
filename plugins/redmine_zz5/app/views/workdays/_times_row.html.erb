@@ -1,0 +1,29 @@
+<div class="worktimes-row <%=id%>">
+    <div class='time-title'><%= title %>
+    </div>
+  <div class="times">
+    <div class="time-column" ng-repeat="day in days track by day.id">
+        <div ng-class="isWeekend('{{day.date}}') ? 'time-data-container-weekend' : 'time-data-container'" >
+            <div class="time-value">
+                <div class="time-middle">
+                    <label id="{{day.id}}_<%= id%>" ng-bind="<%= bind %>" class="time-value-label"></label>
+                </div>
+                <div class="time-right">
+                    <img title="<%= warningMsg %>" class="img-warning" id="{{day.id}}_error"
+                            src="/plugin_assets/redmine_zz5/images/warning.png"
+                            ng-show="<%= warningType %>">
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="time-column sum-column" ng-if="weekview">
+    <div class="time-data-container">
+      <div class="time-value" style="width: 100%">
+        <div class="time-sum">
+          <label id="week_<%= id%>" ng-bind="<%= sumModel %>"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

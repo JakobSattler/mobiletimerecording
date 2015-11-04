@@ -1,0 +1,121 @@
+{
+    "days": [
+    <% @zz5_work_period.workdays.each_with_index do |zz5_work_day, index| %>
+        {
+            <% absence = Zz5Absence.where(:zz5_workday_id => zz5_work_day.id).first %>
+            "id": <%= index %>, "name": "<%= l("zz5_" + zz5_work_day.date.strftime("%A").downcase) %>", "date": "<%= zz5_work_day.date.strftime("%d-%m-%Y") %>",
+            "holiday_name": "<%= @zz5_work_period.get_holiday_name(zz5_work_day.date) %>", "begin": "<%= zz5_work_day.begin.strftime("%H:%M") unless zz5_work_day.begin.nil? %>",
+            "end": "<%= zz5_work_day.end.strftime("%H:%M") unless zz5_work_day.end.nil? %>", "break": "<%= zz5_work_day.break.strftime("%H:%M") unless zz5_work_day.break.nil? %>",
+            "target": "<%= zz5_work_day.target.strftime("%H:%M") %>", "absence_reason": "<%= absence.zz5_absence_type_id.to_s unless absence.nil? %>",
+            "absence_time": "<%= absence.duration.strftime("%H:%M") unless absence.nil? %>", "time_carry": "<%= Zz5GeneralUtil.secondsToTime(zz5_work_day.carry_over) %>"
+        }
+        <% if zz5_work_day != @zz5_work_period.workdays.last %>
+                ,
+        <% end %>
+    <% end %>
+    ],
+
+    "issues": [
+    <% @favorite_issue.each_with_index do |(p, issue_data), index| %>
+        {
+            <% project = ""%>
+            <% @project_names[p.issue_id.to_s].each do |p_name| %>
+                <% 
+                    project += p_name.to_s
+
+                    if (p_name != @project_names[p.issue_id.to_s].last)
+                        project = project + " - "
+                    end
+                %>
+            <% end %>
+            "issue_id": "<%= p.issue_id.to_s %>", "issue_subject": <%= p.issue.subject.to_json.html_safe %>,
+            "project_name": "<%= project %>", "pinned": <%= issue_data[0] %>, "tracker": <%= issue_data[1].to_json.html_safe %>,
+            "time_entries": [
+            <% issue_data[2].each_with_index do |(day , bb), i| %>
+                {
+                    "id": "<%= i %>", "day": "<%= day.strftime("%A").downcase %>", "bb": [
+                    <% if bb.empty? %>
+                        {
+                            "time_id": "<%= i %>", "hours": "", "activity_id": "-1", "comment": "", "issue_id": "<%=p.issue_id.to_s%>", "new": true, "date": "<%= day.to_s %>"
+                        }
+                    <% else %>
+                        <% bb.each_with_index do |(time_id, hours, activity_id, comments), j| %>
+                            {
+                                "time_id": "<%= time_id.to_s %>", "hours": "<%= hours.to_s %>",
+                                "activity_id": "<%= activity_id.to_s %>", "comment": <%= comments.to_json.html_safe %>,
+                                "issue_id": "<%=p.issue_id.to_s%>", "new": false, "date": "<%=day.to_s %>"
+                            }
+                            <% if j != bb.length - 1 %>
+                                ,
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    ]
+                }
+                <% if i != issue_data[2].length - 1 %>
+                    ,
+                <% end %>
+            <% end %>
+            ]
+        }
+        <% if index != @favorite_issue.length - 1 %>
+                ,
+        <% end %>
+    <% end %>
+
+    <% if @favorite_issue.empty? %>
+        {"issue_id": "-1", "issue_subject": "", "project_name": "", "pinned": false, "tracker": "",
+            "time_entries": [
+            <% @zz5_work_period.workdays.each_with_index do |zz5_work_day, i| %>
+                {"id": "<%= i %>", "day": "<%= zz5_work_day.date.strftime("%A").downcase %>", "bb": [
+                    {
+                        "time_id": "<%= i %>",
+                        "hours": "",
+                        "activity_id": "-1",
+                        "comment": "",
+                        "issue_id": "-1",
+                        "new": true,
+                        "date": "<%= zz5_work_day.date.to_s %>"
+                    }]}
+
+                <% if i != @zz5_work_period.workdays.length - 1 %>
+                    ,
+                <% end %>
+            <% end %>
+        ]}
+    <% end %>
+    ],
+
+    "project_tree": [
+        <% @parent_projects.each_with_index do |p, index| %>
+            {
+                "id": "<%=p.id%>", "name": "<%=p.name%>"
+            }
+            <% if index != @parent_projects.length - 1 %>
+                ,
+            <% end %>
+        <% end %>
+    ],
+
+    "absences": [
+        <% @absence_types.each_with_index do |absence, index| %>
+            {
+                "id": "<%= absence.id %>", "name": "<%= l(absence.name) %>"
+            }
+            <% if index != @absence_types.length - 1 %>
+                ,
+            <% end %>
+        <% end %>
+    ],
+
+    "misc_data":
+        {
+            "year": <%= @year %>,
+            "week": <%= @week %>,
+            "day":  <%= @day %>,
+            "day_next": "<%= @first_day_next_period %>",
+            "day_prev": "<%= @first_day_previous_period %>",
+            "last_employment": "<%= @zz5_work_period.get_employment.to_s %>",
+            "vac_entitlement": "<%= @vacation %>"
+        }
+}

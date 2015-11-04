@@ -1,0 +1,195 @@
+<div class="animation" ng-repeat="issue in issues track by issue.issue_id"
+		ng-class="$last ? 'favorite-ticket-row-last' : 'favorite-ticket-row'" ng-if="issue.issue_id != -1" ng-mouseenter="hover=true" ng-mouseleave="hover=false">
+        <div class="ticket-name-col" id="ticket-name-col-{{issue.issue_id}}-0">
+            <label id="favorite-issue-{{issue.issue_id}}" title="{{issue.issue_subject}}">
+                <div class="project-names">
+                    {{issue.project_name}}
+                </div>
+                <br>
+                <div class="issue-name">
+                    <a href="/issues/{{issue.issue_id}}">#{{issue.issue_id}}: {{issue.tracker}} - {{issue.issue_subject}}</a>
+                </div>
+            </label>
+        </div>
+      <div class="times ticket-times">
+        <div class="ticket-data-wrapper animation" ng-repeat="time_entry in issue.time_entries track by $index">
+            <div ng-repeat="time_entry_per_day in time_entry.bb track by $index" class="time-data-container">
+              <div class="loading-data-issue" ng-show="loading"></div>
+                <div class="ticket-time-col">
+                    <div class="te-middle">
+                        <input class="time-input-ticket"
+                               ng-model="time_entry_per_day.hours"
+                               ng-focus="old_hours_value = time_entry_per_day.hours;
+                                    old_begin = days[time_entry.id].begin;
+                                    old_end = days[time_entry.id].end;
+                                    old_break = days[time_entry.id].break;
+                                    old_project_hours = days[time_entry.id].project_hours;
+                                    old_activity = time_entry_per_day.activity_id;
+                                    old_comment = time_entry_per_day.comment;
+                                    hasFocus()"
+                               ng-blur="lostFocus();
+                                    saveTimeEntry(time_entry_per_day, old_hours_value, 'hours', days[time_entry.id],
+                                                    old_begin, old_end, old_break, old_project_hours, old_activity, old_comment);"
+                               ng-change="calcProjectHours(time_entry_per_day.hours, days[time_entry.id], '{{time_entry_per_day.hours}}');
+                                    updateEndTime(days[time_entry.id], 'time_entry');
+                                    calculateActualHours(days[time_entry.id], time_entry);
+                                    calcDifference(days[time_entry.id]);
+                                    checkAbsenceTime(days[time_entry.id])"
+                               data-times-id="{{time_entry.id}}" time-entry-field="{show24Hours: true, defaultTime: '00:00:00'}" placeholder="00:00">
+                    </div>
+                    <div class="te-popup">
+                        <img class="icons-link icons-del" src="/plugin_assets/redmine_zz5/images/trash.png" alt="del" ng-show="!weekview && !$last"
+                             ng-click="calcProjectHours('00:00', days[time_entry.id], time_entry_per_day.hours); removeTimeEntry(time_entry.bb, $index);">
+                        <img class="icons-link" src="/plugin_assets/redmine_zz5/images/add.png" alt="add" ng-show="!weekview && $last"
+                             ng-click="addTimeEntry(time_entry.bb)">
+                        <img id="no-comment-open-popup-{{time_entry_per_day.id}}-{{issue.issue_id}}-1" align="middle" class='icons-link open-popup'
+                             src="/plugin_assets/redmine_zz5/images/no_comment.png" ng-show="time_entry_per_day.comment == '' && weekview"
+                             ng-click="openTicketPopup(time_entry.bb, issue, time_entry.id)">
+                        <img id="a-comment-open-popup-{{time_entry_per_day.id}}-{{issue.issue_id}}-1" align="middle" class='icons-link open-popup'
+                             src="/plugin_assets/redmine_zz5/images/new_comment.png" alt="a-popup" ng-show="time_entry_per_day.comment != '' && weekview"
+                             ng-click="openTicketPopup(time_entry.bb, issue, time_entry.id)">
+                    </div>
+                </div>
+            <% if !@weekview %>
+              <!-- ACTIVITY -->
+              <div class="ticket-activity-col">
+                <div class="activity-select-area">
+                  <input id="selected-activity-{{time_entry.id}}-{{issue.issue_id}}-1" style="display:none;" ng-value="time_entry_per_day.activity_id"
+                         ng-model="time_entry_per_day.activity_id">
+                  <div class="selected-activity" id="selected-activity-string-{{time_entry.id}}-{{issue.issue_id}}-1"
+                       ng-click="showActivitytypes = !showActivitytypes; old_activity_value = time_entry.activity_id"
+                       ng-bind="getActivityname(time_entry_per_day.activity_id)">
+                  </div>
+                  <div class="select-arrow-activity" ng-click="showActivitytypes = !showActivitytypes; old_activity_value = time_entry.activity_id">
+                  </div>
+                </div>
+
+                <div class="activity-select" id="activity-select-{{time_entry.id}}-{{issue.issue_id}}-1" ng-show="showActivitytypes">
+                  <div ng-repeat="activity in activity_array track by activity.id">
+                    <div class="activity-type" ng-click="time_entry_per_day.activity_id = activity.id; saveTimeEntry(time_entry_per_day, old_activity_value,
+                    'activity', days[issue.time_entries.indexOf(time_entry)]); $parent.showActivitytypes = false">
+                      <div class="activity-strings" ng-bind="activity.value">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="outside-click" ng-show="showActivitytypes" ng-click="showActivitytypes = false"></div>
+              </div>
+                  <!-- COMMENT -->
+            <div class="ticket-comment-col">
+              <input ng-model="time_entry_per_day.comment" ng-maxlength="255" ng-focus="old_comment_value = time_entry_per_day.comment; hasFocus()"
+                     ng-blur="saveTimeEntry(time_entry_per_day, old_comment_value, 'comment', days[issue.time_entries.indexOf(time_entry)]); lostFocus()"
+                     rows="1" type="text" class="ticket-comment-input" value="" placeholder="<%= l(:zz5_comment) %>" maxlength="255" autocomplete="off"></input>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+  <div class="ticket-ctrl-wrapper">
+    <div class="pin-ticket">
+      <img ng-if="issue.pinned" ng-click="handlePinnedTicket(issue)" class="icons-pinned icons-link" src="/plugin_assets/redmine_zz5/images/pinned.png">
+      <img ng-if="!issue.pinned" ng-show="hover" ng-click="handlePinnedTicket(issue)" class="icons-pinned icons-link" src="/plugin_assets/redmine_zz5/images/not_pinned.png">
+    </div>
+    <div class="remove-ticket">
+      <img ng-show="hover" ng-click="removeTicket(issue, true)" class="icons-link" src="/plugin_assets/redmine_zz5/images/trash.png">
+    </div>
+  </div>
+  <div ng-if="$last ? false : true" class="favorite-ticket-row-border"></div>
+</div>
+
+
+<script type="text/ng-template" id="ticketPopup">
+  <div style='text-align: center; margin-bottom: 4px;'>
+    <label class='ticket-popup-date'>
+        {{time_entries[0].date | date: 'dd/MM/yyyy'}}
+    </label>
+  </div>
+  <div class='ticket-popup-content' ng-mouseenter="hover=true" ng-mouseleave="hover=false">
+    <div class='ticket-title-popup '>
+      <div class='project-names-popup'>
+        {{issue.project_name}}
+      </div>
+      <div>
+        <a href='/issues/{{issue.issue_id}}'>
+          #{{issue.issue_id}}: {{issue.issue_subject}}
+        </a>
+      </div>
+    </div>
+    <div class="ticket-ctrl-wrapper">
+      <div class="pin-ticket">
+        <img ng-if="issue.pinned" ng-click="handlePinnedTicket(issue)" class="icons-pinned icons-link" src="/plugin_assets/redmine_zz5/images/pinned.png">
+        <img ng-if="!issue.pinned" ng-show="hover" ng-click="handlePinnedTicket(issue)" class="icons-pinned icons-link" src="/plugin_assets/redmine_zz5/images/not_pinned.png">
+      </div>
+      <div class="remove-ticket">
+        <img ng-show="hover" ng-click="removeTicket(issue, true); closeThisDialog('')" class="icons-link" src="/plugin_assets/redmine_zz5/images/trash.png">
+      </div>
+    </div>
+    <div class="animation" name='ticket-data-col' ng-repeat='time_entry in time_entries track by $index'>
+      <div class="ticket-data-container-popup" name="ticket-data-col">
+        <!-- TIME -->
+        <div class="ticket-time-col-popup">
+          <div class="te-middle-popup">
+            <input type="text"
+                   ng-model="time_entry.hours"
+                   ng-focus="old_hours_value = time_entry.hours;
+                        old_begin = days[day].begin;
+                        old_end = days[day].end;
+                        old_break = days[day].break;
+                        old_project_hours = days[day].project_hours;
+                        old_activity = time_entry.activity_id;
+                        old_comment = time_entry.comment"
+                   ng-blur="saveTimeEntry(time_entry, old_hours_value, 'hours',
+                        days[day], old_begin, old_end, old_break, old_project_hours,
+                        old_activity, old_comment);"
+                   ng-change="calcProjectHours(time_entry.hours, days[day], '{{time_entry.hours}}');
+                            updateEndTime(days[day], 'time_entry');
+                            calculateActualHours(days[day], time_entry);
+                            calcDifference(days[day]);
+                            checkAbsenceTime(days[day])"
+                   size="7" class="time-input-ticket" maxlength="5" placeholder="00:00"
+                   time-entry-field="{show24Hours: true, defaultTime: '00:00:00'}">
+          </div>
+          <div class="te-right-popup">
+            <!-- icon-del -->
+            <img class="icons-link icons-del" src="/plugin_assets/redmine_zz5/images/trash.png" alt="del" ng-show="!$last"
+                 ng-click="calcProjectHours('00:00', days[day], time_entry.hours); removeTimeEntry(time_entries, $index);">
+            <!-- icon-add -->
+            <img class="icons-link" src="/plugin_assets/redmine_zz5/images/add.png" alt="add" ng-show="$last" ng-click="addTimeEntry(time_entries)">
+          </div>
+        </div>
+
+        <!-- ACTIVITY -->
+        <div class="ticket-activity-col">
+          <div class="activity-select-area">
+            <input style="display:none;" ng-value="time_entry.activity_id" ng-model="time_entry.activity_id">
+            <div class="selected-activity" ng-bind="getActivityname(time_entry.activity_id)"
+                 ng-click="showActivitytypes = !showActivitytypes; old_activity_value = time_entry.activity_id">
+            </div>
+            <div class="select-arrow" ng-click="showActivitytypes = !showActivitytypes; old_activity_value = time_entry.activity_id">
+            </div>
+          </div>
+
+          <div class="activity-select" ng-show="showActivitytypes">
+            <div ng-repeat="activity in activity_array track by activity.id">
+              <div class="activity-type" ng-click="time_entry.activity_id = activity.id; saveTimeEntry(time_entry, old_activity_value, 'activity',
+              days[time_entries.indexOf(time_entry)]); $parent.showActivitytypes = false">
+                <div class="activity-strings" ng-bind="activity.value">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="outside-click" ng-show="showActivitytypes" ng-click="showActivitytypes = false"></div>
+        </div>
+
+        <!-- COMMENT -->
+        <div class="ticket-comment-col">
+          <input ng-model="time_entry.comment" ng-focus="old_comment_value = time_entry.comment; hasFocus()"
+                 ng-blur="saveTimeEntry(time_entry, old_comment_value, 'comment', days[time_entries.indexOf(time_entry)]); lostFocus()"
+                 rows="1" type="text" class="ticket-comment-input" value="" placeholder="<%= l(:zz5_comment) %>" ng-maxlength="255"
+                 autocomplete="off"></input>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

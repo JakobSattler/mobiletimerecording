@@ -1,0 +1,54 @@
+<% if User.current.allowed_to?(:view_zz5, nil, :global => true) %>
+
+<% content_for :header_tags do %>
+	<script>
+        // translated error messages
+        var begin_empty_error_msg = "<%=l(:zz5_begin_err_empty)%>";
+        var end_empty_error_msg = "<%=l(:zz5_end_err_empty)%>";
+        var break_empty_error_msg = "<%=l(:zz5_break_err_empty)%>";
+        var worktime_error_msg = "<%=l(:zz5_worktime_err_empty)%>";
+        var discard_changes_msg = "<%=l(:zz5_discard_unsaved_changes)%>";
+	</script>
+    <%= javascript_include_tag "zz5_user_preferences.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "helpers.js", :plugin => 'redmine_zz5' %>
+    <%= stylesheet_link_tag 'jquery.timeentry.css', :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "jquery.plugin.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "jquery.timeentry.js", :plugin => 'redmine_zz5' %>
+<% end %>
+
+<h3><%= l(:zz5_settings) %></h3>
+
+<div class="mypage-box">
+	
+	<%= form_tag("/save_zz5_user_preferences", remote: true, :id => 'workdays_form', :name => 'workdays_form') do %>
+	<!--% form = form_tag(:id => 'edit_form') do %-->
+	<fieldset class="box tabular">
+		<legend><%=l(:zz5_user_preferences)%></legend>
+			<p>
+				<label for="default_work_start"><%=l(:zz5_work_start)%></label>
+				<input id="default_begin" name="user[default_begin]" style="text-align:center" size="7" type="text" onblur="validate_user_preferences();" onfocus="disableSaveButton();" value="<%=@user.zz5_user_pref.work_start.strftime("%H:%M")%>">
+				<img id="default_begin_warning" name="begin_warning" src="/plugin_assets/redmine_zz5/images/pin_red.png" onmouseout="this.title.hide" onmouseover="this.title" style="visibility: hidden;" title="<%=l(:zz5_begin_err_empty)%>">
+				<script>$("#default_begin").timeEntry({show24Hours: true});</script>
+			</p>
+	  
+			<p>
+				<label for="default_end"><%=l(:zz5_work_end)%></label>
+				<input id="default_end" name="user[default_end]" style="text-align:center" size="7" type="text" onblur="validate_user_preferences();" onfocus="disableSaveButton();" value="<%=@user.zz5_user_pref.end_work.strftime("%H:%M")%>">
+				<img id="default_end_warning" name="begin_warning" src="/plugin_assets/redmine_zz5/images/pin_red.png" onmouseout="this.title.hide" onmouseover="this.title" style="visibility: hidden;" title="<%=l(:zz5_end_err_empty)%>">
+				<script>$("#default_end").timeEntry({show24Hours: true});</script>
+			</p>
+	  
+			<p>
+				<label for="default_break"><%=l(:zz5_break_duration)%></label>
+				<input id="default_break" name="user[default_break]" style="text-align:center" size="7" type="text" onblur="validate_user_preferences();" onfocus="disableSaveButton();" value="<%=@user.zz5_user_pref.break_duration.strftime("%H:%M")%>">
+				<img id="default_break_warning" name="begin_warning" src="/plugin_assets/redmine_zz5/images/pin_red.png" onmouseout="this.title.hide" onmouseover="this.title" style="visibility: hidden;" title="<%=l(:zz5_break_err_empty)%>">
+				<script>$("#default_break").timeEntry({show24Hours: true});</script>
+			</p>
+
+			<p>
+			    <button type="submit" id="zz5_user_preference_submit"><%= l(:zz5_save)%></button>
+			</p>
+	</fieldset>
+	<%end%>
+</div>
+<%end%>

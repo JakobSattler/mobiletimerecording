@@ -1,0 +1,5 @@
+{
+	<%= render :partial => "workdays/project_table_entry_project", :locals => {:parent_id => @pid.to_i} %>
+	,
+	<%= render :partial => "workdays/project_table_entry_issue", :locals => {:parent_id => @pid.to_i} %>
+}

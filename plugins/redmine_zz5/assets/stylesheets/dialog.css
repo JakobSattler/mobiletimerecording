@@ -1,0 +1,26 @@
+/*
+ * Styles for a GUI dialog
+ */
+.absence_label {
+    display: inline-block;
+    width: 120px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.absence_field {
+    width: 100px;
+}
+
+
+/*
+ * currently selected date background color
+ * overwritten
+ */
+.ui-datepicker-current-day
+{
+    background-color : Green !important;
+    background-image :none !important;
+    color: Green !important;
+    font-weight:bold !important;
+}

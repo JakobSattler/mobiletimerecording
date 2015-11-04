@@ -1,0 +1,32 @@
+"time_entries": [
+<%@time_entries.time_entries.each do |issue, week|%>
+{
+		"issue_id": <%=issue.id.to_json%>,
+		"issue_subject": <%=issue.subject.strip.to_json.html_safe%>,
+		"parent_id": <%=issue.project_id.to_json%>,
+		"edit_te": <%= edit_time_entries_allowed(issue.project_id).to_json %>,
+
+		<%week.each do |day, time_entries| %>
+		"<%=day%>": [
+
+			<%time_entries.each do |te| %>
+				{
+				"id": <%=te.id.to_json%>,
+				"hours": "<%=Zz5GeneralUtil.hoursToTime(te.hours)%>",
+				"parent_id": <%=te.project_id.to_json%>
+				}
+					<%if te != time_entries.last%>
+					,
+					<%end%>
+			<%end%>
+		]
+			<%if day != week.keys.last%>
+			,
+			<%end%>
+		<%end%>
+}
+	<%if issue != @time_entries.time_entries.keys.last %>
+,
+	<%end%>
+<%end%>
+]

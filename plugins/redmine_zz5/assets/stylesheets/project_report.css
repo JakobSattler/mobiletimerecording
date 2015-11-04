@@ -1,0 +1,65 @@
+th {
+    text-align: center !important;
+}
+
+div.project-name-col {
+    font-size: 10px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 2px;
+    text-align: left;
+    width: 420px;
+}
+
+div.project-name-col:hover {
+    text-decoration: underline;
+}
+
+div.issue-name-col {
+    font-size: 10px;
+    padding-left: 11px;
+    padding-top: 2px;
+    text-align: left;
+    width: 420px;
+}
+
+div.issue-name-col label {
+    cursor: pointer;
+}
+
+div.issue-time-col label {
+    cursor: pointer;
+}
+
+.issue-row:hover {
+    text-decoration: underline;
+}
+
+div.project-time-col {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 55px
+}
+
+div.issue-time-col {
+    font-size: 10px;
+    text-align: right;
+    margin-right: 55px
+}
+
+label.calendar-box {
+    padding-left: 10px;
+}
+
+div.apply-btn {
+    padding-top: 7px;
+}
+
+.issue-row {
+    cursor: pointer;
+}
+
+.negative-hours {
+    color: #c61a1a;
+}

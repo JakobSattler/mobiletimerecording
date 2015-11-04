@@ -1,0 +1,81 @@
+<% content_for :header_tags do %>
+
+    <%= stylesheet_link_tag "employment.css", :plugin => "redmine_zz5" %>
+    <%= stylesheet_link_tag 'jquery.timeentry.css', :plugin => 'redmine_zz5' %>
+    
+    <%= javascript_include_tag "helpers.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "employment_helper.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "jquery.plugin.js", :plugin => 'redmine_zz5' %>
+    <%= javascript_include_tag "jquery.timeentry.js", :plugin => 'redmine_zz5' %>
+    <script>
+    	var save_not_possible_msg = "<%=l(:zz5_save_not_possible)%>";
+        var start_dupe = "<%= l(:zz5_employment_enter_start) %>";
+        var enter_scope = "<%= l(:zz5_employment_enter_scope) %>";
+        var enter_vacation = "<%= l(:zz5_employment_enter_vacation) %>";
+        var enter_carry = "<%= l(:zz5_employment_enter_carry) %>";
+        var enter_overtime = "<%= l(:zz5_employment_enter_overtime) %>";
+    </script>
+<% end %>
+
+<h2><%= l(:zz5_employment_data) %></h2>
+
+<div id="flash_notice"></div>
+
+<%= form_tag("/zz5/employment", remote: false, :id => "employment_form", :name => "employment_form") do %>
+	
+	<div class='calendar-image'>
+		<img id='calendar-img' src="<%= path_to_image('/images/calendar.png') %>" alt="calendar">
+	</div>
+
+	<div class='exclamation-image'>
+		<img id='exclamation-img' src='/images/exclamation.png' alt="exclamation">
+	</div>
+
+    <p>
+	    <div class='employment-menu'>
+		    <label class="user"><%= l(:field_user) %></label>
+		    	<%= select("user_select", "user_id", @users.collect { |u| [ u.lastname + ", " + u.firstname, u.id ] }, { include_blank: true } , :onchange => "userBoxSelectionChanged();".html_safe) %>
+		    <label class='actions'>
+		    <%= link_to l(:button_save), '#', :class => 'icon icon-save', :onclick => 'saveEmployments(save_not_possible_msg); return false;', :id => 'employment_commit' %>
+		    <%= link_to l(:zz5_employment_new), '#', :class => 'icon icon-add', :onclick => 'appendEmploymentRow(null, false); return false;', :id => 'employment_add'  %>
+		    </label>
+	    </div>
+    </p>
+
+    <table class="list" id="employment">
+    <thead>
+        <th><%= l(:zz5_employment_start) %></th>
+        <th><%= l(:zz5_employment_scope) %></th>
+        <th><%= l(:zz5_vacation) %> <%= l(:zz5_in_days) %></th>
+        <th><%= l(:zz5_employment_carry) %></th>
+        <th><%= l(:zz5_employment_overtime) %></th>
+        <th><%= l(:zz5_employment_allin) %></th>
+        <th></th>
+    </thead>
+    <tbody>
+    	<!-- this is where the action happens -->
+    </tbody>
+    </table>
+    
+    <!-- show only if no entries exist or default user ("blank") is selected, toggle when loading via ajax -->
+    <div id="no-entries"><%= l(:zz5_employment_no_entries) %></div>
+
+<% end %>
+
+<% content_for :sidebar do %>
+    <% if @total_hours.present? %>
+    <h3><%= l(:label_spent_time) %></h3>
+    <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
+    <p>
+    <% if User.current.allowed_to?(:log_time, @project) %>
+      <%= link_to l(:button_log_time), new_project_time_entry_path(@project) %> |
+    <% end %>
+    <%= link_to(l(:label_details), project_time_entries_path(@project)) %> |
+    <%= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>
+    <% end %>
+
+    <h3><%= l(:zz5_title) %></h3>
+    <%= link_to(l(:zz5_title), "/zz5/") %>
+    <br>
+    <%= link_to(l(:zz5_time_report), "/zz5/report") %>
+<% end %>

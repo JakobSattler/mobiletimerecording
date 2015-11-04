@@ -1,0 +1,36 @@
+[
+<% @tickets.each do |ticket| %>
+	<%
+      	result = Issue.select("p1.name AS first_name, p2.name AS second_name, p3.name AS third_name").joins("AS i1 LEFT OUTER JOIN projects AS p1 ON p1.id = i1.project_id LEFT OUTER JOIN projects AS p2 ON p2.id = p1.parent_id LEFT OUTER JOIN projects AS p3 ON p3.id = p2.parent_id").where("i1.id = ?", ticket.id).first
+
+        names_result = Array.new
+        names_result.push(result.first_name)
+        names_result.push(result.second_name)
+        names_result.push(result.third_name)
+
+        #removes all nil entries
+        names_result.compact!
+      	
+      	project_names = ""
+      	names_result.reverse_each do |p_name|
+      		project_names += p_name.to_s
+      		if p_name != names_result.first
+      			project_names += " - "
+      		end
+      	end
+    %>
+	<% full_name = "#" + ticket.id.to_s + ": " + project_names + ": " + ticket.subject %>
+	<% full_name.gsub! '(', '\(' %>
+	<% full_name.gsub! ')', '\)' %>
+      <% full_name.gsub! '+', '\plus' %>
+      <% full_name.gsub! '?', '\q_mark' %>
+      <% full_name.gsub! '*', '\asterisk' %>
+      <% Rails.logger.info "tickets.json, preparing json msg, full_name: " + full_name.strip.to_json.html_safe.to_s %>
+		{
+			"id": <%= ticket.id.to_json %>, "name": <%= full_name.strip.to_json.html_safe %>
+		}
+	<% if ticket != @tickets.last %>
+	,
+	<% end %>
+<% end %>
+]

@@ -1,0 +1,65 @@
+[
+<% sorted_employments = @employments.sort_by { |employment| employment.start } %>
+<% sorted_employments.each do |employment|%>
+
+	<% date_parts = employment.start.to_s.split("-") %>
+	<% day = date_parts[2].to_i %>
+	<% month = date_parts[1].to_i %>
+	<% year = date_parts[0].to_i %>
+	
+	<% employment_scope = Zz5GeneralUtil.secondsToTime(employment.employment).to_s.split(":") %>
+	<% employment_scope_hh = employment_scope[0].to_i %>
+	<% employment_scope_mm = employment_scope[1].to_i %>
+
+	<% if !employment.vacation_entitlement.nil? %>
+		<% vacation_in_days = Zz5GeneralUtil.secondsToWorkdays(employment.vacation_entitlement, employment.employment) %>
+		<% Rails.logger.info "vacation in days: " + vacation_in_days.to_s %>
+	<% else %> 
+		<% vacation_in_days = 0 %>
+	<% end %>
+
+	<% time_carry_is_neg = false %>
+	<% if !employment.time_carry.nil? %>
+		<% if employment.time_carry < 0 %>
+			<% time_carry_is_neg = true %>
+		<% end %>
+		<% time_carry = Zz5GeneralUtil.secondsToTime(employment.time_carry).to_s.split(":") %>
+		<% time_carry_hh = time_carry[0].to_i.abs %>
+		<% time_carry_mm = time_carry[1].to_i %>
+	<% else %>
+		<% time_carry_hh = 0 %>
+		<% time_carry_mm = 0 %>
+	<% end %>
+
+	<% if !employment.overtime_allowance.nil? %>
+		<% overtime = Zz5GeneralUtil.secondsToTime(employment.overtime_allowance).to_s.split(":") %>
+		<% overtime_hh = overtime[0].to_i %>
+		<% overtime_mm = overtime[1].to_i %>
+	<% else %>
+		<% overtime_hh = 0 %>
+		<% overtime_mm = 0 %>
+	<% end %>
+
+	{
+	"employment": {
+		"id": <%= employment.id.to_json %>, 
+		"user_id": "<%= employment.user_id.to_json %>", 
+		"day": <%= day.to_json %>, 
+		"month": <%= month.to_json %>, 
+		"year": <%= year.to_json %>, 
+		"employment_scope_hh": <%= employment_scope_hh.to_json %>, 
+		"employment_scope_mm": <%= employment_scope_mm.to_json %>, 
+		"vacation_entitlement": <%= vacation_in_days.to_json %>, 
+		"time_carry_hh": <%= time_carry_hh.to_json %>, 
+		"time_carry_mm": <%= time_carry_mm.to_json %>, 
+		"time_carry_is_neg": <%= time_carry_is_neg %>, 
+		"is_all_in": <%= employment.is_all_in.to_json %>,
+		"overtime_hh": <%= overtime_hh.to_json %>,
+		"overtime_mm": <%= overtime_mm.to_json %>
+		}
+	}
+	<% if employment != sorted_employments.last %>
+	,
+	<% end %>
+<% end %>
+]

@@ -1,0 +1,26 @@
+<div class="absences-row absence-duration-row">
+    <div class="time-title" ng-if="weekview"><%= title %>
+    </div>
+  <div class="times times-absence-duration">
+    <div class="absence-duration-column" ng-repeat="day in days track by day.id">
+        <div ng-class="isWeekend('{{day.date}}') ? 'time-data-container-weekend' : 'time-data-container'">
+           <div class="zz5-time-entry">
+                <div class="te-middle absence-middle">
+                    <input class="time-input" ng-disabled="setDisabled('{{day.id}}_<%= id%>')" id="{{day.id}}_<%= id%>" value="<%= value%>"
+                           ng-click="setBeginEndTime(day.id + '_<%= id%>', day)"
+                           ng-model="day.absence_time"
+                           ng-change="calculateActualHours(day);
+                                        calcDifference(day);
+                                        checkAbsenceTime(day)"
+                           ng-focus="hasFocus(); old_duration = day.absence_time; old_reason = day.absence_reason"
+                           ng-blur="lostFocus(); saveAbsenceTime(day, old_duration, old_reason); clearAbsenceType(day)"
+                           size="7" maxlength="5" type="text" autocomplete="off" placeholder="00:00" time-entry-field="{show24Hours: true}">
+                </div>
+                <div class="te-right">
+                    <img class="img-exclamation" ng-show="day.absence_warning" src="/plugin_assets/redmine_zz5/images/error.png" onMouseOut="this.title.hide" onMouseOver="this.title">
+                </div>
+           </div>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<% if User.current.allowed_to?(:view_zz5, nil, :global => true) %>
+</fieldset>
+<fieldset class="box tabular">
+<legend><%= l(:zz5_title) %></legend>
+
+<%= labelled_fields_for :zz5, @user.zz5_user_preference do |pref_fields| %>
+<p><%= pref_fields.number_field :favorite_tickets, :required => true, size: 4, min: 0, max: 99 %></p>
+<p><%= pref_fields.select :favorite_ticket_order, options_for_select({l(:zz5_order_by_issue_id) => Zz5Constants::BY_ISSUE_ID, l(:zz5_order_by_updated_on) => Zz5Constants::BY_UPDATED_ON}, User.current.zz5_user_preference[:favorite_ticket_order]), {}, { :style => "width: 140px" } %></p>
+<p><%= pref_fields.select :display_days, options_for_select([1,5,7], User.current.zz5_user_preference[:display_days]), {}, { :style => "width: 38px" } %></p>
+<% end %>
+
+<!--user.members.first.roles.first.permissions-->
+<!--
+<p>
+    <label for="zz5_work_start"><%= l(:zz5_work_start)%></label>
+    <span class="required"> * </span>
+    <input id="zz5_work_start" name="zz5_work_start" size="8" type="text" value="<%= @user.zz5_user_preference.work_start.strftime("%H:%M:%S") %>">
+</p>
+
+<p>
+    <label for="zz5_work_end"><%= l(:zz5_work_end)%></label>
+    <span class="required"> * </span>
+    <input id="zz5_work_end" name="zz5_work_end" size="8" type="text" value="<%= @user.zz5_user_preference.end_work.strftime("%H:%M:%S") %>">
+</p>
+
+<p>
+    <label for="zz5_break_duration"><%= l(:zz5_break_duration)%></label>
+    <span class="required"> * </span>
+    <input id="zz5_break_duratiom" name="zz5_work_end" size="8" type="text" value="<%= @user.zz5_user_preference.break_duration.strftime("%H:%M:%S") %>">
+</p>
+-->
+</fieldset>
+<% end %>

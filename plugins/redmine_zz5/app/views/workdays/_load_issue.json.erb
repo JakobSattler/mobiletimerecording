@@ -1,0 +1,30 @@
+{
+    "tracker": <%= @issue[0].to_json.html_safe %>,
+    "time_entries": [
+        <% @issue[1].each_with_index do |(day , bb), i| %>
+        {
+            "id": "<%= i %>", "day": "<%= day.strftime("%A").downcase %>", "bb": [
+            <% if bb.empty? %>
+            {
+                "time_id": "<%= i %>", "hours": "", "activity_id": "-1", "comment": "", "issue_id": "<%= @issue_id %>", "new": true, "date": "<%= day.to_s %>"
+            }
+            <% else %>
+                <% bb.each_with_index do |(time_id, hours, activity_id, comments), j| %>
+            {
+                "time_id": "<%= time_id.to_s %>", "hours": "<%= hours.to_s %>",
+                "activity_id": "<%= activity_id.to_s %>", "comment": <%= comments.to_json.html_safe %>,
+                "issue_id": "<%= @issue_id %>", "new": false, "date": "<%=day.to_s %>"
+            }
+                    <% if j != bb.length - 1 %>
+                    ,
+                    <% end %>
+                <% end %>
+            <% end %>
+            ]
+        }
+            <% if i != @issue[1].length - 1 %>
+            ,
+            <% end %>
+        <% end %>
+    ]
+}

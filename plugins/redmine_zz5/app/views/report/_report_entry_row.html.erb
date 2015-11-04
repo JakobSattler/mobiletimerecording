@@ -1,0 +1,87 @@
+<% work_day_factor = zz5_work_period.is_holiday(zz5_work_day.date) %>
+
+
+<tr class="time-entry <%=work_day_factor > 0 ? "" : "weekend-bg"%>" style="border-bottom: 1px solid #f5f5f5;">
+    <td class="day">
+    <% if display_days != 1 %>
+        <a class="day-link" href='<%= "/zz5/" + (zz5_work_period.first_day+3).cwyear.to_s + "/" + zz5_work_day.date.cweek.to_s %>'>
+    <% else %>
+        <% wday = zz5_work_day.date.wday
+            if wday == 0
+                wday = 7
+            end %>
+        <a class="day-link" href='<%= "/zz5/" + (zz5_work_period.first_day+3).cwyear.to_s + "/" + zz5_work_day.date.cweek.to_s + "/" + wday.to_s %>'>
+    <% end %>
+        <%= zz5_work_day.date.strftime("%Y-%m-%d") %> / <%= l("zz5_" + day) %>
+        </a>
+    </td>
+
+    <% Rails.logger.info "target: " + zz5_work_day.target.to_s %>
+    <% diff = zz5_work_day.carry_over - zz5_work_day.carry_forward %>
+    <% diff = Zz5GeneralUtil.secondsToTime(diff) %>
+    <% Rails.logger.info "diff: " + diff.to_s %>
+
+    <% display_absence_error = false
+       if !absence_rs.nil?
+         absence_duration = Zz5GeneralUtil.timeToSeconds(absence_rs.duration.strftime("%H:%M")).to_i
+         target_time = Zz5GeneralUtil.timeToSeconds(zz5_work_day.target.strftime("%H:%M")).to_i
+         project_time = TimeEntry.where(:user_id => @user_id, :spent_on => zz5_work_day.date).sum(:hours).to_f * 3600
+         absence_error = target_time - project_time - absence_duration
+
+         #
+         #
+         # NEED TO GET PROJECT HOURS FOR A DAY!!!!!!!!!!!!!!
+         #
+         #
+
+         Rails.logger.info "target - diff - absence_duratio: " + target_time.to_s + " - " + project_time.to_s + " - " + absence_duration.to_s
+         if absence_rs.zz5_absence_type_id != 4 || (absence_rs.zz5_absence_type_id == 4 && absence_duration > target_time)
+           if absence_error < 0 || absence_duration < 0
+              display_absence_error = true
+           end
+         end
+       end
+    %>
+
+    <td class="report-hours-container"><div class="hours"><div class="report-hours"><%= zz5_work_day.target.strftime("%H:%M") %></div></div></td>
+    <% if !zz5_work_day.end.nil? || zz5_work_day.absences != 0 %>
+      <td class="report-hours-container"><div class="hours"><div class="report-hours <%= (worked < 0) ? "negative-report-hours" : "" %>"><%= Zz5GeneralUtil.secondsToTime(worked) %></div>
+    <% else %>
+      <td class="report-hours-container"><div class="hours"><div class="report-hours">00:00</div>
+    <% end %>
+    <td class="report-hours-container"><div class="hours"><div class="report-hours <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "negative-report-hours" : "" %>"><%= diff %></div>
+    <div class="icons">
+
+    <% a = zz5_work_period.get_missing_hour(zz5_work_day.date)%>
+    <%if worked < 0 %>
+        <%flash.now[:error]=t("message.zz5_invalid_time")%>
+        <img title='<%= l(:zz5_invalid_work_time)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
+             src='/plugin_assets/redmine_zz5/images/error.png' onmouseover="this.title" onmouseout="this.title.hide">
+    <%elsif display_absence_error %>
+        <%flash.now[:error]=t("message.zz5_invalid_absences")%>
+        <img title='<%= l(:zz5_invalid_absence_duration)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
+             src='/plugin_assets/redmine_zz5/images/error.png' onmouseover="this.title" onmouseout="this.title.hide">
+    <%elsif a < 0.0 %>
+        <% a = a * -1 %>
+        <%flash.now[:warning]=t("message.zz5_wrong_time")%>
+        <img title='<%= l(:zz5_wrong_work_time)%>: <%= Zz5GeneralUtil.secondsToTime(a).to_s %>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>'
+             id='<%=day+"_"+"error"%>' src='/plugin_assets/redmine_zz5/images/warning.png' onmouseover="this.title" onmouseout="this.title.hide">
+    <% elsif a > 0.0 %>
+        <%flash.now[:warning]=t("message.zz5_wrong_time")%>
+        <img title='<%= l(:zz5_wrong_project_time)%>: <%= Zz5GeneralUtil.secondsToTime(a).to_s %>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>'
+             id='<%=day+"_"+"error"%>' src='/plugin_assets/redmine_zz5/images/warning.png' onmouseover="this.title" onmouseout="this.title.hide">
+    <%end%>
+    </div></div>
+    </td>
+    <% if work_day_factor > 0  %>
+        <td class="general-hours-container"><div class="comp-hours"><%= (!absence_rs.nil? and absence_rs.name == "zz5_absence_comp_time") ?absence_rs.duration.strftime("%H:%M") : "" %></div></td>
+        <td class="report-hours-container"><div class="vacation-days"><%= (!absence_rs.nil? and absence_rs.name == "zz5_absence_vacation") ? get_absence_in_days(zz5_work_day.date, absence_rs.duration) : "" %></div></td>
+        <td class="general-hours-container"><div class="sick-hours"><%= (!absence_rs.nil? and absence_rs.name == "zz5_absence_sick") ?absence_rs.duration.strftime("%H:%M") : "" %></div></td>
+        <td class="general-hours-container"><div class="special-vacation-hours"><%= (!absence_rs.nil? and absence_rs.name == "zz5_absence_special_vacation") ? absence_rs.duration.strftime("%H:%M") : "" %></div></td>
+        <td class="general-hours-container"><div class="care-hours"><%= (!absence_rs.nil? and absence_rs.name == "zz5_absence_care") ?absence_rs.duration.strftime("%H:%M") : "" %></div></td>
+    <% else %>
+        <td colspan="5" class="comment"><div><%= l(:zz5_no_work_day) %></div></td>
+    <% end %>
+
+    <td></td>
+</tr>

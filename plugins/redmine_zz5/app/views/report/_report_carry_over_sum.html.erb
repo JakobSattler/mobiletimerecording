@@ -1,0 +1,34 @@
+<tr class="total-sum">
+    <td class="day"><%= l(:zz5_time_carry) %></td>
+
+    <%
+        diff_time = work_period_sum[Zz5Constants::ACTUAL_TIME] - work_period_sum[Zz5Constants::TARGET_TIME] + time_carry
+        diff_vacation = vacation_entitlement
+    -%>
+
+    <td/>
+
+    <td/>
+
+    <td/>
+
+    <td/>
+    
+
+    
+    <td class="report-hours-container">
+        <div class="vacation-days">
+            <%= diff_vacation %>
+        </div>
+    </td>
+
+    <td/>
+
+    <td/>
+
+    <td/>
+
+    <td class="total-hours-container">
+        <div class="total-hours"><span class="<%= (diff_time < 0) ? "negative" : "positive"%>"><%= convert_seconds_to_hours_and_minutes(diff_time) %></span></div>
+    </td>
+</tr>

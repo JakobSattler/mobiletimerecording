@@ -1,0 +1,6 @@
+<% if User.current.allowed_to?(:manage_zz5, nil, :global => true) %>
+
+<h3><%= l(:zz5_title) %></h3>
+
+<p><%= link_to l(:zz5_project_report), "/zz5_project_report/" + @project.id.to_s %></p>
+<% end %>
