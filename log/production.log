@@ -4299,3 +4299,861 @@ Processing by AccountController#logout as HTML
   Current user: admin (id=1)
   Rendered account/logout.html.erb within layouts/base (0.5ms)
 Completed 200 OK in 31.9ms (Views: 18.4ms | ActiveRecord: 11.1ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:28:16 +0100
+Processing by AccountController#logout as HTML
+  Current user: admin (id=1)
+  Rendered account/logout.html.erb within layouts/base (0.6ms)
+Completed 200 OK in 14.9ms (Views: 10.4ms | ActiveRecord: 0.9ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:41:59 +0100
+Processing by AccountController#asdf as HTML
+  Current user: admin (id=1)
+  Rendered account/asdf.html.erb within layouts/base (1.8ms)
+Completed 200 OK in 204.7ms (Views: 110.0ms | ActiveRecord: 12.6ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:46:48 +0100
+
+AbstractController::ActionNotFound (The action 'testFile' could not be found for AccountController):
+  actionpack (3.2.22) lib/abstract_controller/base.rb:116:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__1704177199409407019__call__3411032015085346666__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:46:56 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3723965323776252398__call__2725368016066580315__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:46:57 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3723965323776252398__call__2725368016066580315__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:48:46 +0100
+
+ActionController::RoutingError (No route matches [GET] "/mtr/login"):
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:48:48 +0100
+
+ActionController::RoutingError (No route matches [GET] "/mtr/login"):
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-05 15:49:42 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2268469814038061041__call__1065911419158363693__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/login" for 127.0.0.1 at 2015-11-05 15:50:52 +0100
+Processing by AccountController#login as HTML
+  Current user: admin (id=1)
+Redirected to 
+Redirected to http://localhost:3000/
+Completed 302 Found in 94.1ms (ActiveRecord: 8.3ms)
+Started GET "/" for 127.0.0.1 at 2015-11-05 15:50:52 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (62.6ms)
+Completed 200 OK in 171.3ms (Views: 108.4ms | ActiveRecord: 31.1ms)
+Started GET "/zz5/report" for 127.0.0.1 at 2015-11-05 15:50:58 +0100
+Processing by ReportController#index as HTML
+  Current user: admin (id=1)
+initialize Zz5Workperiod for from date 2015-11-01 to date 2015-10-23
+Zz5WorkPeriod, initialize @last_day: 2015-10-23
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-242015-10-11
+---------------------------------------
+calculate_carries_for_holiday, 2015-10-24 is a holiday/weekend
+calculate_carries_for_holiday, working on a weekend: 0
+calculate_carries, new_carry_forward: -166320
+calculate_carries, update_carry: -166320
+fill_possible_gaps, last saved workday date: 2015-10-24
+fill_possible_gaps, number of employments: 1
+fill_possible_gaps, current_date: 2015-10-25
+fill_possible_gaps, current employment start: 2015-10-11
+fill_possible_gaps, current employment employment: 138600.0
+fill_possible_gaps, next until date: 2015-11-01
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-252015-10-11
+---------------------------------------
+calculate_carries_for_holiday, 2015-10-25 is a holiday/weekend
+calculate_carries_for_holiday, working on a weekend: 0
+calculate_carries, new_carry_forward: -166320
+calculate_carries, update_carry: -166320
+set_employment_for_day, target for 2015-10-27 = 2000-01-01 07:42:00 +0100
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-262015-10-11
+---------------------------------------
+calculate_carries_for_holiday, 2015-10-26 is a holiday/weekend
+calculate_carries_for_holiday, working on a weekend: 0
+calculate_carries, new_carry_forward: -166320
+calculate_carries, update_carry: -166320
+set_employment_for_day, target for 2015-10-28 = 2000-01-01 07:42:00 +0100
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-272015-10-11
+---------------------------------------
+calculate_carries, 2015-10-27 is a regular working day
+calculate_carries, worked: 0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -166320
+calculate_carries, carry_over: -194040
+calculate_carries, new_carry_forward: -194040
+calculate_carries, update_carry: -194040
+set_employment_for_day, target for 2015-10-29 = 2000-01-01 07:42:00 +0100
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-282015-10-11
+---------------------------------------
+calculate_carries, 2015-10-28 is a regular working day
+calculate_carries, worked: 0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -194040
+calculate_carries, carry_over: -221760
+calculate_carries, new_carry_forward: -221760
+calculate_carries, update_carry: -221760
+set_employment_for_day, target for 2015-10-30 = 2000-01-01 07:42:00 +0100
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-292015-10-11
+---------------------------------------
+calculate_carries, 2015-10-29 is a regular working day
+calculate_carries, worked: 0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -221760
+calculate_carries, carry_over: -249480
+calculate_carries, new_carry_forward: -249480
+calculate_carries, update_carry: -249480
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-302015-10-11
+---------------------------------------
+calculate_carries, 2015-10-30 is a regular working day
+calculate_carries, worked: 0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -249480
+calculate_carries, carry_over: -277200
+calculate_carries, new_carry_forward: -277200
+calculate_carries, update_carry: -277200
+calculate_carries, old_carry_forward: 0
+employment in calculate carries:  2015-10-312015-10-11
+---------------------------------------
+calculate_carries_for_holiday, 2015-10-31 is a holiday/weekend
+calculate_carries_for_holiday, working on a weekend: 0
+calculate_carries, new_carry_forward: -277200
+calculate_carries, update_carry: -277200
+get_or_create_workdays_for_dates with date 2015-11-01
+first_day: 2015-11-01
+@last_day: 2015-10-23
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2015-11-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2015
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 0
+calculate_vacation, employment: 138600.0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+user: 1employment start: 2015-10-11
+user: 5employment start: 2015-10-15
+user: 1employment start: 2015-10-11
+user: 5employment start: 2015-10-15
+calendar_for, field_id. start_date, minDate: 2015-10-11maxDate:2015-10-31
+include_calendar_headers_tags, partsMin: ["2015", "10", "11"]
+include_calendar_headers_tags, partsMax: ["2015", "10", "31"]
+user: 1employment start: 2015-10-11
+user: 5employment start: 2015-10-15
+calendar_for, field_id. end_date, minDate: 2015-10-11maxDate:2015-10-31
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2015-11-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2015
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 0
+calculate_vacation, employment: 138600.0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/report/_report_carry_forward_sum.html.erb (1.3ms)
+report end date: 2015-10-23
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2015-10-24
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2015
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 0
+calculate_vacation, employment: 138600.0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/report/_report_period_sum.html.erb (25.7ms)
+  Rendered plugins/redmine_zz5/app/views/report/_report_carry_over_sum.html.erb (0.9ms)
+  Rendered plugins/redmine_zz5/app/views/common/_sidebar.html.erb (0.7ms)
+  Rendered plugins/redmine_zz5/app/views/report/show.html.erb within layouts/base (178.5ms)
+Completed 200 OK in 1143.1ms (Views: 205.0ms | ActiveRecord: 578.7ms)
+Started GET "/javascripts/i18n/jquery.ui.datepicker-de.js" for 127.0.0.1 at 2015-11-05 15:51:00 +0100
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/i18n/jquery.ui.datepicker-de.js"):
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/javascripts/i18n/jquery.ui.datepicker-de.js" for 127.0.0.1 at 2015-11-05 15:51:00 +0100
+
+ActionController::RoutingError (No route matches [GET] "/javascripts/i18n/jquery.ui.datepicker-de.js"):
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2015-11-05 15:55:53 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (38.9ms)
+Completed 200 OK in 290.7ms (Views: 98.7ms | ActiveRecord: 16.3ms)
+Started GET "/zz5/test" for 127.0.0.1 at 2015-11-05 15:56:05 +0100
+
+ActionController::RoutingError (No route matches [GET] "/zz5/test"):
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/zz5/login" for 127.0.0.1 at 2015-11-05 15:56:11 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__1710400849907024671__call__2326609110456926325__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/test" for 127.0.0.1 at 2015-11-05 15:56:35 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3855062526588232634__call__803886941637546497__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/zz5/test" for 127.0.0.1 at 2015-11-05 15:57:09 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3717977888777337970__call__729594016085282028__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/" for 127.0.0.1 at 2015-11-05 16:05:09 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (55.7ms)
+Completed 200 OK in 335.3ms (Views: 114.2ms | ActiveRecord: 24.6ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/test" for 127.0.0.1 at 2015-11-05 16:06:21 +0100
+
+ActionController::RoutingError (uninitialized constant TestController):
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:230:in `block in constantize'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `each'
+  activesupport (3.2.22) lib/active_support/inflector/methods.rb:229:in `constantize'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:54:in `controller'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:32:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3942091801636607251__call__1604458591628500233__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/test" for 127.0.0.1 at 2015-11-05 16:10:44 +0100
+Processing by TestController#testFile as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/test/testFile.html.erb within layouts/base (1.1ms)
+Completed 200 OK in 170.7ms (Views: 86.3ms | ActiveRecord: 10.1ms)
