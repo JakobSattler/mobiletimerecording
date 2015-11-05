@@ -1,2 +1,2 @@
-class TestController
+class TestController < ApplicationController
 end
