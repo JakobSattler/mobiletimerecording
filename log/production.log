@@ -5201,3 +5201,33 @@ Processing by TestController#testFile as HTML
   Current user: anonymous
   Rendered plugins/redmine_mtr/app/views/test/testFile.html.erb within layouts/base (0.0ms)
 Completed 200 OK in 32.3ms (Views: 17.5ms | ActiveRecord: 6.1ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2015-11-19 14:15:02 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (117.7ms)
+Completed 200 OK in 945.4ms (Views: 341.7ms | ActiveRecord: 201.4ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2015-11-19 14:15:07 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/account/login.html.erb within layouts/base (7.3ms)
+Completed 200 OK in 36.5ms (Views: 28.9ms | ActiveRecord: 4.8ms)
+Started POST "/login" for 127.0.0.1 at 2015-11-19 14:15:09 +0100
+Processing by AccountController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5U/PMHDESVTuFwEuufckK0PmLy5OVDqZQnsHnNjTAa0=", "username"=>"admin", "password"=>"[FILTERED]", "login"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2015-11-19 13:15:09 UTC
+Redirected to http://localhost:3000/my/page
+Completed 302 Found in 62.7ms (ActiveRecord: 56.3ms)
+Started GET "/my/page" for 127.0.0.1 at 2015-11-19 14:15:09 +0100
+Processing by MyController#page as HTML
+  Current user: admin (id=1)
+  Rendered issues/_list_simple.html.erb (1.4ms)
+  Rendered my/blocks/_issuesassignedtome.html.erb (60.3ms)
+  Rendered issues/_list_simple.html.erb (0.1ms)
+  Rendered my/blocks/_issuesreportedbyme.html.erb (8.8ms)
+  Rendered my/page.html.erb within layouts/base (83.7ms)
+Completed 200 OK in 178.1ms (Views: 114.5ms | ActiveRecord: 21.5ms)
