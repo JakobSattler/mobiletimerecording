@@ -132,7 +132,7 @@ class Zz5GeneralUtil
 
     appendMinus = false
 
-    if time.nil? || time == 0
+    if time.nil? || time == 0 || time == ""
       return 0
     end
 
@@ -186,7 +186,7 @@ class Zz5GeneralUtil
 
   #converts hours (e.g. 1.5 ) to a human readable time string (e.g 01:30)
   def self.hoursToTime(hours)
-    #Rails.logger.info "hoursToTime called with: " + hours.to_s
+    Rails.logger.info "hoursToTime called with: " + hours.to_f.to_s
     
     if hours.nil?
       hours = 0
@@ -221,7 +221,7 @@ class Zz5GeneralUtil
     result["zz5_label_carry"] = I18n.translate(:zz5_label_carry)
     result["hours"] = I18n.translate(:field_hours)
     result["days"] = I18n.translate(:label_day_plural)
-    return result;
+    return result
   end
 
 
@@ -272,4 +272,46 @@ class Zz5GeneralUtil
     return new_date_string.to_date
   end
 
+  def self.migrateData
+    puts "start migration"
+    users = User.all
+
+    users.each do |user|
+      puts "migrating data for user: #{user.id}"
+      workdays = Zz5Workday.where("user_id = ? AND begin IS NOT NULL", user.id)
+
+      workdays.each do |workday|
+      # creates the begin times for the given wday
+        id = workday.id
+        #Rails.logger.info "create_begin_end_times, workdays id: " + id.to_s
+        #Rails.logger.info "create_begin_end_times, t_begin: " + time_begin.to_s
+        #Rails.logger.info "create_begin_end_times, t_end: " + time_end.to_s
+        time_begin_in_s = Zz5GeneralUtil.timeToSeconds(workday.begin.strftime("%H:%M"))
+        time_end_in_s = Zz5GeneralUtil.timeToSeconds(workday.end.strftime("%H:%M"))
+        time_break_in_s = Zz5GeneralUtil.timeToSeconds(workday.break.strftime("%H:%M"))
+
+        worked = time_end_in_s - time_begin_in_s - time_break_in_s
+
+        be_times_first = Zz5BeginEndTimes.new(:zz5_workdays_id => id, :begin => workday.begin, :end => Zz5GeneralUtil.secondsToTime(time_begin_in_s + worked))
+        if be_times_first.save
+          Rails.logger.info "create_begin_end_times, new begin end times successful!!! " + be_times_first.id.to_s + " " + be_times_first.begin.to_s + " " + be_times_first.end.to_s
+        else
+          Rails.logger.info "create_begin_end_times, new begin end times failed!!!"
+        end
+
+        be_times_second = Zz5BeginEndTimes.new(:zz5_workdays_id => id, :begin => workday.end, :end => workday.end)
+        if be_times_second.save
+          Rails.logger.info "create_begin_end_times, new begin end times successful!!! " + be_times_second.id.to_s + " " + be_times_second.begin.to_s + " " + be_times_second.end.to_s
+        else
+          Rails.logger.info "create_begin_end_times, new begin end times failed!!!"
+        end
+      end
+    end
+    puts "dropping begin, end, break columns from zz5_workdays"
+    ActiveRecord::Migration.remove_column :zz5_workdays, :begin
+    ActiveRecord::Migration.remove_column :zz5_workdays, :end
+    ActiveRecord::Migration.remove_column :zz5_workdays, :break
+
+    puts "migration finished"
+  end
 end

@@ -84,18 +84,23 @@
 
     <% Rails.logger.info "report end date: " + @report_end_date.to_s %>
 
-        <% @zz5_work_period.workdays.each do |zz5_work_day| %>
+        <% @zz5_work_period.workdays.each_with_index do |zz5_work_day, index| %>
             <% Rails.logger.info "work day: " + zz5_work_day.target.to_s %>
             <% # get the result sets
 
                Rails.logger.info "workday date: " + zz5_work_day.date.to_s + " aaaaaab: " + zz5_work_day.absences.to_s
 
-               if !zz5_work_day.end.nil? || zz5_work_day.absences != 0
-                 worked = (convert_date_time_to_seconds(zz5_work_day.end) - convert_date_time_to_seconds(zz5_work_day.begin) - convert_date_time_to_seconds(zz5_work_day.break)) + zz5_work_day.absences
+               if !@zz5_work_period.begin_end_times.empty? || zz5_work_day.absences != 0
+
+                 worked = 0
+                 @zz5_work_period.begin_end_times[index].each do |worktimes|
+                   worked += convert_date_time_to_seconds(worktimes.end) - convert_date_time_to_seconds(worktimes.begin)
+                 end
+
+                 worked += zz5_work_day.absences
                else
                  worked = 0
                end
-               Rails.logger.info "" + zz5_work_day.date.to_s + ": " + worked.to_s + " = " + convert_date_time_to_seconds(zz5_work_day.end).to_s + " - " + convert_date_time_to_seconds(zz5_work_day.begin).to_s + " - " + convert_date_time_to_seconds(zz5_work_day.break).to_s
                absence_rs = Zz5Absence.select("duration, zz5_absence_types.name as name, zz5_absence_type_id").joins(:zz5_absence_type).where("zz5_workday_id = ?", zz5_work_day.id).first
 
                add_work_time(work_week_sum, convert_date_time_to_seconds(zz5_work_day.target), worked, absence_rs, zz5_work_day.date)
@@ -104,7 +109,7 @@
                add_work_time(work_period_sum, convert_date_time_to_seconds(zz5_work_day.target), worked, absence_rs, zz5_work_day.date)
             -%>
 
-            <%= render :partial => "report_entry_row", :locals => {:day => zz5_work_day.date.strftime("%A").downcase, :zz5_work_day => zz5_work_day, :zz5_work_period => @zz5_work_period,
+            <%= render :partial => "report_entry_row", :locals => {:day => zz5_work_day.date.strftime("%A").downcase, :zz5_work_day => zz5_work_day, :zz5_work_period => @zz5_work_period, :index => index,
                                                                    :worked => worked, :absence_rs => absence_rs, :display_days => display_days} %>
 
             <% if zz5_work_day.date == zz5_work_day.date.at_end_of_week || zz5_work_day.date == @report_end_date %>

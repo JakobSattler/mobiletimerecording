@@ -642,6 +642,12 @@ ActiveRecord::Schema.define(:version => 20140920094058) do
     t.time    "duration",            :default => '2000-01-01 00:00:00'
   end
 
+  create_table "zz5_begin_end_times", :force => true do |t|
+    t.integer "zz5_workdays_id"
+    t.time    "begin"
+    t.time    "end"
+  end
+
   create_table "zz5_employments", :force => true do |t|
     t.integer "user_id"
     t.date    "start"
@@ -683,6 +689,7 @@ ActiveRecord::Schema.define(:version => 20140920094058) do
     t.boolean "display_projects",      :default => true
     t.integer "favorite_ticket_order", :default => 0
     t.integer "display_worktimes",     :default => 0
+    t.integer "alternative_worktimes", :default => 0
   end
 
   create_table "zz5_workdays", :force => true do |t|

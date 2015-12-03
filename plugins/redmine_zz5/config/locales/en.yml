@@ -36,6 +36,11 @@ en:
   zz5_invalid_absence: "Ungültige Absenz"
   zz5_last_saved: "Zuletzt gespeichert"
   zz5_duplicate_tickets: "The following tickets are already in the list"
+  zz5_come_in: "Come"
+  zz5_leave: "Leave"
+  zz5_worked: "Worked"
+  zz5_break_time_exists: "Pausenzeit in einfacher Arbeitszeitenansicht vorhanden!"
+  zz5_extra_work_times: "Mehrere Arbeitszeiten in mehrfacher Arbeitszeitenansicht vorhanden!"
 
   zz5_actual_time: "Ist-Stunden"
   zz5_target_time: "Soll-Stunden"
@@ -124,11 +129,14 @@ en:
   field_display_days: "Show number of days"
   field_display_projects: "Show project tree"
   field_favorite_ticket_order: "Tickets order by"
-  field_display_worktimes: "Show wortimes"
+  field_display_worktimes: "Show worktimes"
+  field_alternative_worktimes: "Worktimes"
   zz5_order_by_issue_id: "By Issue ID"
   zz5_order_by_updated_on: "Updated on"
   zz5_static_worktimes: "Immer sichtbar"
   zz5_normal_worktimes: "Normal"
+  zz5_single_worktimes: "Begin/End/Break"
+  zz5_multiple_worktimes: "Come/Leave"
 
   # date
   date:

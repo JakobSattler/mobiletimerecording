@@ -7,6 +7,7 @@
 <p><%= pref_fields.number_field :favorite_tickets, :required => true, size: 4, min: 0, max: 99 %></p>
 <p><%= pref_fields.select :favorite_ticket_order, options_for_select({l(:zz5_order_by_issue_id) => Zz5Constants::BY_ISSUE_ID, l(:zz5_order_by_updated_on) => Zz5Constants::BY_UPDATED_ON}, User.current.zz5_user_preference[:favorite_ticket_order]), {}, { :style => "width: 140px" } %></p>
 <p><%= pref_fields.select :display_days, options_for_select([1,5,7], User.current.zz5_user_preference[:display_days]), {}, { :style => "width: 38px" } %></p>
+<p><%= pref_fields.select :alternative_worktimes, options_for_select({l(:zz5_single_worktimes) => Zz5Constants::SINGLE_WORKTIMES, l(:zz5_multiple_worktimes) => Zz5Constants::MULTIPLE_WORKTIMES}, User.current.zz5_user_preference[:alternative_worktimes]), {}, { :style => "width: 148px" }%></p>
 <% end %>
 
 <!--user.members.first.roles.first.permissions-->

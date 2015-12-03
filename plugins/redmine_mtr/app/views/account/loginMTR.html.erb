@@ -17,20 +17,20 @@
                     <h1 class="container col-md-12">Login</h1>
                 </div>
                 <div class="modal-body form-group">
-                        <div style="padding-top: 5px;">
-                            <%= text_field_tag 'username', params[:username], :tabindex => '1', :class => 'form-control input-lg',
+                    <div style="padding-top: 5px;">
+                        <%= text_field_tag 'username', params[:username], :tabindex => '1', :class => 'form-control input-lg',
+                                           :class => 'login-input', :style => 'width: 100%'%>
+                    </div>
+                    <div style="padding-top: 5px;">
+                        <%= password_field_tag 'password', nil, :tabindex => '2', :class => 'form-control input-lg',
                                                :class => 'login-input', :style => 'width: 100%'%>
-                        </div>
-                        <div style="padding-top: 5px;">
-                            <%= password_field_tag 'password', nil, :tabindex => '2', :class => 'form-control input-lg',
-                                                   :class => 'login-input', :style => 'width: 100%'%>
-                        </div>
-                        <div style="padding-top: 5px;">
-                            <input type="submit" style="height: 38px" class="form-control input-lg btn btn-danger" name="login" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
-                        </div>
-                        <div style="padding-top: 5px;">
-                                <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
-                        </div>
+                    </div>
+                    <div style="padding-top: 5px;">
+                        <input type="submit" style="height: 38px" class="form-control input-lg btn btn-danger" name="login" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
+                    </div>
+                    <div style="padding-top: 5px;">
+                        <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,4 +42,3 @@
 <% else %>
     <%= javascript_tag "$('#username').focus();" %>
 <% end %>
-

@@ -64,6 +64,14 @@ module Zz5
             User.current.zz5_user_preference[:display_worktimes] = display_worktimes
           end
 
+          # handle alternative worktimes
+          alt_worktimes = params[:zz5][:alternative_worktimes]
+          if alt_worktimes == '1'
+            User.current.zz5_user_preference[:alternative_worktimes] = true
+          else
+            User.current.zz5_user_preference[:alternative_worktimes] = false
+          end
+
           # save active record
           User.current.zz5_user_preference.save
 

@@ -20,8 +20,8 @@
                         <input class="time-input-ticket"
                                ng-model="time_entry_per_day.hours"
                                ng-focus="old_hours_value = time_entry_per_day.hours;
-                                    old_begin = days[time_entry.id].begin;
-                                    old_end = days[time_entry.id].end;
+                                    old_begin = days[time_entry.id].begin_end_times[0].begin;
+                                    old_end = days[time_entry.id].begin_end_times[days[time_entry.id].begin_end_times.length - 1].end;
                                     old_break = days[time_entry.id].break;
                                     old_project_hours = days[time_entry.id].project_hours;
                                     old_activity = time_entry_per_day.activity_id;
@@ -31,8 +31,8 @@
                                     saveTimeEntry(time_entry_per_day, old_hours_value, 'hours', days[time_entry.id],
                                                     old_begin, old_end, old_break, old_project_hours, old_activity, old_comment);"
                                ng-change="calcProjectHours(time_entry_per_day.hours, days[time_entry.id], '{{time_entry_per_day.hours}}');
-                                    updateEndTime(days[time_entry.id], 'time_entry');
-                                    calculateActualHours(days[time_entry.id], time_entry);
+                                    <%= updateEndTimes %>(days[time_entry.id], 'time_entry');
+                                    <%= calcActualHours %>(days[time_entry.id]);
                                     calcDifference(days[time_entry.id]);
                                     checkAbsenceTime(days[time_entry.id])"
                                data-times-id="{{time_entry.id}}" time-entry-field="{show24Hours: true, defaultTime: '00:00:00'}" placeholder="00:00">
@@ -133,8 +133,8 @@
             <input type="text"
                    ng-model="time_entry.hours"
                    ng-focus="old_hours_value = time_entry.hours;
-                        old_begin = days[day].begin;
-                        old_end = days[day].end;
+                        old_begin = days[day].begin_end_times[0].begin;
+                        old_end = days[day].begin_end_times[days[day].begin_end_times.length-1].end;
                         old_break = days[day].break;
                         old_project_hours = days[day].project_hours;
                         old_activity = time_entry.activity_id;
@@ -143,8 +143,8 @@
                         days[day], old_begin, old_end, old_break, old_project_hours,
                         old_activity, old_comment);"
                    ng-change="calcProjectHours(time_entry.hours, days[day], '{{time_entry.hours}}');
-                            updateEndTime(days[day], 'time_entry');
-                            calculateActualHours(days[day], time_entry);
+                            <%= updateEndTimes %>(days[day], 'time_entry');
+                            <%= calcActualHours %>(days[day]);
                             calcDifference(days[day]);
                             checkAbsenceTime(days[day])"
                    size="7" class="time-input-ticket" maxlength="5" placeholder="00:00"
@@ -187,7 +187,7 @@
           <input ng-model="time_entry.comment" ng-focus="old_comment_value = time_entry.comment; hasFocus()"
                  ng-blur="saveTimeEntry(time_entry, old_comment_value, 'comment', days[time_entries.indexOf(time_entry)]); lostFocus()"
                  rows="1" type="text" class="ticket-comment-input" value="" placeholder="<%= l(:zz5_comment) %>" ng-maxlength="255"
-                 autocomplete="off"></input>
+                 autocomplete="off" maxlength="255"></input>
         </div>
       </div>
     </div>

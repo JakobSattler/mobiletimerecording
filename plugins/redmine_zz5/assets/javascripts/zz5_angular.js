@@ -142,6 +142,7 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                 $scope.saved = false;
                 $scope.children_projects = "";
                 $scope.weekview = is_weekview;
+                $scope.alt_worktimes = is_alt_worktimes;
                 $scope.tree = [];
                 $scope.showTicketWarning = false;
                 $scope.duplicate_tickets = "";
@@ -191,10 +192,16 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                         absence_time = "00:00";
                     }
 
-                    if (($scope.days[j].begin != "" || $scope.days[j].absence_time != "")) {
-                        $scope.days[j].actual_hours = $scope.time_addition($scope.time_difference($scope.days[j].break, $scope.time_difference($scope.days[j].end, $scope.days[j].begin)), absence_time);
+                    $scope.days[j].actual_hours = "00:00";
+
+                    if($scope.alt_worktimes) {
+                        for (var l = 0; l < $scope.days[j].begin_end_times.length; l++) {
+                            $scope.days[j].actual_hours = $scope.time_addition($scope.days[j].actual_hours, $scope.time_difference($scope.days[j].begin_end_times[l].end, $scope.days[j].begin_end_times[l].begin));
+                        }
+                        $scope.days[j].actual_hours = $scope.time_addition($scope.days[j].actual_hours, absence_time);
                     } else {
-                        $scope.days[j].actual_hours = "00:00";
+                        var last_index = $scope.days[j].begin_end_times.length-1;
+                        $scope.days[j].actual_hours = $scope.time_addition($scope.time_difference($scope.days[j].break, $scope.time_difference($scope.days[j].begin_end_times[last_index].end, $scope.days[j].begin_end_times[0].begin)), absence_time);
                     }
 
                     $scope.sums.actual = $scope.time_addition($scope.sums.actual, $scope.days[j].actual_hours);
@@ -256,17 +263,14 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
             };
 
             // pass old_value and field to do some basic checks whether to save or not!!!
-            $scope.saveDayTime = function(day_data, old_values, field) {
+            $scope.saveAbsence = function(day_data, old_time, old_reason) {
                 var json_data = {
                     "date": day_data.date,
-                    "begin": day_data.begin,
-                    "end": day_data.end,
-                    "break": day_data.break,
                     "absence_time": day_data.absence_time,
                     "absence_reason": day_data.absence_reason
                 };
 
-                $scope.time = Day.save(json_data,
+                $scope.time = Day.save_absence.send(json_data,
                     function (data) {
                         $scope.saved = true;
                         day_data.time_carry = data.carry;
@@ -276,29 +280,115 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                         alert("Error while saving. Please try again!");
                         $scope.saved = false;
 
-                        switch(field) {
-                            case 'worktime':
-                                day_data.begin = old_values[0];
-                                day_data.end = old_values[1];
-                                day_data.break = old_values[2];
-                                break;
+                        day_data.absence_time = old_time;
+                        day_data.absence_reason = old_reason;
 
-                            case 'absence':
-                                day_data.absence_time = old_values[0];
-                                day_data.absence_reason = old_values[1];
-                                break;
-
-                            default:
-                                break;
+                        if($scope.alt_workimes) {
+                            $scope.calculateMultipleActualHours(day_data);
+                        } else {
+                            $scope.calculateSingleActualHours(day_data);
                         }
-
-                        $scope.calculateActualHours(day_data);
                     });
             };
 
-            $scope.saveWorktimes = function(day, old_begin, old_end, old_break) {
-                var old_values = [old_begin, old_end, old_break];
-                $scope.saveDayTime(day, old_values, 'worktime');
+            $scope.saveSingleWorktime = function(day, type, old_begin, old_end, old_break) {
+
+                switch(type) {
+                    case "begin":
+                        if((day.begin_end_times[0].begin == "" && old_begin == day.begin_end_times[0].begin) || old_begin == day.begin_end_times[0].begin) {
+                            return;
+                        }
+                        break;
+                    case "end":
+                        if(old_end == day.begin_end_times[day.begin_end_times.length-1].end) {
+                            return;
+                        }
+                        break;
+                    case "break":
+                        if(old_break == day.break) {
+                            return;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+
+                var json_data = {
+                    "date": day.date,
+                    "id": day.begin_end_times[0].id,
+                    "type": type,
+                    "begin": day.begin_end_times[0].begin,
+                    "end": day.begin_end_times[day.begin_end_times.length-1].end,
+                    "break": day.break
+                };
+
+                $scope.time = Day.save_single_worktime.send(json_data,
+                    function (data) {
+                        $scope.saved = true;
+                        day.time_carry = data.carry;
+                        day.begin_end_times[0].id = data.be_id
+                    },
+                    function (data) {
+                        alert("Error while saving. Please try again!");
+                        $scope.saved = false;
+
+                        day.begin_end_times[0].begin = old_begin;
+                        day.begin_end_times[day.begin_end_times.length-1].end = old_end;
+                        day.break = old_break;
+
+                        $scope.calculateSingleActualHours(day);
+                    });
+            };
+
+            $scope.saveMultipleWorktime = function(day, index, old_begin, old_end, old_break) {
+                if(day.begin_end_times[index].begin == "" && old_begin == day.begin_end_times[index].begin) {
+                    return;
+                }
+
+                var json_data = {
+                    "date": day.date,
+                    "id": day.begin_end_times[index].id,
+                    "begin": day.begin_end_times[index].begin,
+                    "end": day.begin_end_times[index].end,
+                    "break": day.break
+                };
+
+                $scope.time = Day.save_multiple_worktime.send(json_data,
+                    function (data) {
+                        $scope.saved = true;
+                        day.time_carry = data.carry;
+                        day.begin_end_times[index].id = data.be_id
+                    },
+                    function (data) {
+                        alert("Error while saving. Please try again!");
+                        $scope.saved = false;
+
+                        day.begin_end_times[index].begin = old_begin;
+                        day.begin_end_times[index].end = old_end;
+                        day.break = old_break;
+
+                        $scope.calculateMultipleActualHours(day);
+                    });
+            };
+
+            $scope.addWorktimesRow = function() {
+                var worktimes = $scope.days[0].begin_end_times;
+                worktimes.push({id: 0, begin: '', end: ''});
+            };
+
+            $scope.removeWorktimesRow = function(index) {
+                var worktimes = $scope.days[0].begin_end_times;
+                var json_data = {   "id": worktimes[index].id,
+                    "date": $scope.days[0].date
+                };
+
+                $scope.time = Day.delete_worktime.send(json_data,
+                    function(data) {
+                        $scope.saved = true;
+                    });
+
+                worktimes.splice(index, 1);
             };
 
             $scope.setAbsenceType = function (day, day_id, absence_id, old_reason, old_duration) {
@@ -324,14 +414,21 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                     day.absence_reason = "";
                     day.absence_warning = false;
                 }
+
+                if($scope.alt_worktimes) {
+                    $scope.calculateMultipleActualHours(day);
+                } else {
+                    $scope.calculateSingleActualHours(day);
+                }
+
                 var old_absence_values = [old_duration, old_reason];
-                $scope.saveDayTime(day, old_absence_values, 'absence');
+                $scope.saveAbsence(day, old_absence_values);
             };
 
             $scope.saveAbsenceTime = function (day, old_duration, old_reason) {
                 if(day.absence_time != old_duration) {
                     var old_absence_values = [old_duration, old_reason];
-                    $scope.saveDayTime(day, old_absence_values, 'absence');
+                    $scope.saveAbsence(day, old_absence_values);
                 }
             };
 
@@ -400,8 +497,12 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                         } else {
                             time_entry.new = false;
                         }
-                        if(typeof day != "undefined") {
-                            $scope.saveDayTime(day, old_day_values, 'worktime');
+                        if(typeof day != "undefined" && !$scope.alt_workimes && field == 'hours') {
+                            if(day.begin_end_times[0].id == 0) {
+                                $scope.saveSingleWorktime(day, "begin", old_day_values[0], old_day_values[1], old_day_values[2]);
+                            } else {
+                                $scope.saveSingleWorktime(day, "end", old_day_values[0], old_day_values[1], old_day_values[2]);
+                            }
                         }
                     },
                     function (data) {
@@ -428,10 +529,14 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                                 break;
                         }
 
-                        day.begin = old_day_values[0];
-                        day.end = old_day_values[1];
-                        day.break = old_day_values[2];
-                        $scope.calculateActualHours(day);
+                        if($scope.alt_worktimes) {
+                            $scope.calculateMultipleActualHours(day);
+                        } else {
+                            day.begin_end_times[0].begin = old_day_values[0];
+                            day.begin_end_times[day.begin_end_times.length-1].end = old_day_values[1];
+                            day.break = old_day_values[2];
+                            $scope.calculateSingleActualHours(day);
+                        }
                     });
             };
 
@@ -573,11 +678,11 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
 
             };
 
-            $scope.setDisabled = function(id) {
+            $scope.setDisabled = function(id, begin) {
                 var parts = id.split('_');
                 var day_id = parts[0];
                 var time_id = parts[1];
-                var begin_time = angular.element($("#" + day_id + "_begin")).val();
+                var begin_time = begin;
                 if(begin_time == "") {
                     if(time_id == 'end' || time_id == 'break') {
                         return true;
@@ -597,8 +702,12 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
             };
 
             $scope.setBeginEndTime = function(day, type) {
+                if ($scope.alt_worktimes) {
+                    return;
+                }
+
                 if (type == "begin") {
-                    if (day.begin == "") {
+                    if (day.begin_end_times[0].begin == "") {
 
                         var default_begin = $scope.toSeconds(default_work_start);
                         var default_break = $scope.toSeconds(default_break_duration);
@@ -607,61 +716,155 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                         if(end_time > 86340) {
                             end_time = 86340;
                         }
-                        day.begin = default_work_start;
+                        day.begin_end_times[0].begin = default_work_start;
                         // hacky wacky $timeout to propagate changes of model (end, break) to view
                         $timeout(function() {
                             day.break = default_break_duration;
-                            day.end = $scope.toTime(end_time);
+                            day.begin_end_times[day.begin_end_times.length-1].end = $scope.toTime(end_time);
                         });
                     }
                 }
             };
 
-            $scope.validateBeginEndTimes = function (day, type) {
+            $scope.validateBeginEndTimes = function (day, type, index) {
 
                 if(type == "end") {
-                    var s_begin = $scope.toSeconds(day.begin);
-                    var s_end = $scope.toSeconds(day.end);
+                    var s_begin = $scope.toSeconds(day.begin_end_times[index].begin);
+                    var s_end = $scope.toSeconds(day.begin_end_times[day.begin_end_times.length-1].end);
+                    var s_break = $scope.toSeconds(day.break);
 
                     if (s_begin > s_end) {
                         return true;
+                    } else if (s_end - s_begin - s_break < 0 && !$scope.alt_worktimes) {
+                        return true;
                     }
-                } else if (type == "break" && day.break == "" && (day.begin != "" || day.end != "")) {
+                } else if (type == "break" && day.break == "" && (day.begin_end_times[index].begin != "" || day.begin_end_times[day.begin_end_times.length-1].end != "")) {
                     return true
                 }
                 return false;
             };
 
-            // if called from a time entry ng-change it is important that project hours are calculated first!
-            $scope.updateEndTime = function (day, type) {
-                $timeout(function () {
-                    var calculated_end_time = $scope.toSeconds(day.begin) +
-                                                $scope.toSeconds(day.project_hours) +
-                                                $scope.toSeconds(day.break);
+            $scope.validateMultipleBeginEndTimes = function (day, type, index) {
 
-                    if(day.begin != "" && type != "end"){
+                var s_begin_validate = $scope.toSeconds(day.begin_end_times[index].begin);
+                var s_end_validate = $scope.toSeconds(day.begin_end_times[index].end);
+
+                for(var i = 0; i < day.begin_end_times.length; i++) {
+                    if (i == index) {
+                        continue;
+                    }
+
+                    var s_begin = $scope.toSeconds(day.begin_end_times[i].begin);
+                    var s_end = $scope.toSeconds(day.begin_end_times[i].end);
+
+                    if(type == "begin" && s_begin_validate >= s_begin && s_begin_validate <= s_end && s_begin_validate != "") {
+                        return true;
+                    } else if (type == "end" && s_end_validate >= s_begin && s_end_validate <= s_end && s_end_validate != "") {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
+            // if called from a time entry ng-change it is important that project hours are calculated first!
+            $scope.updateSingleEndTime = function (day, type) {
+                if ($scope.alt_worktimes) {
+                    return;
+                }
+
+                $timeout(function () {
+                    var calculated_end_time = $scope.toSeconds(day.begin_end_times[0].begin) +
+                        $scope.toSeconds(day.project_hours) +
+                        $scope.toSeconds(day.break);
+
+                    if(day.begin_end_times[0].begin != "" && type != "end"){
                         if(calculated_end_time > 86340) {
                             calculated_end_time = 86340;
                         }
-                            day.end = $scope.toTime(calculated_end_time);
+                        day.begin_end_times[day.begin_end_times.length - 1].end = $scope.toTime(calculated_end_time);
 
-                    } else if (day.begin == "" && type == "time_entry") {
-                        day.begin = default_work_start;
+                    } else if (day.begin_end_times[0].begin == "" && type == "time_entry") {
+                        day.begin_end_times[0].begin = default_work_start;
                         day.break = default_break_duration;
 
-                        calculated_end_time = $scope.toSeconds(day.begin) +
-                            $scope.toSeconds(day.project_hours) +
-                            $scope.toSeconds(day.break);
+                        calculated_end_time = $scope.toSeconds(day.begin_end_times[0].begin) +
+                        $scope.toSeconds(day.project_hours) +
+                        $scope.toSeconds(day.break);
 
-                        day.end = $scope.toTime(calculated_end_time);
+                        day.begin_end_times[day.begin_end_times.length - 1].end = $scope.toTime(calculated_end_time);
                     } else if (type != "end") {
-                            day.break = "";
-                            day.end = "";
+                        day.break = "";
+                        day.begin_end_times[day.begin_end_times.length - 1].end = "";
+                        day.begin_end_times[day.begin_end_times.length - 1].end = "";
                     }
                 });
             };
 
-            $scope.calculateActualHours = function(day) {
+            // if called from a time entry ng-change it is important that project hours are calculated first!
+            $scope.updateMultipleEndTime = function (day, type) {
+                if ($scope.alt_worktimes) {
+                    return;
+                }
+
+                $timeout(function () {
+                    var calculated_end_time = $scope.toSeconds(day.begin_end_times[0].begin) +
+                                                $scope.toSeconds(day.project_hours) +
+                                                $scope.toSeconds(day.break);
+
+                    if(day.begin_end_times[0].begin != "" && type != "end"){
+                        if(calculated_end_time > 86340) {
+                            calculated_end_time = 86340;
+                        }
+                            day.begin_end_times[0].end = $scope.toTime(calculated_end_time);
+
+                    } else if (day.begin_end_times[0].begin == "" && type == "time_entry") {
+                        day.begin_end_times[0].begin = default_work_start;
+                        day.break = default_break_duration;
+
+                        calculated_end_time = $scope.toSeconds(day.begin_end_times[0].begin) +
+                            $scope.toSeconds(day.project_hours) +
+                            $scope.toSeconds(day.break);
+
+                        day.begin_end_times[0].end = $scope.toTime(calculated_end_time);
+                    } else if (type != "end") {
+                            day.break = "";
+                            day.begin_end_times[0].end = "";
+                    }
+                });
+            };
+
+            $scope.calculateSingleActualHours = function(day) {
+                $timeout(function () {
+                    var old_actual = $scope.toSeconds(day.actual_hours);
+                    var absence_time = day.absence_time;
+
+                    if(day.absence_reason == 5) {
+                        absence_time = "00:00";
+                    }
+
+                    var worktimes = day.begin_end_times;
+
+                    var actual = $scope.time_difference($scope.time_difference(worktimes[worktimes.length-1].end, worktimes[0].begin), day.break);
+                    day.actual_hours = $scope.time_addition(actual, absence_time);
+
+                    var diff = $scope.toSeconds(day.actual_hours) - old_actual;
+                    $scope.sums.actual = $scope.toTime($scope.toSeconds($scope.sums.actual) + diff);
+
+                    if ($scope.toSeconds(day.project_hours) > $scope.toSeconds($scope.time_difference(day.actual_hours, absence_time))) {
+                        day.project_warning = false;
+                        day.actual_warning = true;
+                    } else if ($scope.toSeconds(day.project_hours) < $scope.toSeconds($scope.time_difference(day.actual_hours, absence_time))) {
+                        day.actual_warning = false;
+                        day.project_warning = true;
+                    } else {
+                        day.project_warning = false;
+                        day.actual_warning = false;
+                    }
+                });
+            };
+
+            $scope.calculateMultipleActualHours = function(day) {
                     $timeout(function () {
                         var old_actual = $scope.toSeconds(day.actual_hours);
                         var absence_time = day.absence_time;
@@ -669,8 +872,17 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                         if(day.absence_reason == 5) {
                             absence_time = "00:00";
                         }
+                        // TODO compute actual hours of all begin/ends!!!
 
-                        day.actual_hours = $scope.time_addition($scope.time_difference(day.break, $scope.time_difference(day.end, day.begin)), absence_time);
+                        var actual = "00:00";
+                        var worktimes = day.begin_end_times;
+
+                        for(var i = 0; i < worktimes.length; i++) {
+                                actual = $scope.time_addition(actual, $scope.time_difference(worktimes[i].end, worktimes[i].begin));
+                        }
+
+                        day.actual_hours = $scope.time_addition(actual, absence_time);
+
                         var diff = $scope.toSeconds(day.actual_hours) - old_actual;
                         $scope.sums.actual = $scope.toTime($scope.toSeconds($scope.sums.actual) + diff);
 
@@ -691,8 +903,6 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
             $scope.calcProjectHours = function(new_value, day, old_value) {
                 $timeout(function() {
                     var diff = $scope.toSeconds(new_value) - $scope.toSeconds(old_value);
-                    console.log("ooooooold: " + old_value);
-                    console.log("difffffff: " + diff);
                     day.project_hours = $scope.toTime($scope.toSeconds(day.project_hours) + diff);
                     $scope.sums.project = $scope.toTime($scope.toSeconds($scope.sums.project) + diff);
 
@@ -733,6 +943,7 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                     day.absence_time = $scope.toTime(absence_time);
                 }
 
+
             };
 
             $scope.checkAbsenceTime = function (day) {
@@ -771,6 +982,28 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                 } else {
                     return false;
                 }
+            };
+
+            $scope.checkBeginTime = function(row) {
+                if(row.begin == "") {
+                    row.begin = row.end;
+                } else if ($scope.toSeconds(row.end) - $scope.toSeconds(row.begin) < 0 && row.end != "") {
+                    row.begin = row.end;
+                }
+            };
+
+            $scope.checkEndTime = function(row) {
+                if(row.end == "") {
+                    row.end = row.begin;
+                } else if ($scope.toSeconds(row.end) - $scope.toSeconds(row.begin) < 0) {
+                    row.end = row.begin;
+                } else if (row.begin == "") {
+                    row.end = "";
+                }
+            };
+
+            $scope.checkWorkedHours = function(row) {
+                row.worked = $scope.time_difference(row.end, row.begin);
             };
 
             $scope.clearAbsenceType = function(day) {
@@ -1012,6 +1245,8 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
                 $scope.time = TimeEntry.delete.send(json_data,
                     function(data) {
                         $scope.saved = true;
+                    }, function(data) {
+                        $scope.saved = false;
                     });
 
                 time_entries_for_day.splice(index, 1);
@@ -1087,7 +1322,6 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
 
                     time_entries = new Array();
                     for(var j = 0; j < no_of_days; j++) {
-                        console.log("day: " +j);
                         var day = $scope.days[j].name; // WHERE FROM?!?!?!?
                         var date = $scope.days[j].date;
 
@@ -1235,7 +1469,6 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
             };
 
             $scope.handlePinnedTicket = function (issue)  {
-                console.log("handlePinnedTicket, issue pinned: " + issue.pinned);
                 var json_data = { "data": {
                     "issue_id": issue.issue_id,
                     "pinned": !issue.pinned
@@ -1254,7 +1487,6 @@ var zz5Controllers = angular.module('zz5Controllers', ['ngDialog']);
             };
 
             $scope.removeTicket = function (issue, remove)  {
-                console.log("removeTicket, issue pinned: " + issue.pinned);
 
                 var json_data = { "data": {
                     "issue_id": issue.issue_id,
@@ -1346,11 +1578,27 @@ var zz5Services = angular.module('zz5Services', ['ngResource']);
     }]);
 
     zz5Services.factory('Day', ['$resource', '$http', '$log', function($resource){
-        return $resource('/zz5/save_day', {}, {
-            save: {method:'POST', params:{}, isArray:false,
-                withCredentials:true, ignoreLoadingBar: true,
-                headers:{'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-Token': window.csrfToken, 'X-Requested-With': 'XMLHttpRequest'}}
-        });
+        return {    save_single_worktime: $resource('/zz5/save_single_worktime', {}, {
+                        send: { method:'POST', params:{}, isArray:false,
+                            withCredentials:true, ignoreLoadingBar: true,
+                            headers:{'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-Token': window.csrfToken, 'X-Requested-With': 'XMLHttpRequest'}}
+                     }),
+                    save_multiple_worktime: $resource('/zz5/save_multiple_worktime', {}, {
+                        send: { method:'POST', params:{}, isArray:false,
+                            withCredentials:true, ignoreLoadingBar: true,
+                            headers:{'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-Token': window.csrfToken, 'X-Requested-With': 'XMLHttpRequest'}}
+                    }),
+                    delete_worktime: $resource('/zz5/delete_worktime', {}, {
+                        send: { method:'POST', params:{}, isArray:false,
+                            withCredentials:true, ignoreLoadingBar: true,
+                            headers:{'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-Token': window.csrfToken, 'X-Requested-With': 'XMLHttpRequest'}}
+                    }),
+                    save_absence: $resource('/zz5/save_absence', {}, {
+                        send: { method:'POST', params:{}, isArray:false,
+                            withCredentials:true, ignoreLoadingBar: true,
+                            headers:{'Content-Type': 'application/json; charset=utf-8', 'X-CSRF-Token': window.csrfToken, 'X-Requested-With': 'XMLHttpRequest'}}
+                    })
+        };
     }]);
 
     zz5Services.factory('TimeEntry', ['$resource', '$http', '$log', function($resource){

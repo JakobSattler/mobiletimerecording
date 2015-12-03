@@ -1,6 +1,8 @@
 <% content_for :header_tags do %>
     <% if @weekview %>
         <%= stylesheet_link_tag "workdays_angular.css", :plugin => "redmine_zz5" %>
+    <% elsif @alternative_worktimes %>
+        <%= stylesheet_link_tag "workdays_alt_angular.css", :plugin => "redmine_zz5" %>
     <% else %>
         <%= stylesheet_link_tag "workdays_daily_angular.css", :plugin => "redmine_zz5" %>
     <% end %>
@@ -20,7 +22,6 @@
         <div id="absence-popup-link" ng-click="openAbsencePopup()"><%= l(:zz5_block_entry) %></div>
     </div>
     <h2><%= l(:zz5_title) %></h2>
-
     <div class='table' style="height:75%; overflow:auto;" tabindex="0">
       <div id="loading-data" ng-show="loading"></div>
       <div id="init-loading-data" ng-show="loading_init"></div>
@@ -28,8 +29,8 @@
             <div class="header-worktimes">
                 <div class='header' sticky sticky-class="sticky-header">
                     <div class='week-title'>
-                        <a ng-if="!weekview" href="/zz5/{{misc_data.year}}/{{misc_data.week}}" style="text-decoration: none; color: inherit" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
-                        <a ng-if="weekview" style="text-decoration: none; color: inherit; cursor: pointer" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
+                        <a ng-if="!weekview && !alt_worktimes" href="/zz5/{{misc_data.year}}/{{misc_data.week}}" style="text-decoration: none; color: inherit" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
+                        <a ng-if="weekview || alt_worktimes" style="text-decoration: none; color: inherit; cursor: pointer" ng-cloak><%= l(:zz5_week_title) %> {{misc_data.week}}</a>
                     </div>
 
                     <div class="calendar-icon">
@@ -64,140 +65,11 @@
                     </div>
                 </div>
                 <div class="work-absences-container">
-                <div class="work-container">
-                    <!-- WORK START -->
-                        <%= render :partial => "worktimes_row",
-                        :locals => {:title => l(:zz5_work_start),
-                                    :id => 'begin',
-                                    :value => '{{day.begin}}',
-                                    :model => 'day.begin',
-                                    :error_msg => l(:zz5_worktime_err_empty),
-                                    :id_int => 0
-                                }
-                        %>
-                    <!-- WORK END -->
-                        <%= render :partial => "worktimes_row",
-                        :locals => {:title => l(:zz5_work_end),
-                                    :id => 'end',
-                                    :value => '{{day.end}}',
-                                    :model => 'day.end',
-                                    :error_msg => l(:zz5_worktime_err_empty),
-                                    :id_int => 1
-                                }
-                        %>
-                    <!-- WORK BREAK -->
-                        <%= render :partial => "worktimes_row",
-                        :locals => {:title => l(:zz5_break_duration),
-                                    :id => 'break',
-                                    :value => '{{day.break}}' ,
-                                    :model => 'day.break',
-                                    :error_msg => l(:zz5_worktime_err_empty),
-                                    :id_int => 2
-                                }
-                        %>
-
-
-                    <!-- SEPERATOR-->
-                      <div class="seperator" ng-if="weekview"></div>
-
-                    <!-- ACTUAL TIME -->
-                        <%= render :partial => "times_row",
-                        :locals => {:title => l(:zz5_actual_time),
-                                    :id => 'zz5_actual_time',
-                                    :message => l(:zz5_actual_sum),
-                                    :bind => 'day.actual_hours',
-                                    :sumModel => "sums.actual",
-                                    :show => '',
-                                    :warningType => 'day.actual_warning',
-                                    :warningMsg => l(:zz5_wrong_work_time)
-                                }
-                        %>
-
-                    <!-- PROJECT TIMES -->
-                        <%= render :partial => "times_row",
-                        :locals => {:title => l(:zz5_project_time),
-                                    :id => 'zz5_project_time',
-                                    :message => l(:zz5_project_sum),
-                                    :bind => 'day.project_hours',
-                                    :sumModel => "sums.project",
-                                    :show => '',
-                                    :warningType => 'day.project_warning',
-                                    :warningMsg => l(:zz5_wrong_project_time)
-                                }
-                        %>
-                    <!-- TARGET TIMES -->
-                        <%= render :partial => "times_row",
-                        :locals => {:title => l(:zz5_target_time),
-                                    :id => 'zz5_target_time',
-                                    :message => l(:zz5_target_sum),
-                                    :bind => 'day.target',
-                                    :sumModel => "sums.target",
-                                    :show => 'false',
-                                    :warningType => 'dummy',
-                                    :warningMsg => ""
-                                }
-                        %>
-                    <!-- TIME DIFFERENCES-->
-                        <%= render :partial => "times_row",
-                        :locals => {:title => l(:zz5_time_difference),
-                                    :id => 'zz5_time_difference',
-                                    :message => l(:zz5_weekly_time_difference),
-                                    :bind => 'day.time_difference',
-                                    :sumModel => "sums.difference",
-                                    :show => 'false',
-                                    :warningType => 'dummy',
-                                    :warningMsg => ""
-                                }
-                        %>
-
-                    <!-- TIME CARRY (FOR DAILY VIEW) -->
-                    <% if !@weekview %>
-                         <%= render :partial => "times_row",
-                             :locals => {:title => l(:zz5_time_carry),
-                                         :id => 'zz5_time_carry',
-                                         :message => l(:zz5_time_carry),
-                                         :bind => 'day.time_carry',
-                                         :sumModel => "carry_sum",
-                                         :show => 'false',
-                                         :warningType => 'dummy',
-                                         :warningMsg => ""
-                             }
-                         %>
-                      <% end %>
-                </div>
-                <!-- ABSENCES -->
-                <div class="absences-container">
-                    <!-- ABSENCE REASON -->
-                        <%= render :partial => "absence_reason_row",
-                        :locals => {:title => l(:zz5_absence_reason),
-                                    :id => 'absence_reason',
-                                    :value => '{{day.id}}_zz5_absence_reason'
-                                }
-                        %>
-                    <!-- ABSENCE TIME -->
-                        <%= render :partial => "absence_duration_row",
-                        :locals => {:title => l(:zz5_absence_duration),
-                                    :id => 'absence_time',
-                                    :value => '{{day.absence_time}}',
-                                    :bind => 'day.absence_time'
-                                }
-                        %>
-
-                    <!-- VACATION ENTITLEMENT -->
-                  <% if !@weekview %>
-                      <%= render :partial => "times_row",
-                                 :locals => {:title => l(:zz5_vacation),
-                                             :id => 'vac_entitlement',
-                                             :message => l(:zz5_vacation),
-                                             :bind => 'misc_data.vac_entitlement',
-                                             :sumModel => "carry_sum",
-                                             :show => 'false',
-                                             :warningType => 'dummy',
-                                             :warningMsg => ""
-                                 }
-                      %>
+                    <% if @alternative_worktimes %>
+                        <%= render :partial => "multiple_worktimes_view" %>
+                    <% else %>
+                        <%= render :partial => "single_worktimes_view" %>
                   <% end %>
-                </div>
                 </div>
                 <!-- FAVORITE ISSUES HEADER -->
                 <div class="project-times-header">
@@ -278,7 +150,15 @@
                 <div id="favorite-ticket-table">
                     <!-- FAVORITE ISSUE -->
                     <div ng-bind-html="ticketrow"></div>
-                    <%= render :partial => "favorite_issue_row"%>
+                    <% if @alternative_worktimes %>
+                      <%= render :partial => "favorite_issue_row",
+                                 :locals => { :calcActualHours => "calculateMultipleActualHours",
+                                              :updateEndTimes => "updateMultipleEndTime" } %>
+                    <% else %>
+                       <%= render :partial => "favorite_issue_row",
+                                  :locals => { :calcActualHours => "calculateSingleActualHours",
+                                               :updateEndTimes => "updateSingleEndTime" } %>
+                    <% end %>
                 </div>
                 <script type="text/ng-template" id="templateId">
                     <h1>Template heading</h1>
@@ -304,6 +184,7 @@
 <script>
     var data = {"year": <%= @year %>, "week": <%= @week %>, "day": <%= @day %>};
     var is_weekview = <%= @weekview %>;
+    var is_alt_worktimes = <%= @alternative_worktimes %>;
 
     var default_activity_id = "<%=@default_activity.id %>";
     var activity_arr = new Array();

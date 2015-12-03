@@ -2,7 +2,7 @@
 class Zz5Workperiod
 
   # getter and setter
-  attr_accessor :workdays, :absence_types , :time_errors
+  attr_accessor :workdays, :absence_types , :time_errors, :begin_end_times, :break_times
 
   # getter
   attr_reader   :user, :user_preference, :week_days, :first_day, :last_day, :hours
@@ -27,6 +27,15 @@ class Zz5Workperiod
     fill_possible_gaps(@first_day)
 
     @workdays = get_or_create_workdays_for_dates(@user, @first_day, @last_day)
+    @begin_end_times = get_begin_end_times
+    @break_times = get_break_times
+
+    #@workdays.each_with_index do |day, index|
+    #  @begin_end_times[index].each do |times|
+    #    Rails.logger.info "additional times: " + times.to_s
+    #  end
+    #end
+
     @absence_types = get_absence_types
     @time_errors = initialize_my(@user)
 
@@ -38,34 +47,32 @@ class Zz5Workperiod
 
   def initialize_my(user_id)
     time_errors = {}
-    @workdays.each do |work_day|
+    @workdays.each_with_index do |work_day, i|
+
+       #hack to migrate the dataaaaa!
+      #if !work_day.begin.nil?
+      #  set_single_workday_data(0, "begin", work_day.begin, work_day.end, work_day.break, work_day.date, user_id)
+      #end
+
+
       spent_on = work_day.date
       Rails.logger.info "Datum: " + spent_on.to_s
       #Rails.logger.info "User : : " + user_id.to_s
 
       hours_on_date = TimeEntry.where(:user_id => user_id, :spent_on => spent_on).sum(:hours)
       Rails.logger.info "initialize_my, hours_on_date: " + hours_on_date.round(2).to_s
-      #wd = Zz5Workday.find_by_sql(["SELECT SUM(TIME_TO_SEC(TIMEDIFF(TIMEDIFF(COALESCE(end, TIME('00:00:00')),  COALESCE(begin, TIME('00:00:00'))), COALESCE(break, TIME('00:00:00'))))) AS sum  FROM zz5_workdays WHERE user_id = ? AND date = ?;", user_id, spent_on]).first.sum
 
-      if work_day.begin.nil?
-        begin_seconds = 0
-      else
-        begin_seconds = Zz5GeneralUtil.timeToSeconds(work_day.begin.strftime("%H:%M"))
+
+      worked_seconds = 0
+      @begin_end_times[i].each do |additional_time|
+        Rails.logger.info "initialize_my, additional_time.begin: " + additional_time.begin.to_s
+        Rails.logger.info "initialize_my, additional_time.end: " + additional_time.end.to_s
+        begin_in_s = Zz5GeneralUtil.timeToSeconds(additional_time.begin.strftime("%H:%M"))
+        end_in_s = Zz5GeneralUtil.timeToSeconds(additional_time.end.strftime("%H:%M"))
+        worked_seconds += (end_in_s - begin_in_s)
       end
 
-      if work_day.end.nil?
-        end_seconds = 0
-      else
-        end_seconds = Zz5GeneralUtil.timeToSeconds(work_day.end.strftime("%H:%M"))
-      end
-
-      if work_day.break.nil?
-        break_seconds = 0
-      else
-        break_seconds = Zz5GeneralUtil.timeToSeconds(work_day.break.strftime("%H:%M"))
-      end
-
-      wd = end_seconds - begin_seconds - break_seconds
+      wd = worked_seconds
       Rails.logger.info "initialize_my, wd: " + (wd.to_f / 3600).round(2).to_s
       wd = (wd.to_f / 3600).round(2)
       hours_missing = 0
@@ -77,27 +84,29 @@ class Zz5Workperiod
       # account for ticket times which were not entered via the zz5 view
       # if hours_missing is negative we have a surplus of ticket times for this day
       # thus we want to increase the end time accordingly
-      if !work_day.begin.nil? && hours_missing < 0
+      if !@begin_end_times[i].empty? && hours_missing < 0
         # need conversion from seconds to hours
         normalize = Time.parse("Jan 2000")
 
-        if work_day.end.nil?
-          work_day.end = "00:00"
+        if @begin_end_times[i].last.end.nil?
+          @begin_end_times[i].last.end = "00:00"
         end
 
-        Rails.logger.info "work_day.end.strftime.to_f: " + work_day.end.strftime("%H:%M").to_f.to_s
+        Rails.logger.info "work_day.end.strftime.to_f: " + @begin_end_times[i].last.end.strftime("%H:%M").to_f.to_s
         Rails.logger.info "normalize: " + normalize.to_s
-        Rails.logger.info "normalize2: " + (Zz5GeneralUtil.timeToSeconds(work_day.end.strftime("%H:%M")).to_f - (hours_missing * 3600)).to_s
-        Rails.logger.info "normalize3: " + (Zz5GeneralUtil.secondsToTime(Zz5GeneralUtil.timeToSeconds(work_day.end.strftime("%H:%M")).to_f - (hours_missing * 3600))).to_s
+        Rails.logger.info "normalize2: " + (Zz5GeneralUtil.timeToSeconds(@begin_end_times[i].last.end.strftime("%H:%M")).to_f - (hours_missing * 3600)).to_s
+        Rails.logger.info "normalize3: " + (Zz5GeneralUtil.secondsToTime(Zz5GeneralUtil.timeToSeconds(@begin_end_times[i].last.end.strftime("%H:%M")).to_f - (hours_missing * 3600))).to_s
 
-        work_end_seconds = Zz5GeneralUtil.timeToSeconds(work_day.end.strftime("%H:%M")).to_f - (hours_missing * 3600)
+        work_end_seconds = Zz5GeneralUtil.timeToSeconds(@begin_end_times[i].last.end.strftime("%H:%M")).to_f - (hours_missing * 3600)
 
         if work_end_seconds > 86340
           work_end_seconds = 86340
         end
 
-        work_day.end = Time.parse(Zz5GeneralUtil.secondsToTime(work_end_seconds), normalize)
-        work_day.save
+        Rails.logger.info "initialize_my, Zz5GeneralUtil.secondsToTime(work_end_seconds): " + Zz5GeneralUtil.secondsToTime(work_end_seconds).to_s
+
+        @begin_end_times[i].last.end = Time.parse(Zz5GeneralUtil.secondsToTime(work_end_seconds), normalize)
+        @begin_end_times[i].last.save
         hours_missing = 0
       end
 
@@ -145,7 +154,7 @@ class Zz5Workperiod
     Rails.logger.info "calculate_vacation, until_date: " + until_date.to_s
 
     if first_employment.nil?
-      return result = 0
+      return 0
     end
 
     last_employment = Zz5Employment.where("user_id = ? AND start <= ?", @user.id, until_date).order(:start).last
@@ -213,13 +222,312 @@ class Zz5Workperiod
   end
 
   # sets the workday data for the given wday
-  def set_workday_data(day, time_begin, time_end, time_break)
-    Rails.logger.info "set_workday_data started"
-    Rails.logger.info "set_workday_data for " + day.date.to_s
+  def set_single_workday_data(id, type, time_begin, time_end, time_break, date, user_id)
+    Rails.logger.info "set_single_workday_data started"
+    Rails.logger.info "set_single_workday_data, type: " + type.to_s
+    #Rails.logger.info "set_workday_data, begin: " + time_begin.to_s
+    #Rails.logger.info "set_workday_data, end: " + time_end.to_s
+    #Rails.logger.info "set_workday_data, break: " + time_break.to_s
 
-    day.begin = time_begin
-    day.end = time_end
-    day.break = time_break
+    if id == 0 && type == "begin"
+      be_id = create_begin_end_times_for_single_view(date, user_id, time_begin, time_end, time_break)
+    else
+      if type == "begin"
+        be_id = update_begin_time(date, user_id, time_begin)
+      elsif type == "end"
+        be_id = update_end_time(date, user_id, time_begin, time_end, time_break)
+      elsif type == "break"
+        be_id = update_break_time(date, user_id, time_break)
+      end
+    end
+
+    #@workdays[0].break = time_break
+
+    return be_id
+  end
+
+  # creates the begin times for the given wday
+  def create_begin_end_times_for_single_view(date, user_id, time_begin, time_end, time_break)
+    Rails.logger.info "create_begin_end_times, date: " + date.to_s + " user id: " + user_id.to_s
+    date = date.to_date
+    id = Zz5Workday.where("date = ? and user_id = ?", date, user_id).first.id
+    #Rails.logger.info "create_begin_end_times, workdays id: " + id.to_s
+    #Rails.logger.info "create_begin_end_times, t_begin: " + time_begin.to_s
+    #Rails.logger.info "create_begin_end_times, t_end: " + time_end.to_s
+    time_begin_in_s = Zz5GeneralUtil.timeToSeconds(time_begin)
+    time_end_in_s = Zz5GeneralUtil.timeToSeconds(time_end)
+    time_break_in_s = Zz5GeneralUtil.timeToSeconds(time_break)
+
+    worked = time_end_in_s - time_begin_in_s - time_break_in_s
+
+    be_times_first = Zz5BeginEndTimes.new(:zz5_workdays_id => id, :begin => time_begin, :end => Zz5GeneralUtil.secondsToTime(time_begin_in_s + worked))
+    if be_times_first.save
+      Rails.logger.info "create_begin_end_times, new begin end times successful!!! " + be_times_first.id.to_s + " " + be_times_first.begin.to_s + " " + be_times_first.end.to_s
+    else
+      Rails.logger.info "create_begin_end_times, new begin end times failed!!!"
+    end
+
+    be_times_second = Zz5BeginEndTimes.new(:zz5_workdays_id => id, :begin => time_end, :end => time_end)
+    if be_times_second.save
+      Rails.logger.info "create_begin_end_times, new begin end times successful!!! " + be_times_second.id.to_s + " " + be_times_second.begin.to_s + " " + be_times_second.end.to_s
+    else
+      Rails.logger.info "create_begin_end_times, new begin end times failed!!!"
+    end
+
+    return be_times_second.id
+  end
+
+  # updates the begin time and shifts other existing time entries for this day accordingly
+  def update_begin_time(date, user_id, time_begin)
+    Rails.logger.info "update_begin_time, date: " + date.to_s + " user id: " + user_id.to_s
+
+    wd_id = Zz5Workday.where("date = ? and user_id = ?", date.to_date, user_id).first.id
+    be_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", wd_id).order("begin ASC")
+
+    if time_begin == ""
+      be_times.each do |be_time|
+        be_time.delete
+      end
+      be_id = 0
+    else
+      first_old_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_times.first.begin.strftime("%H:%M"))
+      new_begin_in_s = Zz5GeneralUtil.timeToSeconds(time_begin)
+
+      update_time = new_begin_in_s - first_old_begin_in_s
+
+      be_times.each do |be_time|
+        old_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_time.begin.strftime("%H:%M"))
+        old_end_in_s = Zz5GeneralUtil.timeToSeconds(be_time.end.strftime("%H:%M"))
+        be_time.update_attributes(:begin => Zz5GeneralUtil.secondsToTime(old_begin_in_s + update_time), :end => Zz5GeneralUtil.secondsToTime(old_end_in_s + update_time))
+      end
+      be_id = 1
+    end
+    #Rails.logger.info "update_begin_end_times: " + t_begin.to_s + " - " + time_end.to_s
+
+    return be_id
+
+  end
+
+  # updates the end time and shifts other existing time entries for this day accordingly
+  def update_end_time(date, user_id, time_begin, time_end, time_break)
+    Rails.logger.info "update_begin_time, date: " + date.to_s + " user id: " + user_id.to_s
+
+    wd_id = Zz5Workday.where("date = ? and user_id = ?", date.to_date, user_id).first.id
+    be_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", wd_id).order("begin ASC")
+
+    be_id = 1
+
+    old_end_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+    new_end_in_s = Zz5GeneralUtil.timeToSeconds(time_end)
+    old_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_times.first.begin.strftime("%H:%M"))
+    break_times = get_break_per_day_in_seconds(be_times)
+
+    if new_end_in_s < old_begin_in_s + break_times
+      return -1
+    end
+
+    update_time = new_end_in_s - old_end_in_s
+    Rails.logger.info "update_end_time, new_end_in_s: " + new_end_in_s.to_s
+    Rails.logger.info "update_end_time, old_end_in_s: " + old_end_in_s.to_s
+    Rails.logger.info "update_end_time, update_time: " + update_time.to_s
+
+    if update_time > 0
+      Rails.logger.info "update_end_time, the end time has increased!"
+      be_times.last.update_attributes(:end => Zz5GeneralUtil.secondsToTime(old_end_in_s + update_time))
+    else
+      Rails.logger.info "update_end_time, the end time has decreased!"
+      decrease_begin_end_times(time_begin, time_end, time_break, update_time.abs, be_times)
+    end
+    #Rails.logger.info "update_begin_end_times: " + t_begin.to_s + " - " + time_end.to_s
+
+    return be_id
+
+  end
+
+  # actually updates the times in the DB
+  def decrease_begin_end_times(time_begin, time_end, time_break, update_time, be_times)
+
+    time_begin_in_s = Zz5GeneralUtil.timeToSeconds(time_begin)
+    time_end_in_s = Zz5GeneralUtil.timeToSeconds(time_end)
+    time_break_in_s = Zz5GeneralUtil.timeToSeconds(time_break)
+
+    if time_end_in_s - time_begin_in_s - time_break_in_s == 0
+      be_times.each_with_index do |be_time, i|
+        if i == 0
+          be_time.update_attributes(:begin => time_begin, :end => time_begin)
+        else
+          be_time.update_attributes(:begin => time_end, :end => time_end)
+        end
+      end
+    elsif time_end_in_s - time_begin_in_s - time_break_in_s < time_break_in_s
+      be_times.each_with_index do |be_time, i|
+        if i == 0
+          worked_in_s = time_end_in_s - time_begin_in_s - time_break_in_s
+          new_end = Zz5GeneralUtil.secondsToTime(time_begin_in_s + worked_in_s)
+          be_time.update_attributes(:begin => time_begin, :end => new_end)
+        else
+          be_time.update_attributes(:begin => time_end, :end => time_end)
+        end
+      end
+    else
+      last_break = 0
+      while true do
+        last_worked_time_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M")) - Zz5GeneralUtil.timeToSeconds(be_times.last.begin.strftime("%H:%M"))
+        Rails.logger.info "update_end_time, last_worked_time_in_s: " + last_worked_time_in_s.to_s
+        Rails.logger.info "update_end_time, update_time: " + update_time.to_s
+        if update_time > last_worked_time_in_s
+          update_time = update_time - last_worked_time_in_s
+          to_be_deleted = be_times.pop
+          to_be_deleted_in_s = Zz5GeneralUtil.timeToSeconds(to_be_deleted.begin.strftime("%H:%M"))
+          last_end_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+          last_break += to_be_deleted_in_s - last_end_in_s
+          Rails.logger.info "update_end_time, to_be_deleted_in_s: " + to_be_deleted_in_s.to_s
+          Rails.logger.info "update_end_time, last_end_in_s: " + last_end_in_s.to_s
+          Rails.logger.info "update_end_time, last_break: " + last_break.to_s
+          to_be_deleted.delete
+        else
+          old_end_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+          Rails.logger.info "update_end_time, old_end_in_s: " + old_end_in_s.to_s
+          Rails.logger.info "update_end_time, last_break: " + last_break.to_s
+          be_times.last.update_attributes(:end => Zz5GeneralUtil.secondsToTime((old_end_in_s - update_time) + last_break))
+          break
+        end
+      end
+    end
+
+  end
+
+  def update_break_time(date, user_id, time_break)
+    wd_id = Zz5Workday.where("date = ? and user_id = ?", date.to_date, user_id).first.id
+    be_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", wd_id).order("begin ASC")
+    old_break_in_s = get_break_per_day_in_seconds(be_times)
+    new_break_in_s = Zz5GeneralUtil.timeToSeconds(time_break)
+    old_end = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+    diff = new_break_in_s - old_break_in_s
+
+    Rails.logger.info "update_break_time, old_break_in_s: " + old_break_in_s.to_s
+    Rails.logger.info "update_break_time, new_break_in_s: " + new_break_in_s.to_s
+    Rails.logger.info "update_break_time, diff: " + diff.to_s
+
+    # break time increased
+    if old_break_in_s < new_break_in_s
+      old_begin = Zz5GeneralUtil.timeToSeconds(be_times.last.begin.strftime("%H:%M"))
+
+      Rails.logger.info "update_break_time, be_times.size: " + be_times.size.to_s
+      if be_times.size == 1
+        be_times.unshift(Zz5BeginEndTimes.new(:zz5_workdays_id => wd_id, :begin => be_times.last.begin, :end => be_times.last.begin))
+        be_times.first.save
+      end
+
+      new_end = old_end + diff
+      if new_end > 86340
+          new_end = 86340
+      end
+
+      new_begin = old_begin + diff
+      if new_begin > 86340
+        new_begin = 86340
+      end
+
+      be_times.last.update_attributes(:begin => Zz5GeneralUtil.secondsToTime(new_begin), :end => Zz5GeneralUtil.secondsToTime(new_end))
+    elsif new_break_in_s == 0
+
+      worked = 0
+      be_times.each do |time|
+        Rails.logger.info "update_break_time, time begin: " + Time.at(time.begin).to_s
+        Rails.logger.info "update_break_time, time end: " + Time.at(time.end).to_s
+        diff = time.end - time.begin
+        worked += diff
+      end
+
+      first_begin = Zz5GeneralUtil.timeToSeconds(be_times.first.begin.strftime("%H:%M"))
+
+      be_times.each_with_index do |be_time, i|
+        if i > 0
+          be_time.delete
+        end
+      end
+
+      be_times.first.update_attributes(:end => Zz5GeneralUtil.secondsToTime(first_begin + worked))
+    # break time decreased
+    else
+      diff = diff.abs
+      while true do
+        last_be_time = be_times.pop
+        gap = Zz5GeneralUtil.timeToSeconds(last_be_time.begin.strftime("%H:%M")) - Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+        Rails.logger.info "update_break_time, gap: " + gap.to_s
+
+        if diff > gap
+          #continue doing ur shit
+          diff = diff - gap
+          Rails.logger.info "update_break_time, diff: " + diff.to_s
+          old_end_in_s = Zz5GeneralUtil.timeToSeconds(last_be_time.end.strftime("%H:%M"))
+          Rails.logger.info "update_break_time, old_end_in_s: " + old_end_in_s.to_s
+
+          be_times.last.update_attributes(:end => Zz5GeneralUtil.secondsToTime(old_end_in_s - diff))
+          last_be_time.delete
+        else
+          #break that shit, u done m8!
+          be_times.push(last_be_time)
+          last_end_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.end.strftime("%H:%M"))
+          last_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_times.last.begin.strftime("%H:%M"))
+          Rails.logger.info "update_break_time, last_begin_in_s: " + last_begin_in_s.to_s
+          Rails.logger.info "update_break_time, last_end_in_s: " + last_end_in_s.to_s
+          be_times.last.update_attributes(:begin => Zz5GeneralUtil.secondsToTime(last_begin_in_s - diff), :end => Zz5GeneralUtil.secondsToTime(last_end_in_s - diff))
+          break
+        end
+      end
+    end
+
+    return be_id = 1
+  end
+
+  # sets the workday data for the given wday
+  def set_multiple_workday_data(id, time_begin, time_end, time_break, date, user_id)
+    Rails.logger.info "set_workday_data for multiple worktimes started"
+    #Rails.logger.info "set_workday_data, begin: " + time_begin.to_s
+    #Rails.logger.info "set_workday_data, end: " + time_end.to_s
+    #Rails.logger.info "set_workday_data, break: " + time_break.to_s
+
+    if id == 0
+      be_id = create_begin_end_times_for_multiple_view(date, user_id, time_begin, time_end)
+    else
+      be_id = update_begin_end_times(id, time_begin, time_end)
+    end
+
+    return be_id
+  end
+
+  def create_begin_end_times_for_multiple_view(date, user_id, t_begin, t_end)
+    Rails.logger.info "create_begin_end_times, date: " + date.to_s + " user id: " + user_id.to_s
+    date = date.to_date
+    id = Zz5Workday.where("date = ? and user_id = ?", date, user_id).first.id
+    #Rails.logger.info "create_begin_end_times, workdays id: " + id.to_s
+    #Rails.logger.info "create_begin_end_times, t_begin: " + t_begin.to_s
+    #Rails.logger.info "create_begin_end_times, t_end: " + t_end.to_s
+
+    be_times = Zz5BeginEndTimes.new(:zz5_workdays_id => id, :begin => t_begin, :end => t_end)
+    if be_times.save
+      Rails.logger.info "create_begin_end_times, new begin end times successful!!! " + be_times.id.to_s + " " + be_times.begin.to_s + " " + be_times.end.to_s
+    else
+      Rails.logger.info "create_begin_end_times, new begin end times failed!!!"
+    end
+
+    return be_times.id
+  end
+
+  def update_begin_end_times(id, t_begin, t_end)
+    be_times = Zz5BeginEndTimes.find(id)
+    if t_begin == ""
+      be_times.delete
+      be_id = 0
+    else
+      be_times.update_attributes(:begin => t_begin, :end => t_end)
+      be_id = be_times.id
+    end
+    Rails.logger.info "update_begin_end_times: " + t_begin.to_s + " - " + t_end.to_s
+
+    return be_id
   end
 
   # returns the carry for the previous week or for a previous employment on the left-hand side
@@ -280,14 +588,11 @@ class Zz5Workperiod
     end
 
     employment = Zz5Employment.where("user_id = ? AND start < ?", @user.id.to_s, until_date.to_s).order(:start).last
-    #employment = Zz5Employment.where("user_id = ? and start > ? and start <= ?", @user.id, @first_day, @@last_day).order("start ASC").first
 
     if employment.nil?
       return 0.0
     end
-    daily_target = (employment.employment / 5)
 
-    #consumed_vacation = Zz5Workday.find_by_sql(["SELECT SUM(TIME_TO_SEC(COALESCE(duration, TIME('00:00:00')))) AS value FROM zz5_workdays INNER JOIN zz5_absences ON zz5_workdays.id = zz5_absences.zz5_workday_id WHERE zz5_absences.zz5_absence_type_id=? AND user_id=? AND (date >= ? AND date < ? );", 4, @user.id, employment.start, until_date]).first
     absences = Zz5Absence.joins(:zz5_workday).where("zz5_absence_type_id = ? AND user_id = ? AND (zz5_workdays.date >= ? AND zz5_workdays.date < ? )", 4, @user.id, employment.start, until_date)
     consumed_vacation = 0
     absences.each do |absence|
@@ -575,26 +880,70 @@ class Zz5Workperiod
     end
   end
 
-  def get_time_worked_in_seconds (day)
-    if day.begin.nil?
+  # day times need to be converted to seconds already
+  def get_time_worked_in_seconds(day)
+
+    begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", day.id).order("begin ASC")
+
+    if begin_end_times.empty?
       return 0
     end
 
-    if day.break.nil?
-      day.break = "00:00"
+    # subtracting to times returns difference in seconds
+    worked = 0
+    begin_end_times.each do |time|
+      Rails.logger.info "get_time_worked_in_seconds, additional end: " + Time.at(time.end).to_s
+      Rails.logger.info "get_time_worked_in_seconds, additional begin: " + Time.at(time.begin).to_s
+      diff = time.end - time.begin
+      worked += diff
     end
 
-    if day.end.nil?
-      day.end = "00:00"
-    end
-
-    Rails.logger.info "get_time_worked_in_seconds, end: " + Time.at(day.end).to_s
-    Rails.logger.info "get_time_worked_in_seconds, begin: " + Time.at(day.begin).to_s
-
-    worked = day.end - day.begin
     Rails.logger.info "get_time_worked_in_seconds,k worked: " + worked.to_s
-    break_seconds = Zz5GeneralUtil.timeToSeconds(Time.at(day.break).strftime "%H:%M")
-    return worked - break_seconds
+    return worked
+  end
+
+  def get_break_per_day_in_seconds(be_times)
+
+    if be_times.empty? || be_times.size == 1
+      return 0
+    end
+
+    break_seconds = 0
+    be_times.each_with_index do |be_time, i|
+      Rails.logger.info "get_break_per_day_in_seconds, end: " + be_time.end.to_s
+
+      end_in_s = Zz5GeneralUtil.timeToSeconds(be_time.end.strftime("%H:%M"))
+      if i < be_times.size - 1
+        Rails.logger.info "get_break_per_day_in_seconds, next begin: " + be_times[i+1].begin.to_s
+        next_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_times[i+1].begin.strftime("%H:%M"))
+        break_seconds += (next_begin_in_s - end_in_s)
+        Rails.logger.info "get_break_per_day_in_seconds, break_seconds: " + break_seconds.to_s
+      end
+    end
+
+    return break_seconds
+  end
+
+  def get_break_per_day_in_hours(be_times)
+
+    if be_times.empty? || be_times.size == 1
+      return "00:00"
+    end
+
+    break_seconds = 0
+    be_times.each_with_index do |be_time, i|
+      Rails.logger.info "get_break_per_day_in_hours, end: " + be_time.end.to_s
+
+      end_in_s = Zz5GeneralUtil.timeToSeconds(be_time.end.strftime("%H:%M"))
+      if i < be_times.size - 1
+        Rails.logger.info "get_break_per_day_in_hours, next begin: " + be_times[i+1].begin.to_s
+        next_begin_in_s = Zz5GeneralUtil.timeToSeconds(be_times[i+1].begin.strftime("%H:%M"))
+        break_seconds += (next_begin_in_s - end_in_s)
+        Rails.logger.info "get_break_per_day_in_hours, break_seconds: " + break_seconds.to_s
+      end
+    end
+
+    return Zz5GeneralUtil.secondsToTime(break_seconds)
   end
 
   def consider_overtime_allowance(day, employment)
@@ -762,6 +1111,26 @@ class Zz5Workperiod
     return workdays
   end
 
+  def get_begin_end_times
+    times = Array.new
+
+    @workdays.each do |workday|
+      times.push(Zz5BeginEndTimes.select("t.id, t.begin, t.end").joins("AS t LEFT OUTER JOIN zz5_workdays AS w ON w.id = t.zz5_workdays_id").where("w.id = ?", workday.id).order("t.begin"))
+    end
+
+    return times
+  end
+
+  def get_break_times
+    times = Array.new
+
+    @begin_end_times.each do |day|
+      Rails.logger.info "get_break_times, get_break_per_day_in_hours: " + get_break_per_day_in_hours(day).to_s
+      times.push(get_break_per_day_in_hours(day))
+    end
+
+    return times
+  end
 
   # creates missing workday records beginning with the last date found in zz5_workdays
   # returns if there's no gap to fill: last_saved_date >= until_date

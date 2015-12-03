@@ -28,12 +28,6 @@
          project_time = TimeEntry.where(:user_id => @user_id, :spent_on => zz5_work_day.date).sum(:hours).to_f * 3600
          absence_error = target_time - project_time - absence_duration
 
-         #
-         #
-         # NEED TO GET PROJECT HOURS FOR A DAY!!!!!!!!!!!!!!
-         #
-         #
-
          Rails.logger.info "target - diff - absence_duratio: " + target_time.to_s + " - " + project_time.to_s + " - " + absence_duration.to_s
          if absence_rs.zz5_absence_type_id != 4 || (absence_rs.zz5_absence_type_id == 4 && absence_duration > target_time)
            if absence_error < 0 || absence_duration < 0
@@ -41,10 +35,37 @@
            end
          end
        end
+
+       display_alt_worktimes_error = false
+
+       @zz5_work_period.begin_end_times[index].each_with_index do |validate_times, validate_index|
+          if @zz5_work_period.begin_end_times[index].length == 1
+             break
+          end
+
+          validate_begin = Zz5GeneralUtil.timeToSeconds(validate_times.begin.strftime("%H:%M")).to_i
+          validate_end = Zz5GeneralUtil.timeToSeconds(validate_times.end.strftime("%H:%M")).to_i
+
+          @zz5_work_period.begin_end_times[index].each_with_index do |compare_times, compare_index|
+            if compare_index == validate_index
+                next
+            end
+
+            compare_begin = Zz5GeneralUtil.timeToSeconds(compare_times.begin.strftime("%H:%M")).to_i
+            compare_end = Zz5GeneralUtil.timeToSeconds(compare_times.end.strftime("%H:%M")).to_i
+
+            if validate_begin > compare_begin && validate_begin < compare_end
+                display_alt_worktimes_error = true
+            elsif validate_end > compare_begin && validate_end < compare_end
+                display_alt_worktimes_error = true
+            end
+         end
+       end
+
     %>
 
     <td class="report-hours-container"><div class="hours"><div class="report-hours"><%= zz5_work_day.target.strftime("%H:%M") %></div></div></td>
-    <% if !zz5_work_day.end.nil? || zz5_work_day.absences != 0 %>
+    <% if !@zz5_work_period.begin_end_times[index].empty? || zz5_work_day.absences != 0 %>
       <td class="report-hours-container"><div class="hours"><div class="report-hours <%= (worked < 0) ? "negative-report-hours" : "" %>"><%= Zz5GeneralUtil.secondsToTime(worked) %></div>
     <% else %>
       <td class="report-hours-container"><div class="hours"><div class="report-hours">00:00</div>
@@ -55,11 +76,15 @@
     <% a = zz5_work_period.get_missing_hour(zz5_work_day.date)%>
     <%if worked < 0 %>
         <%flash.now[:error]=t("message.zz5_invalid_time")%>
-        <img title='<%= l(:zz5_invalid_work_time)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
+        <img title='<%= l(:zz5_invalid_worktime)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
              src='/plugin_assets/redmine_zz5/images/error.png' onmouseover="this.title" onmouseout="this.title.hide">
     <%elsif display_absence_error %>
         <%flash.now[:error]=t("message.zz5_invalid_absences")%>
         <img title='<%= l(:zz5_invalid_absence_duration)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
+             src='/plugin_assets/redmine_zz5/images/error.png' onmouseover="this.title" onmouseout="this.title.hide">
+    <%elsif display_alt_worktimes_error %>
+        <%flash.now[:error]=t("message.zz5_invalid_time")%>
+        <img title='<%= l(:zz5_invalid_worktime)%>' class='img-warning <%= (Zz5GeneralUtil.timeToSeconds(diff) < 0) ? "img-warning-negative" : "" %>' id='<%=day+"_"+"error"%>'
              src='/plugin_assets/redmine_zz5/images/error.png' onmouseover="this.title" onmouseout="this.title.hide">
     <%elsif a < 0.0 %>
         <% a = a * -1 %>

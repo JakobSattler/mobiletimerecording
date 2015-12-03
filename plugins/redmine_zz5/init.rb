@@ -11,7 +11,7 @@ Redmine::Plugin.register :redmine_zz5 do
   name 'Redmine Zz5 plugin'
   author 'Thorsten Lusser, David Sauperl, Florian Schitter, Bianca Sulzbacher'
   description 'This is a time management plugin for redmine'
-  version '0.5.2'
+  version '0.5.5'
   requires_redmine :version_or_higher => '2.3.1'
   url 'http://www.apus.co.at/path/to/plugin'
   author_url 'http:/www.apus.co.at/about'

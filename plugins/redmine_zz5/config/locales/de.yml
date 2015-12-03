@@ -34,6 +34,9 @@ de:
   zz5_invalid_worktime: "Ungültige Arbeitszeiten"
   zz5_last_saved: "Zuletzt gespeichert"
   zz5_duplicate_tickets: "Folgende Tickets befinden sich bereits in der Liste"
+  zz5_come_in: "Kommen"
+  zz5_leave: "Gehen"
+  zz5_worked: "Gearbeitet"
 
   zz5_actual_time: "Ist-Stunden"
   zz5_target_time: "Soll-Stunden"
@@ -114,6 +117,8 @@ de:
   zz5_target_sum: "Wochensumme Soll-Stunden"
   zz5_actual_sum: "Wochensumme Ist-Stunden"
   zz5_project_sum: "Wochensumme Projekt-Stunden"
+  zz5_break_time_exists: "Pausenzeit in einfacher Arbeitszeitenansicht vorhanden!"
+  zz5_extra_work_times: "Mehrere Arbeitszeiten in mehrfacher Arbeitszeitenansicht vorhanden!"
 
   # ticket search
   zz5_hint_text: "Bis zu 3 Ticketnamen/-nummern eingeben"
@@ -126,10 +131,13 @@ de:
   field_display_projects: "Projektbaum anzeigen"
   field_favorite_ticket_order: "Ticketreihenfolge"
   field_display_worktimes: "Anzeige der Arbeitszeiten"
+  field_alternative_worktimes: "Arbeitszeiten"
   zz5_order_by_issue_id: "Nach Issue ID"
   zz5_order_by_updated_on: "Zuletzt bearbeitet"
   zz5_static_worktimes: "Immer sichtbar"
   zz5_normal_worktimes: "Normal"
+  zz5_single_worktimes: "Anfang/Ende/Pause"
+  zz5_multiple_worktimes: "Kommen/Gehen"
 
   # date
   date:

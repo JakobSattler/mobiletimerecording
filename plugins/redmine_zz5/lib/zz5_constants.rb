@@ -25,4 +25,8 @@ class Zz5Constants
 
   # Absence types
   COMPENSATORY_TIME = 5
+
+  # Favorite ticket order options
+  SINGLE_WORKTIMES      = 0
+  MULTIPLE_WORKTIMES    = 1
 end

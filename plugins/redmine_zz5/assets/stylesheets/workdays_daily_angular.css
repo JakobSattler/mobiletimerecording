@@ -123,6 +123,15 @@ div.begin {
     margin-left: 1em;
 }
 
+div.times-row {
+    height: 40px;
+    padding-left: 8px;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 1.2em;
+    width: 23%;
+}
+
 div.zz5_project_time {
     margin-left: 1em;
 }

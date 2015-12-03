@@ -9,7 +9,7 @@
                     <input class="time-input" ng-disabled="setDisabled('{{day.id}}_<%= id%>')" id="{{day.id}}_<%= id%>" value="<%= value%>"
                            ng-click="setBeginEndTime(day.id + '_<%= id%>', day)"
                            ng-model="day.absence_time"
-                           ng-change="calculateActualHours(day);
+                           ng-change="<%= calcActualHours %>(day);
                                         calcDifference(day);
                                         checkAbsenceTime(day)"
                            ng-focus="hasFocus(); old_duration = day.absence_time; old_reason = day.absence_reason"

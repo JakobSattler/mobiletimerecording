@@ -4,8 +4,35 @@
         {
             <% absence = Zz5Absence.where(:zz5_workday_id => zz5_work_day.id).first %>
             "id": <%= index %>, "name": "<%= l("zz5_" + zz5_work_day.date.strftime("%A").downcase) %>", "date": "<%= zz5_work_day.date.strftime("%d-%m-%Y") %>",
-            "holiday_name": "<%= @zz5_work_period.get_holiday_name(zz5_work_day.date) %>", "begin": "<%= zz5_work_day.begin.strftime("%H:%M") unless zz5_work_day.begin.nil? %>",
-            "end": "<%= zz5_work_day.end.strftime("%H:%M") unless zz5_work_day.end.nil? %>", "break": "<%= zz5_work_day.break.strftime("%H:%M") unless zz5_work_day.break.nil? %>",
+            "holiday_name": "<%= @zz5_work_period.get_holiday_name(zz5_work_day.date) %>", "begin_end_times": [
+                <% if @zz5_work_period.begin_end_times[index].empty? %>
+                    {   "id": 0,
+                        "begin": "",
+                        "end": "",
+                        "worked": "00:00"},
+                    {   "id": 0,
+                        "begin": "",
+                        "end": "",
+                        "worked": "00:00" }
+                <% else %>
+                    <% @zz5_work_period.begin_end_times[index].each_with_index do |time, time_index| %>
+                        { "id": "<%= time.id %>",
+                          "begin": "<%= time.begin.strftime("%H:%M") %>",
+                          "end": "<%= time.end.strftime("%H:%M") %>",
+                          "worked": "<%= Zz5GeneralUtil.secondsToTime(Zz5GeneralUtil.timeToSeconds(time.end.strftime("%H:%M")) - Zz5GeneralUtil.timeToSeconds(time.begin.strftime("%H:%M"))) %>" }
+                        <% if time_index != @zz5_work_period.begin_end_times[index].length - 1 %>
+                        ,
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <% if @zz5_work_period.begin_end_times[index].length == 1 && @user.zz5_user_pref.alternative_worktimes == 1 %>
+                , {   "id": 0,
+                "begin": "",
+                "end": "",
+                "worked": "00:00" }
+                <% end %>
+            ],
+            "break": "<%= @zz5_work_period.break_times[index] %>",
             "target": "<%= zz5_work_day.target.strftime("%H:%M") %>", "absence_reason": "<%= absence.zz5_absence_type_id.to_s unless absence.nil? %>",
             "absence_time": "<%= absence.duration.strftime("%H:%M") unless absence.nil? %>", "time_carry": "<%= Zz5GeneralUtil.secondsToTime(zz5_work_day.carry_over) %>"
         }

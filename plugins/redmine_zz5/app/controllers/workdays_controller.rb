@@ -17,7 +17,14 @@ class WorkdaysController < ApplicationController
         first_day_week = curr_date.beginning_of_week
         week = first_day_week.cweek.to_s
         year = first_day_week.strftime("%Y")
-        if User.current.zz5_user_pref.display_days != 1
+        if User.current.zz5_user_pref.alternative_worktimes == 1
+          day = curr_date.wday
+          # our workweek ends with sunday = 7 but wday returns sunday = 0
+          if day == 0
+            day = 7
+          end
+          redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
+        elsif User.current.zz5_user_pref.display_days != 1
           redirect_to '/zz5/' + year + '/' + week
         else
           day = curr_date.wday
@@ -25,7 +32,6 @@ class WorkdaysController < ApplicationController
           if day == 0
             day = 7
           end
-
           redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
         end
       else
@@ -49,6 +55,12 @@ class WorkdaysController < ApplicationController
         @weekview = false
       end
 
+      if @user.zz5_user_pref.alternative_worktimes == 0
+        @alternative_worktimes = false
+      else
+        @alternative_worktimes = true
+      end
+
       @zz5_calculation_labels = ['zz5_actual_time','zz5_target_time','zz5_time_difference','zz5_vacation']
       @activity_array = TimeEntryActivity.select("id, name")
       @default_activity = TimeEntryActivity.where("is_default = true").first
@@ -66,7 +78,12 @@ class WorkdaysController < ApplicationController
         @max_date_absence = Date.parse(@max_date).strftime("%d-%m-%Y")
       end
 
+      if @alternative_worktimes
+        @weekview = false
+      end
+
       Rails.logger.info "@weekview: " + @weekview.to_s
+      Rails.logger.info "@alt_view: " + @alternative_worktimes.to_s
       respond_to do |format|
         format.html
       end
@@ -102,6 +119,11 @@ class WorkdaysController < ApplicationController
 
     if !employment_data.nil? && employment_data.start.beginning_of_week <= @curr_date && @curr_date <= (Date.today + 6.months)
       @user.zz5_user_pref
+
+      if @user.zz5_user_pref.alternative_worktimes == true
+        @weekview = false
+      end
+
       @absence_types = Zz5AbsenceType.select("id, name")
 
       from = @curr_date
@@ -130,26 +152,63 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  def save_day
+  def save_single_worktime
 
     @user = User.current
 
     if @user.allowed_to?(:view_zz5, nil, :global => true)
       date = params[:date]
-      Rails.logger.info "save_day, Date: " + date.to_s
-      init_controller(date.to_date, 0)
-
+      type = params[:type]
+      id = params[:id].to_i
       time_begin = (params[:begin]).to_s
       time_end = (params[:end]).to_s
       time_break = (params[:break]).to_s
 
-      absence_type_id = (params[:absence_reason]).to_s
-      absence_time = (params[:absence_time]).to_s
-      absence_type = get_absence_type(absence_type_id)
-      Rails.logger.info "absence type: " + absence_type.to_s
-      Zz5Absence.create_or_update_absence_for_week_day_and_type(@zz5_work_period.workdays[0], absence_type, absence_time)
+      Rails.logger.info "save_day, Begin: " + time_begin.to_s
+      Rails.logger.info "save_day, End: " + time_end.to_s
+      Rails.logger.info "save_day, Date: " + date.to_s
+      Rails.logger.info "save_day, ID: " + id.to_s
+      init_controller(date.to_date, 0)
 
-      @zz5_work_period.set_workday_data(@zz5_work_period.workdays[0], time_begin, time_end, time_break)
+      @be_id = @zz5_work_period.set_single_workday_data(id, type, time_begin, time_end, time_break, date, @user.id)
+
+      if @be_id == -1
+        raise "error"
+      end
+
+      # manual call of calculate carries necessary to account for changed worktimes
+      @zz5_work_period.calculate_carries
+      @zz5_work_period.save_work_period
+      @carry = Zz5GeneralUtil.secondsToTime(@zz5_work_period.workdays[0].carry_over)
+      Rails.logger.info "save_day, @carry: " + @carry.to_s
+      Rails.logger.info "save_day, @be_id: " + @be_id.to_s
+      @vacation = @zz5_work_period.get_vacation_entitlement_in_days(date.to_date + 1.days)
+
+      respond_to do |format|
+        format.json { render :partial => "workdays/saved_msg" }
+      end
+    else
+      render_403
+    end
+  end
+
+  def save_multiple_worktime
+
+    @user = User.current
+
+    if @user.allowed_to?(:view_zz5, nil, :global => true)
+      date = params[:date]
+      id = params[:id].to_i
+      time_begin = (params[:begin]).to_s
+      time_end = (params[:end]).to_s
+      time_break = (params[:break]).to_s
+
+      Rails.logger.info "save_day, Begin: " + time_begin.to_s
+      Rails.logger.info "save_day, End: " + time_end.to_s
+      Rails.logger.info "save_day, Date: " + date.to_s
+      init_controller(date.to_date, 0)
+
+      @be_id = @zz5_work_period.set_multiple_workday_data(id, time_begin, time_end, time_break, date, @user.id)
 
       # manual call of calculate carries necessary to account for changed worktimes
       @zz5_work_period.calculate_carries
@@ -158,6 +217,56 @@ class WorkdaysController < ApplicationController
       Rails.logger.info "save_day, @carry: " + @carry.to_s
       @vacation = @zz5_work_period.get_vacation_entitlement_in_days(date.to_date + 1.days)
 
+      respond_to do |format|
+        format.json { render :partial => "workdays/saved_msg" }
+      end
+    else
+      render_403
+    end
+  end
+
+  def delete_worktime
+    @user = User.current
+
+    if @user.allowed_to?(:view_zz5, nil, :global => true)
+
+      begin Zz5BeginEndTimes.find(params[:id])
+        be = Zz5BeginEndTimes.find(params[:id])
+        be.delete
+      rescue ActiveRecord::RecordNotFound
+
+      end
+
+      date = params[:date]
+      init_controller(date.to_date, 0)
+      @be_id = 0
+
+      respond_to do |format|
+        format.json { render :partial => "workdays/saved_msg" }
+      end
+
+    else
+      render_403
+    end
+  end
+
+  def save_absence
+    @user = User.current
+
+    if @user.allowed_to?(:view_zz5, nil, :global => true)
+      date = params[:date]
+      absence_type_id = (params[:absence_reason]).to_s
+      absence_time = (params[:absence_time]).to_s
+      absence_type = get_absence_type(absence_type_id)
+
+      init_controller(date.to_date, 0)
+      Rails.logger.info "absence type: " + absence_type.to_s
+      Zz5Absence.create_or_update_absence_for_week_day_and_type(@zz5_work_period.workdays[0], absence_type, absence_time)
+
+      @zz5_work_period.calculate_carries
+      @zz5_work_period.save_work_period
+      @carry = Zz5GeneralUtil.secondsToTime(@zz5_work_period.workdays[0].carry_over)
+      @vacation = @zz5_work_period.get_vacation_entitlement_in_days(date.to_date + 1.days)
       respond_to do |format|
         format.json { render :partial => "workdays/saved_msg" }
       end
@@ -219,7 +328,6 @@ class WorkdaysController < ApplicationController
 
     if @user.allowed_to?(:view_zz5, nil, :global => true)
 
-      Rails.logger.info "piiiiiiiiiiiinned?" + params[:data]["pinned"].to_s
       issue_id = params[:data]["issue_id"]
       pin = params[:data]["pinned"]
 
@@ -227,10 +335,10 @@ class WorkdaysController < ApplicationController
         # add to pinnedtickets table
         pinned_issue = Zz5PinnedTicket.new(:issue_id => issue_id, :user_id => @user.id)
         if pinned_issue.save
-          Rails.logger.info "pinned ticket successfully!"
+          #Rails.logger.info "pinned ticket successfully!"
           Zz5RemovedTicket.where("user_id = ? AND issue_id = ?", @user.id, issue_id).destroy_all
         else
-          Rails.logger.info "failed pinning ticket!"
+          #Rails.logger.info "failed pinning ticket!"
         end
       else
         # remove from pinnedtickets table
@@ -257,10 +365,10 @@ class WorkdaysController < ApplicationController
 
       if remove
         if removed_issue.save
-          Rails.logger.info "removed ticket successfully!"
+          #Rails.logger.info "removed ticket successfully!"
           Zz5PinnedTicket.where("user_id = ? AND issue_id = ?", @user.id, issue_id).destroy_all
         else
-          Rails.logger.info "failed removing ticket!"
+          #Rails.logger.info "failed removing ticket!"
         end
       else
         Zz5RemovedTicket.where("user_id = ? AND issue_id = ?", @user.id, issue_id).destroy_all
@@ -297,7 +405,7 @@ class WorkdaysController < ApplicationController
 
   # saves the content of a block entry
   def saveblock
-    Rails.logger.info "WorkdayController, saveblock"
+    #Rails.logger.info "WorkdayController, saveblock"
 
     @user = User.current
 
@@ -308,16 +416,16 @@ class WorkdaysController < ApplicationController
       block_date_to = params[:to].to_s
       absence_type_id = params[:id].to_s
 
-      Rails.logger.info "+++++ block_date_from: '" + block_date_from + "'"
-      Rails.logger.info "+++++ block_date_to: '" + block_date_to + "'"
-      Rails.logger.info "+++++ absence_type_id: '" + absence_type_id + "'"
+      #Rails.logger.info "+++++ block_date_from: '" + block_date_from + "'"
+      #Rails.logger.info "+++++ block_date_to: '" + block_date_to + "'"
+      #Rails.logger.info "+++++ absence_type_id: '" + absence_type_id + "'"
 
       # create work weeks
       first_absence_day = Date.strptime(block_date_from, '%Y-%m-%d')
       last_absence_day = Date.strptime(block_date_to, '%Y-%m-%d')
 
-      Rails.logger.info "saveblock, first_absence_day:" + first_absence_day.to_s
-      Rails.logger.info "saveblock, last_absence_day:" + last_absence_day.to_s
+      #Rails.logger.info "saveblock, first_absence_day:" + first_absence_day.to_s
+      #Rails.logger.info "saveblock, last_absence_day:" + last_absence_day.to_s
       work_period = Zz5Workperiod.new(@user, block_date_from, block_date_to)
       #@zz5_work_week.calculate_carries
 
@@ -339,13 +447,13 @@ class WorkdaysController < ApplicationController
 
           if workday.date >= employment.start
             workday.target = Time.at(employment.employment / 5).utc.strftime "%H:%M"
-            Rails.logger.info "target for " + workday.date.to_s + " = " + workday.target.to_s
+            #Rails.logger.info "target for " + workday.date.to_s + " = " + workday.target.to_s
           end
 
 
           #workday.target = Time.parse("07:42")
           absence_type = get_absence_type(absence_type_id)
-          Rails.logger.info "saveblock, absence_type: " + absence_type.to_s
+          #Rails.logger.info "saveblock, absence_type: " + absence_type.to_s
         end
 
         if !absence_type.nil?
@@ -419,7 +527,7 @@ class WorkdaysController < ApplicationController
       unsorted_issue_ids_of_the_period = TimeEntry.select('time_entries.issue_id').where("user_id = ? AND issue_id IS NOT NULL AND spent_on = ?", @user.id.to_s, @curr_date).order("updated_on DESC").uniq
     end
 
-    Rails.logger.info "favorite_issue,  unsorted_issues_of_the_week.length: " +  unsorted_issue_ids_of_the_period.length.to_s
+    #Rails.logger.info "favorite_issue,  unsorted_issues_of_the_week.length: " +  unsorted_issue_ids_of_the_period.length.to_s
     no_of_unsorted_most_recent_issues = limit - unsorted_issue_ids_of_the_period.length
 
     #Rails.logger.info "favorite_issue, no_of_unsorted_most_recent_issues: " + no_of_unsorted_most_recent_issues.to_s
@@ -660,7 +768,7 @@ class WorkdaysController < ApplicationController
     if time == "" || time == "00:00"
       te = TimeEntry.find(id)
       te_id = te.spent_on.wday
-      Rails.logger.info "gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: " + te_id.to_s
+
       if(te_id == 0)
         te_id = 6;
       else
@@ -725,15 +833,15 @@ class WorkdaysController < ApplicationController
 
   def create_time_entry(time_entry)
 
-    Rails.logger.info "------------------- Create TIME ENRTIES ---------------------------------"
+    #Rails.logger.info "------------------- Create TIME ENRTIES ---------------------------------"
     activity_time_entry = time_entry["activity"]
     comment_time_entry = time_entry["comment"]
     issue_id = time_entry["issue_id"]
     time = time_entry["hours"]
     date = time_entry["date"]
 
-    Rails.logger.info "create_time_entry, new_time entry issue id: " + issue_id.to_s
-    Rails.logger.info "create_time_entry, date: " + date.to_s
+    #Rails.logger.info "create_time_entry, new_time entry issue id: " + issue_id.to_s
+    #Rails.logger.info "create_time_entry, date: " + date.to_s
     valid = Zz5GeneralUtil.is_valid_time(time)
 
     if !activity_time_entry.nil?
@@ -748,8 +856,8 @@ class WorkdaysController < ApplicationController
     hours = Zz5GeneralUtil.timeToHours(time)
 
     if hours > 0.0
-      Rails.logger.info "create_time_entries, value: " + time.to_f.to_s
-      Rails.logger.info "create_time_entries, valid: " + valid.to_s
+      #Rails.logger.info "create_time_entries, value: " + time.to_f.to_s
+      #Rails.logger.info "create_time_entries, valid: " + valid.to_s
       updated_on = DateTime.now
       if valid
         if activity_time_entry != '-1' && !comment_time_entry.nil?
