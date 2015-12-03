@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class SessionStartTest < ActionController::TestCase
-  tests AccountController
+  tests AccountMtrController
 
   fixtures :users
 

@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class AccountControllerOpenidTest < ActionController::TestCase
-  tests AccountController
+  tests AccountMtrController
   fixtures :users, :roles
 
   def setup
@@ -133,8 +133,8 @@ class AccountControllerOpenidTest < ActionController::TestCase
 
     def test_post_login_should_not_verify_token_when_using_open_id
       ActionController::Base.allow_forgery_protection = true
-      AccountController.any_instance.stubs(:using_open_id?).returns(true)
-      AccountController.any_instance.stubs(:authenticate_with_open_id).returns(true)
+      AccountMtrController.any_instance.stubs(:using_open_id?).returns(true)
+      AccountMtrController.any_instance.stubs(:authenticate_with_open_id).returns(true)
       post :login
       assert_response 200
     ensure

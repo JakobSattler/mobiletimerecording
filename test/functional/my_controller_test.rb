@@ -63,7 +63,7 @@ class MyControllerTest < ActionController::TestCase
   end
 
   def test_my_account_should_show_editable_custom_fields
-    get :account
+    get :mtr_account
     assert_response :success
     assert_template 'account'
     assert_equal User.find(2), assigns(:user)
@@ -74,7 +74,7 @@ class MyControllerTest < ActionController::TestCase
   def test_my_account_should_not_show_non_editable_custom_fields
     UserCustomField.find(4).update_attribute :editable, false
 
-    get :account
+    get :mtr_account
     assert_response :success
     assert_template 'account'
     assert_equal User.find(2), assigns(:user)
@@ -83,21 +83,21 @@ class MyControllerTest < ActionController::TestCase
   end
 
   def test_my_account_should_show_language_select
-    get :account
+    get :mtr_account
     assert_response :success
     assert_select 'select[name=?]', 'user[language]'
   end
 
   def test_my_account_should_not_show_language_select_with_force_default_language_for_loggedin
     with_settings :force_default_language_for_loggedin => '1' do
-      get :account
+      get :mtr_account
       assert_response :success
       assert_select 'select[name=?]', 'user[language]', 0
     end
   end
 
   def test_update_account
-    post :account,
+    post :mtr_account,
       :user => {
         :firstname => "Joe",
         :login => "root",
@@ -118,7 +118,7 @@ class MyControllerTest < ActionController::TestCase
   end
 
   def test_my_account_should_show_destroy_link
-    get :account
+    get :mtr_account
     assert_select 'a[href=/my/account/destroy]'
   end
 

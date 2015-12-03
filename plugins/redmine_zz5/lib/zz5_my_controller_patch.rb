@@ -9,7 +9,7 @@ module Zz5
 
       base.class_eval do
         unloadable # Send unloadable so it will not be unloaded in development
-        after_filter :save_zz5_user_preferences, :only => [:account]
+        after_filter :save_zz5_user_preferences, :only => [:mtr_account]
       end
     end
 

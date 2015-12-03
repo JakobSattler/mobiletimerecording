@@ -103,6 +103,6 @@ VIEW
     context = ContextTestHook.context
     assert_kind_of ActionDispatch::Request, context[:request]
     assert_kind_of Hash, context[:request].params
-    assert_kind_of AccountController, context[:hook_caller]
+    assert_kind_of AccountMtrController, context[:hook_caller]
   end
 end
