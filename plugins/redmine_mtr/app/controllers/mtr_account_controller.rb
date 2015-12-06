@@ -14,10 +14,10 @@ class MtrAccountController < ApplicationController
   end
 
   # Login request and validation
-  def loginMtr
+  def mtr_login
     if request.get?
       if User.current.logged?
-        redirect_back_or_default home_url, :referer => true
+        redirect_back_or_default mtr_home_url, :referer => true
       end
     else
       authenticate_user
@@ -239,7 +239,7 @@ class MtrAccountController < ApplicationController
       set_autologin_cookie(user)
     end
     call_hook(:controller_account_success_authentication_after, {:user => user })
-    redirect_back_or_default my_page_path
+    redirect_back_or_default mtr_home_url
   end
 
   def set_autologin_cookie(user)

@@ -9,7 +9,7 @@ module Zz5
 
       base.class_eval do
         unloadable # Send unloadable so it will not be unloaded in development
-        after_filter :save_zz5_user_preferences, :only => [:mtr_account]
+        after_filter :save_zz5_user_preferences, :only => [:account]
       end
     end
 
@@ -22,12 +22,12 @@ module Zz5
         Rails.logger.info "save_zz5_user_preferences started"
         if request.post? && flash[:notice] == l(:notice_account_updated)
           # handle backlog color
-          color = (params[:backlogs] ? params[:backlogs][:task_color] : '').to_s
-          if color == '' || color.match(/^#[A-Fa-f0-9]{6}$/)
-            User.current.backlogs_preference[:task_color] = color
-          else
-            flash[:notice] = "Invalid task color code #{color}"
-          end
+          #color = (params[:backlogs] ? params[:backlogs][:task_color] : '').to_s
+          #if color == '' || color.match(/^#[A-Fa-f0-9]{6}$/)
+          #  User.current.backlogs_preference[:task_color] = color
+          #else
+          #  flash[:notice] = "Invalid task color code #{color}"
+          #end
 
           # handle number of favorites
           no_of_favorites = params[:zz5][:favorite_tickets]
