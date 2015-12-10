@@ -30,10 +30,10 @@ class MtrAccountController < ApplicationController
   # Log out current user and redirect to welcome page
   def mtr_logout
     if User.current.anonymous?
-      redirect_to mtr_signin_url
+      redirect_to signin_url
     elsif request.post?
       logout_user
-      redirect_to mtr_signin_url
+      redirect_to signin_url
     end
     # display the logout form
   end
