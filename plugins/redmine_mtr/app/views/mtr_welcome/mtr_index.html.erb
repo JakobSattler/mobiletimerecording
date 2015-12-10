@@ -1,3 +1,13 @@
-<div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'bootstrap.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
+
+    <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+<% end %>
+
+<div class="modal show" tabindex="-1" aria-hidden="true">
 <p>Hello World!</p>
 </div>
