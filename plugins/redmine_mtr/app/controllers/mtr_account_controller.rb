@@ -17,7 +17,7 @@ class MtrAccountController < ApplicationController
   def mtr_login
     if request.get?
       if User.current.logged?
-        redirect_back_or_default home_url, :referer => true
+        redirect_back_or_default mtr_home_url, :referer => true
       end
     else
       authenticate_user
@@ -28,28 +28,28 @@ class MtrAccountController < ApplicationController
   end
 
   # Log out current user and redirect to welcome page
-  def logout
+  def mtr_logout
     if User.current.anonymous?
-      redirect_to home_url
+      redirect_to mtr_home_url
     elsif request.post?
       logout_user
-      redirect_to home_url
+      redirect_to mtr_home_url
     end
     # display the logout form
   end
 
   # Lets user choose a new password
   def lost_password
-    (redirect_to(home_url); return) unless Setting.lost_password?
+    (redirect_to(mtr_home_url); return) unless Setting.lost_password?
     if params[:token]
       @token = Token.find_token("recovery", params[:token].to_s)
       if @token.nil? || @token.expired?
-        redirect_to home_url
+        redirect_to mtr_home_url
         return
       end
       @user = @token.user
       unless @user && @user.active?
-        redirect_to home_url
+        redirect_to mtr_home_url
         return
       end
       if request.post?
@@ -94,7 +94,7 @@ class MtrAccountController < ApplicationController
 
   # User self-registration
   def register
-    (redirect_to(home_url); return) unless Setting.self_registration? || session[:auth_source_registration]
+    (redirect_to(mtr_home_url); return) unless Setting.self_registration? || session[:auth_source_registration]
     if request.get?
       session[:auth_source_registration] = nil
       @user = User.new(:language => current_language.to_s)
@@ -134,11 +134,11 @@ class MtrAccountController < ApplicationController
 
   # Token based account activation
   def activate
-    (redirect_to(home_url); return) unless Setting.self_registration? && params[:token].present?
+    (redirect_to(mtr_home_url); return) unless Setting.self_registration? && params[:token].present?
     token = Token.find_token('register', params[:token].to_s)
-    (redirect_to(home_url); return) unless token and !token.expired?
+    (redirect_to(mtr_home_url); return) unless token and !token.expired?
     user = token.user
-    (redirect_to(home_url); return) unless user.registered?
+    (redirect_to(mtr_home_url); return) unless user.registered?
     user.activate
     if user.save
       token.destroy
@@ -157,7 +157,7 @@ class MtrAccountController < ApplicationController
         return
       end
     end
-    redirect_to(home_url)
+    redirect_to(mtr_home_url)
   end
 
   private
@@ -197,7 +197,7 @@ class MtrAccountController < ApplicationController
         user = User.find_or_initialize_by_identity_url(identity_url)
         if user.new_record?
           # Self-registration off
-          (redirect_to(home_url); return) unless Setting.self_registration?
+          (redirect_to(mtr_home_url); return) unless Setting.self_registration?
           # Create on the fly
           user.login = registration['nickname'] unless registration['nickname'].nil?
           user.mail = registration['email'] unless registration['email'].nil?

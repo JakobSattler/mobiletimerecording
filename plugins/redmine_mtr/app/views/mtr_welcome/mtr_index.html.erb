@@ -4,10 +4,33 @@
     <%= stylesheet_link_tag 'bootstrap-theme.css', :plugin => 'redmine_mtr' %>
     <%= stylesheet_link_tag 'bootstrap-theme.min.css', :plugin => 'redmine_mtr' %>
     <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'menu.css', :plugin => 'redmine_mtr' %>
 
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+    <%= javascript_include_tag "https://code.jquery.com/ui/1.11.1/jquery-ui.min.js" %>
+    <%= javascript_include_tag "https://code.jquery.com/jquery-2.1.1.min.js" %>
+    <%= javascript_include_tag "menu.js" , :plugin => 'redmine_mtr' %>
+    <%= javascript_include_tag "jquery-2.1.0.min.js", :plugin => 'redmine_mtr' %>
 <% end %>
 
 <div class="modal show" tabindex="-1" aria-hidden="true">
-<p>Hello World!</p>
-</div>
+  <div id="container" class="col-sm-12">
+
+    <!--The Hamburger Button in the Header-->
+    <ul id="menu">
+      <li><a title="Home" href="/">Home</a></li>
+      <li><a title="About Me" href="/about">About Me</a></li>
+      <li><a title="Contact Me" href="/contact">Contact Me</a></li>
+    </ul>
+
+    <div id="page">
+      <header>
+        <h1>My New Site</h1>
+        <a href="/mtr/logout" id="toggle-menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+      </header>
+      <%= form_tag(mtr_signout_path) do %>
+          <p><%= submit_tag l(:label_logout) %></p>
+      <% end %>
+    </div>
+  </div>
+  </div>
