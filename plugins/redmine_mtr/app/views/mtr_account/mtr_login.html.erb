@@ -9,7 +9,7 @@
 <% end %>
 
 <div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-    <%= form_tag(signin_path) do %>
+    <%= form_tag(mtr_signin_path) do %>
         <%= back_url_hidden_field_tag %>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -26,11 +26,14 @@
                                                :class => 'login-input', :style => 'width: 100%'%>
                     </div>
                     <div style="padding-top: 5px;">
-                        <input type="submit" style="height: 38px" class="form-control input-lg btn btn-danger" name="loginMtr" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
+                        <input type="submit" style="height: 38px" class="form-control input-lg btn btn-danger"
+                               name="loginMtr" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
                     </div>
-                    <div style="padding-top: 5px;">
-                        <label for="autologin"><%= check_box_tag 'autologin', 1, false, :tabindex => 4 %> <%= l(:label_stay_logged_in) %></label>
-                    </div>
+                    <% flash.each do |key, value| %>
+                      <div style="padding-top: 5px;">
+                        <label class="mtr-error"><%= value %></div>
+                      </div>
+                    <% end %>
                 </div>
             </div>
         </div>

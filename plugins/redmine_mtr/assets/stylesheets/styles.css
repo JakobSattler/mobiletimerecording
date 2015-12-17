@@ -3,3 +3,14 @@
     height: 35px;
     font-size:13px;
 }
+
+.menu-label
+{
+    color: white;
+    vertical-align: middle;
+}
+
+.mtr-error
+{
+    color: red;
+}

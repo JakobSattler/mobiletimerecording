@@ -12,9 +12,14 @@
 <div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
     <!--The Hamburger Button in the Header-->
     <ul id="menu">
-      <li><a title="Home" href="/">Home</a></li>
-      <li><a title="About Me" href="/about">About Me</a></li>
-      <li><a title="Contact Me" href="/contact">Contact Me</a></li>
+      <li>
+        <a title="Home" href="/mtr">Home</a>
+      </li>
+      <li>
+        <%= form_tag(mtr_signout_path) do %>
+          <a href="#" title="Abmelden" onClick="this.parentNode.submit()">Abmelden</a>
+        <% end %>
+      </li>
     </ul>
 
     <div id="page">
@@ -22,9 +27,7 @@
         <h1>My New Site</h1>
         <a href="#" id="toggle-menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
       </header>
-      <%= form_tag(mtr_signout_path) do %>
-          <%= submit_tag l(:label_logout) %>
-      <% end %>
+
     </div>
 </div>
 

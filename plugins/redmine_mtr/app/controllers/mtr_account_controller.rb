@@ -30,10 +30,10 @@ class MtrAccountController < ApplicationController
   # Log out current user and redirect to welcome page
   def mtr_logout
     if User.current.anonymous?
-      redirect_to signin_url
+      redirect_to mtr_signin_url
     elsif request.post?
       logout_user
-      redirect_to signin_url
+      redirect_to mtr_signin_url
     end
     # display the logout form
   end
@@ -57,7 +57,7 @@ class MtrAccountController < ApplicationController
         if @user.save
           @token.destroy
           flash[:notice] = l(:notice_account_password_updated)
-          redirect_to signin_path
+          redirect_to mtr_signin_path
           return
         end
       end
@@ -85,7 +85,7 @@ class MtrAccountController < ApplicationController
         if token.save
           Mailer.lost_password(token).deliver
           flash[:notice] = l(:notice_account_lost_email_sent)
-          redirect_to signin_path
+          redirect_to mtr_signin_path
           return
         end
       end
@@ -144,7 +144,7 @@ class MtrAccountController < ApplicationController
       token.destroy
       flash[:notice] = l(:notice_account_activated)
     end
-    redirect_to signin_path
+    redirect_to mtr_signin_path
   end
 
   # Sends a new account activation email
@@ -188,7 +188,7 @@ class MtrAccountController < ApplicationController
   end
 
   def open_id_authenticate(openid_url)
-    back_url = signin_url(:autologin => params[:autologin])
+    back_url = mtr_signin_url(:autologin => params[:autologin])
     authenticate_with_open_id(
         openid_url, :required => [:nickname, :fullname, :email],
         :return_to => back_url, :method => :post
@@ -235,9 +235,7 @@ class MtrAccountController < ApplicationController
     # Valid user
     self.logged_user = user
     # generate a key and set cookie if autologin
-    if params[:autologin] && Setting.autologin?
-      set_autologin_cookie(user)
-    end
+    set_autologin_cookie(user)
     call_hook(:controller_account_success_authentication_after, {:user => user })
     redirect_back_or_default mtr_home_url
   end
@@ -263,7 +261,7 @@ class MtrAccountController < ApplicationController
 
   def invalid_credentials
     logger.warn "Failed login for '#{params[:username]}' from #{request.remote_ip} at #{Time.now.utc}"
-    flash.now[:error] = l(:notice_account_invalid_creditentials)
+    flash[:success] = l(:notice_account_invalid_creditentials)
   end
 
   # Register a user for email activation.
@@ -274,7 +272,7 @@ class MtrAccountController < ApplicationController
     if user.save and token.save
       Mailer.register(token).deliver
       flash[:notice] = l(:notice_account_register_done, :email => ERB::Util.h(user.mail))
-      redirect_to signin_path
+      redirect_to mtr_signin_path
     else
       yield if block_given?
     end
@@ -309,7 +307,7 @@ class MtrAccountController < ApplicationController
     end
   end
 
-  def handle_inactive_user(user, redirect_path=signin_path)
+  def handle_inactive_user(user, redirect_path=mtr_signin_path)
     if user.registered?
       account_pending(user, redirect_path)
     else
@@ -317,7 +315,7 @@ class MtrAccountController < ApplicationController
     end
   end
 
-  def account_pending(user, redirect_path=signin_path)
+  def account_pending(user, redirect_path=mtr_signin_path)
     if Setting.self_registration == '1'
       flash[:error] = l(:notice_account_not_activated_yet, :url => activation_email_path)
       session[:registered_user_id] = user.id
@@ -327,7 +325,7 @@ class MtrAccountController < ApplicationController
     redirect_to redirect_path
   end
 
-  def account_locked(user, redirect_path=signin_path)
+  def account_locked(user, redirect_path=mtr_signin_path)
     flash[:error] = l(:notice_account_locked)
     redirect_to redirect_path
   end
