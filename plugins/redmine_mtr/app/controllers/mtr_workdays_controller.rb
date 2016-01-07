@@ -1,4 +1,4 @@
-class WorkdaysController < ApplicationController
+class MtrWorkdaysController < ApplicationController
   unloadable
 
   before_filter :set_cache_buster
@@ -12,31 +12,31 @@ class WorkdaysController < ApplicationController
 
   # redirect user to current week and year
   def index
-      if User.current.allowed_to?(:view_zz5, nil, :global => true)
-        curr_date = Date.today
-        first_day_week = curr_date.beginning_of_week
-        week = first_day_week.cweek.to_s
-        year = first_day_week.strftime("%Y")
-        if User.current.zz5_user_pref.alternative_worktimes == 1
-          day = curr_date.wday
-          # our workweek ends with sunday = 7 but wday returns sunday = 0
-          if day == 0
-            day = 7
-          end
-          redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
-        elsif User.current.zz5_user_pref.display_days != 1
-          redirect_to '/zz5/' + year + '/' + week
-        else
-          day = curr_date.wday
-          # our workweek ends with sunday = 7 but wday returns sunday = 0
-          if day == 0
-            day = 7
-          end
-          redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
+    if User.current.allowed_to?(:view_zz5, nil, :global => true)
+      curr_date = Date.today
+      first_day_week = curr_date.beginning_of_week
+      week = first_day_week.cweek.to_s
+      year = first_day_week.strftime("%Y")
+      if User.current.zz5_user_pref.alternative_worktimes == 1
+        day = curr_date.wday
+        # our workweek ends with sunday = 7 but wday returns sunday = 0
+        if day == 0
+          day = 7
         end
+        redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
+      elsif User.current.zz5_user_pref.display_days != 1
+        redirect_to '/zz5/' + year + '/' + week
       else
-        render_403
+        day = curr_date.wday
+        # our workweek ends with sunday = 7 but wday returns sunday = 0
+        if day == 0
+          day = 7
+        end
+        redirect_to '/zz5/' + year + '/' + week + '/' + day.to_s
       end
+    else
+      render_403
+    end
   end
 
   # show the workday input page
@@ -48,8 +48,12 @@ class WorkdaysController < ApplicationController
       @week = params[:week]
       @day  = params[:day]
 
-      @weekview = false
-
+      if @day.nil?
+        @weekview = true
+        @day = -1
+      else
+        @weekview = false
+      end
 
       if @user.zz5_user_pref.alternative_worktimes == 0
         @alternative_worktimes = false
@@ -99,10 +103,15 @@ class WorkdaysController < ApplicationController
     Rails.logger.info "year: " + @year.to_s
 
     #"wednesday" == Date.commercial(2015, 4, 3).strftime("%A").downcase
-    @curr_date = Date.commercial(@year.to_i, @week.to_i, @day.to_i)
-    @weekview = false
-    Rails.logger.info "zz5_workdays_controller, load_data, no weekview"
-
+    if @day == -1
+      @curr_date = Date.commercial(@year.to_i, @week.to_i, 1)
+      @weekview = true
+      Rails.logger.info "zz5_workdays_controller, load_data, weekview"
+    else
+      @curr_date = Date.commercial(@year.to_i, @week.to_i, @day.to_i)
+      @weekview = false
+      Rails.logger.info "zz5_workdays_controller, load_data, no weekview"
+    end
 
     employment_data = Zz5Employment.where(:user_id => @user.id).order('start ASC').first
     Rails.logger.info "zz5_workdays_controller, load_data, employment_data: " + employment_data.start.beginning_of_week.to_s
@@ -124,8 +133,11 @@ class WorkdaysController < ApplicationController
       init_controller(from, to)
       @parent_projects = @zz5_work_period.get_parent_projects
 
-      @vacation = @zz5_work_period.get_vacation_entitlement_in_days(from + 1.days)
-
+      if @weekview
+        @vacation = @zz5_work_period.get_vacation_entitlement_in_days(to)
+      else
+        @vacation = @zz5_work_period.get_vacation_entitlement_in_days(from + 1.days)
+      end
 
       favorite_issues(@user.zz5_user_pref.favorite_tickets)
 
@@ -219,8 +231,8 @@ class WorkdaysController < ApplicationController
     if @user.allowed_to?(:view_zz5, nil, :global => true)
 
       begin Zz5BeginEndTimes.find(params[:id])
-        be = Zz5BeginEndTimes.find(params[:id])
-        be.delete
+      be = Zz5BeginEndTimes.find(params[:id])
+      be.delete
       rescue ActiveRecord::RecordNotFound
 
       end
@@ -290,14 +302,14 @@ class WorkdaysController < ApplicationController
     if @user.allowed_to?(:view_zz5, nil, :global => true)
 
       begin TimeEntry.find(params[:id])
-        te = TimeEntry.find(params[:id])
-        @te_id = te.spent_on.wday
-        if(@te_id == 0)
-          @te_id = 6;
-        else
-          @te_id = @te_id-1;
-        end
-        te.delete
+      te = TimeEntry.find(params[:id])
+      @te_id = te.spent_on.wday
+      if(@te_id == 0)
+        @te_id = 6;
+      else
+        @te_id = @te_id-1;
+      end
+      te.delete
       rescue ActiveRecord::RecordNotFound
 
       end
@@ -636,7 +648,7 @@ class WorkdaysController < ApplicationController
       # get these names as an array
       # write those names to @project_names hash at [issue_id]
       result = Issue.select("p1.name AS first_name, p2.name AS second_name, p3.name AS third_name").joins("AS i1 LEFT OUTER JOIN projects AS p1 ON p1.id = i1.project_id LEFT OUTER JOIN projects AS p2 ON p2.id = p1.parent_id LEFT OUTER JOIN projects AS p3 ON p3.id = p2.parent_id").where("i1.id = ?", te.issue_id).first
-      
+
       project_names = Array.new
       project_names.push(result.first_name)
       project_names.push(result.second_name)
@@ -914,7 +926,7 @@ class WorkdaysController < ApplicationController
     #also check if something changed or not
 
     #update attributes accordingly
-      #delete time entry if hours == 00:00
+    #delete time entry if hours == 00:00
 
     #save te
     return id
@@ -923,20 +935,20 @@ class WorkdaysController < ApplicationController
   def get_week_day_string(day_int)
 
     case day_int.to_i
-    when 1
-      day_string = "monday"
-    when 2
-      day_string = "tuesday"
-    when 3
-      day_string = "wednesday"
-    when 4
-      day_string = "thursday"
-    when 5
-      day_string = "friday"
-    when 6
-      day_string = "saturday"
-    when 7
-      day_string = "sunday"
+      when 1
+        day_string = "monday"
+      when 2
+        day_string = "tuesday"
+      when 3
+        day_string = "wednesday"
+      when 4
+        day_string = "thursday"
+      when 5
+        day_string = "friday"
+      when 6
+        day_string = "saturday"
+      when 7
+        day_string = "sunday"
     end
 
     return day_string.to_s
@@ -945,20 +957,20 @@ class WorkdaysController < ApplicationController
   def get_week_day_int(day_str)
 
     case day_str.to_s
-    when "monday"
-      day_int = 1
-    when "tuesday"
-      day_int = 2
-    when "wednesday"
-      day_int = 3
-    when "thursday"
-      day_int = 4
-    when "friday"
-      day_int = 5
-    when "saturday"
-      day_int = 6
-    when "sunday"
-      day_int = 7
+      when "monday"
+        day_int = 1
+      when "tuesday"
+        day_int = 2
+      when "wednesday"
+        day_int = 3
+      when "thursday"
+        day_int = 4
+      when "friday"
+        day_int = 5
+      when "saturday"
+        day_int = 6
+      when "sunday"
+        day_int = 7
     end
 
     return day_int
