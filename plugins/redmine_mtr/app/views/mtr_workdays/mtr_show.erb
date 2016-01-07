@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'bootstrap.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.js"></script>
+    <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+<% end %>
 
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <style>
-
-    </style>
-</head>
-<body>
 <div class="container-fluid">
 
     <center><h3>
