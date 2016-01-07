@@ -18319,3 +18319,624 @@ Processing by MtrAccountController#mtr_login as HTML
   Current user: anonymous
   Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (3.7ms)
 Completed 200 OK in 15.6ms (Views: 13.1ms | ActiveRecord: 0.4ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:01:13 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (48.1ms)
+Completed 200 OK in 256.2ms (Views: 90.0ms | ActiveRecord: 9.6ms)
+Started GET "/login" for 127.0.0.1 at 2016-01-07 14:01:15 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered account/login.html.erb within layouts/base (4.7ms)
+Completed 200 OK in 97.9ms (Views: 94.3ms | ActiveRecord: 1.1ms)
+Started POST "/login" for 127.0.0.1 at 2016-01-07 14:01:17 +0100
+Processing by AccountController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/RMf134mfnxiDVutJ+xXNNVfR5U/sr8k3V1s+uFDe48=", "back_url"=>"http://localhost:3000/", "username"=>"admin", "password"=>"[FILTERED]", "login"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:01:17 UTC
+Redirected to http://localhost:3000/
+Completed 302 Found in 59.6ms (ActiveRecord: 33.1ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:01:17 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (8.3ms)
+Completed 200 OK in 46.6ms (Views: 31.7ms | ActiveRecord: 4.4ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:01:30 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (1.6ms)
+Completed 200 OK in 73.8ms (Views: 8.7ms | ActiveRecord: 3.4ms)
+Started GET "/login" for 127.0.0.1 at 2016-01-07 14:01:31 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered account/login.html.erb within layouts/base (1.2ms)
+Completed 200 OK in 20.9ms (Views: 18.3ms | ActiveRecord: 0.5ms)
+Started POST "/login" for 127.0.0.1 at 2016-01-07 14:01:33 +0100
+Processing by AccountController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z9XgYpidlK5WCq+9q5YVF7n6a0lSfJeVsPcLmD28O78=", "back_url"=>"http://localhost:3000/", "username"=>"admin", "password"=>"[FILTERED]", "login"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:01:33 UTC
+Redirected to http://localhost:3000/
+Completed 302 Found in 29.4ms (ActiveRecord: 20.9ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:01:33 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (5.9ms)
+Completed 200 OK in 27.4ms (Views: 18.1ms | ActiveRecord: 2.2ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:01:46 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (1.5ms)
+Completed 200 OK in 15.3ms (Views: 8.4ms | ActiveRecord: 1.2ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/login" for 127.0.0.1 at 2016-01-07 14:09:05 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered account/login.html.erb within layouts/base (27.2ms)
+Completed 200 OK in 178.2ms (Views: 85.9ms | ActiveRecord: 7.1ms)
+Started POST "/login" for 127.0.0.1 at 2016-01-07 14:09:08 +0100
+Processing by AccountController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CM7R/gIDeaRBXXW0LSWy4ucemqBq3i9ZGccgfOfAXfk=", "back_url"=>"http://localhost:3000/", "username"=>"admin", "password"=>"[FILTERED]", "login"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:09:08 UTC
+Redirected to http://localhost:3000/
+Completed 302 Found in 13.5ms (ActiveRecord: 5.1ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:09:08 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (18.0ms)
+Completed 200 OK in 103.2ms (Views: 37.9ms | ActiveRecord: 6.2ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:09:26 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://localhost:3000/mtr/login
+Completed 302 Found in 80.1ms (ActiveRecord: 1.7ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:09:26 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (7.5ms)
+Completed 200 OK in 25.7ms (Views: 18.3ms | ActiveRecord: 4.2ms)
+Started POST "/mtr/login" for 127.0.0.1 at 2016-01-07 14:09:41 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9XWtptqaNi2MMAGETf+I4gc1E6iAA4eh7j8lz1EsORU=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:09:41 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 48.1ms (ActiveRecord: 29.2ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:09:41 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (3.4ms)
+Completed 200 OK in 31.3ms (Views: 17.4ms | ActiveRecord: 5.1ms)
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:09:51 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://localhost:3000/mtr/login
+Completed 302 Found in 39.0ms (ActiveRecord: 27.2ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:09:51 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (15.0ms)
+Completed 200 OK in 32.8ms (Views: 25.5ms | ActiveRecord: 4.1ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started POST "/mtr/login" for 127.0.0.1 at 2016-01-07 14:11:05 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"i4toLPlpl2+VjSU8xm5bHewMBQ6dAVqNtMHJMxDm/Zo=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:11:06 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 138.8ms (ActiveRecord: 41.2ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:11:06 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (10.7ms)
+Completed 500 Internal Server Error in 91.2ms
+
+ActionView::Template::Error (undefined local variable or method `current_language' for #<#<Class:0x00000003c928b0>:0x00000003c91410>):
+    1: <!DOCTYPE html>
+    2: <html lang="<%= current_language %>">
+    3: <head>
+    4: <meta charset="utf-8" />
+    5: <title><%=h html_title %></title>
+  app/views/layouts/base.html.erb:2:in `_app_views_layouts_base_html_erb___4230348615456062794_31614740'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:15:02 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (63.5ms)
+Completed 200 OK in 207.6ms (Views: 102.8ms | ActiveRecord: 12.1ms)
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:15:04 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (3.7ms)
+Completed 500 Internal Server Error in 66.7ms
+
+ActionView::Template::Error (undefined local variable or method `current_language' for #<#<Class:0x0000000372d7a8>:0x0000000372b4a8>):
+    1: <!DOCTYPE html>
+    2: <html lang="<%= current_language %>">
+    3: <head>
+    4: <meta charset="utf-8" />
+    5: <title><%=h html_title %></title>
+  app/views/layouts/base.html.erb:2:in `_app_views_layouts_base_html_erb__4253891051968420421_32256040'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:15:17 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (4.9ms)
+Completed 200 OK in 204.7ms (Views: 84.2ms | ActiveRecord: 14.9ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:15:21 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (14.5ms)
+Completed 200 OK in 45.9ms (Views: 38.9ms | ActiveRecord: 2.0ms)
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:15:24 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (4.7ms)
+Completed 200 OK in 21.5ms (Views: 15.1ms | ActiveRecord: 0.8ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:15:27 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (3.0ms)
+Completed 200 OK in 20.3ms (Views: 11.9ms | ActiveRecord: 3.3ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:15:43 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (5.1ms)
+Completed 200 OK in 184.5ms (Views: 87.6ms | ActiveRecord: 7.6ms)
+Started POST "/logout" for 127.0.0.1 at 2016-01-07 14:15:47 +0100
+Processing by AccountController#logout as HTML
+  Parameters: {"authenticity_token"=>"9b2vI8VbzpZ824w7418mgDGSYg/rYxTrVx8weNzDm9I="}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/
+Completed 302 Found in 31.2ms (ActiveRecord: 10.4ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:15:47 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (8.4ms)
+Completed 200 OK in 111.0ms (Views: 33.0ms | ActiveRecord: 2.3ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:15:50 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (121.4ms)
+Completed 500 Internal Server Error in 133.3ms
+
+ActionView::Template::Error (undefined local variable or method `back_url_hidden_field_tag' for #<#<Class:0x000000030e8140>:0x000000030e63e0>):
+    10: 
+    11: <div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+    12:     <%= form_tag(mtr_signin_path) do %>
+    13:         <%= back_url_hidden_field_tag %>
+    14:         <div class="modal-dialog">
+    15:             <div class="modal-content">
+    16:                 <div class="modal-header">
+  plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb:13:in `block in _plugins_redmine_mtr_app_views_mtr_account_mtr_login_html_erb___1146821408337258007_25629380'
+  actionpack (3.2.22) lib/action_view/helpers/capture_helper.rb:40:in `block in capture'
+  actionpack (3.2.22) lib/action_view/helpers/capture_helper.rb:187:in `with_output_buffer'
+  actionpack (3.2.22) lib/action_view/helpers/capture_helper.rb:40:in `capture'
+  actionpack (3.2.22) lib/action_view/helpers/form_tag_helper.rb:663:in `form_tag_in_block'
+  actionpack (3.2.22) lib/action_view/helpers/form_tag_helper.rb:70:in `form_tag'
+  plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb:12:in `_plugins_redmine_mtr_app_views_mtr_account_mtr_login_html_erb___1146821408337258007_25629380'
+  actionpack (3.2.22) lib/action_view/template.rb:145:in `block in render'
+  activesupport (3.2.22) lib/active_support/notifications.rb:125:in `instrument'
+  actionpack (3.2.22) lib/action_view/template.rb:143:in `render'
+  actionpack (3.2.22) lib/action_view/renderer/template_renderer.rb:47:in `block (2 levels) in render_template'
+  actionpack (3.2.22) lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+  actionpack (3.2.22) lib/action_view/renderer/template_renderer.rb:46:in `block in render_template'
+  actionpack (3.2.22) lib/action_view/renderer/template_renderer.rb:54:in `render_with_layout'
+  actionpack (3.2.22) lib/action_view/renderer/template_renderer.rb:45:in `render_template'
+  actionpack (3.2.22) lib/action_view/renderer/template_renderer.rb:18:in `render'
+  actionpack (3.2.22) lib/action_view/renderer/renderer.rb:36:in `render_template'
+  actionpack (3.2.22) lib/action_view/renderer/renderer.rb:17:in `render'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:110:in `_render_template'
+  actionpack (3.2.22) lib/action_controller/metal/streaming.rb:225:in `_render_template'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:103:in `render_to_body'
+  actionpack (3.2.22) lib/action_controller/metal/renderers.rb:28:in `render_to_body'
+  actionpack (3.2.22) lib/action_controller/metal/compatibility.rb:50:in `render_to_body'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:88:in `render'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+  activesupport (3.2.22) lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+  /usr/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (3.2.22) lib/active_support/core_ext/benchmark.rb:5:in `ms'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:83:in `cleanup_view_runtime'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:39:in `render'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:458:in `_run__3690820986390338630__process_action__1529090504399501086__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__760505407458532901__call__4521350444976812263__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:18:34 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (55.4ms)
+Completed 200 OK in 262.0ms (Views: 94.3ms | ActiveRecord: 10.0ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:18:41 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (5.9ms)
+Completed 200 OK in 30.2ms (Views: 19.5ms | ActiveRecord: 0.6ms)
+Started POST "/mtr/login" for 127.0.0.1 at 2016-01-07 14:18:42 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ek1Zl8+3de3+C6V8t9sDP19hWmAKewfZ1yWHsoi+BeI=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:18:42 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 45.9ms (ActiveRecord: 18.5ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:18:42 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (3.9ms)
+Completed 200 OK in 108.8ms (Views: 98.2ms | ActiveRecord: 1.9ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:18:58 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: admin (id=1)
+Redirected to 
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 2.9ms (ActiveRecord: 0.2ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:18:58 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (3.5ms)
+Completed 200 OK in 40.5ms (Views: 24.8ms | ActiveRecord: 3.5ms)
+Started POST "/mtr/logout" for 127.0.0.1 at 2016-01-07 14:19:02 +0100
+Processing by MtrAccountController#mtr_logout as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y+TBr1PP+BlbMEzK0AUC+Bq0xMZwBpxKV5Rx1dSQLl8="}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/mtr/login
+Completed 302 Found in 15.8ms (ActiveRecord: 10.8ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:19:02 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (2.8ms)
+Completed 200 OK in 18.5ms (Views: 15.7ms | ActiveRecord: 0.5ms)
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:19:05 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://localhost:3000/mtr/login
+Completed 302 Found in 12.0ms (ActiveRecord: 5.7ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:19:05 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (4.4ms)
+Completed 200 OK in 15.9ms (Views: 12.5ms | ActiveRecord: 0.6ms)
+Started POST "/mtr/login" for 127.0.0.1 at 2016-01-07 14:19:45 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rMVIiAr+oQPTWjn1XdtSCEWcyJn3twi6eXru1pPsi0M=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:19:45 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 42.6ms (ActiveRecord: 32.7ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:19:45 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (6.5ms)
+Completed 200 OK in 34.7ms (Views: 20.9ms | ActiveRecord: 8.1ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:23:56 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (4.3ms)
+Completed 200 OK in 35.7ms (Views: 17.1ms | ActiveRecord: 13.5ms)
+Started GET "/admin" for 127.0.0.1 at 2016-01-07 14:24:01 +0100
+Processing by AdminController#index as HTML
+  Current user: admin (id=1)
+  Rendered admin/_menu.html.erb (4.4ms)
+  Rendered admin/index.html.erb within layouts/admin (65.2ms)
+  Rendered layouts/base.html.erb (15.3ms)
+Completed 200 OK in 156.7ms (Views: 148.5ms | ActiveRecord: 2.3ms)
+Started GET "/users" for 127.0.0.1 at 2016-01-07 14:24:06 +0100
+Processing by UsersController#index as HTML
+  Current user: admin (id=1)
+  Rendered users/index.html.erb within layouts/admin (22.9ms)
+  Rendered admin/_menu.html.erb (2.8ms)
+  Rendered layouts/base.html.erb (8.3ms)
+Completed 200 OK in 87.0ms (Views: 29.5ms | ActiveRecord: 24.9ms)
+Started GET "/settings" for 127.0.0.1 at 2016-01-07 14:24:19 +0100
+Processing by SettingsController#index as HTML
+  Current user: admin (id=1)
+  Rendered settings/_general.html.erb (12.8ms)
+  Rendered settings/_display.html.erb (82.3ms)
+  Rendered settings/_authentication.html.erb (9.5ms)
+  Rendered settings/_projects.html.erb (37.0ms)
+  Rendered queries/_columns.html.erb (8.5ms)
+  Rendered settings/_issues.html.erb (36.2ms)
+  Rendered settings/_notifications.html.erb (20.3ms)
+  Rendered settings/_mail_handler.html.erb (5.3ms)
+  Rendered settings/_repositories.html.erb (760.0ms)
+  Rendered common/_tabs.html.erb (985.3ms)
+  Rendered settings/edit.html.erb within layouts/admin (988.6ms)
+  Rendered admin/_menu.html.erb (3.5ms)
+  Rendered layouts/base.html.erb (11.1ms)
+Completed 200 OK in 1021.1ms (Views: 957.0ms | ActiveRecord: 54.2ms)
+Started GET "/admin/projects" for 127.0.0.1 at 2016-01-07 14:24:24 +0100
+Processing by AdminController#projects as HTML
+  Current user: admin (id=1)
+  Rendered admin/projects.html.erb within layouts/admin (11.4ms)
+  Rendered admin/_menu.html.erb (2.8ms)
+  Rendered layouts/base.html.erb (12.1ms)
+Completed 200 OK in 43.2ms (Views: 28.6ms | ActiveRecord: 9.1ms)
+Started GET "/auth_sources" for 127.0.0.1 at 2016-01-07 14:24:29 +0100
+Processing by AuthSourcesController#index as HTML
+  Current user: admin (id=1)
+  Rendered auth_sources/index.html.erb within layouts/admin (1.6ms)
+  Rendered admin/_menu.html.erb (2.8ms)
+  Rendered layouts/base.html.erb (9.7ms)
+Completed 200 OK in 44.5ms (Views: 17.5ms | ActiveRecord: 18.3ms)
+Started GET "/users" for 127.0.0.1 at 2016-01-07 14:24:34 +0100
+Processing by UsersController#index as HTML
+  Current user: admin (id=1)
+  Rendered users/index.html.erb within layouts/admin (8.4ms)
+  Rendered admin/_menu.html.erb (2.7ms)
+  Rendered layouts/base.html.erb (7.7ms)
+Completed 200 OK in 40.2ms (Views: 19.7ms | ActiveRecord: 4.6ms)
+Started GET "/groups" for 127.0.0.1 at 2016-01-07 14:24:41 +0100
+Processing by GroupsController#index as HTML
+  Current user: admin (id=1)
+  Rendered groups/index.html.erb within layouts/admin (4.6ms)
+  Rendered admin/_menu.html.erb (3.8ms)
+  Rendered layouts/base.html.erb (14.7ms)
+Completed 200 OK in 41.9ms (Views: 29.4ms | ActiveRecord: 6.2ms)
+Started GET "/roles" for 127.0.0.1 at 2016-01-07 14:24:42 +0100
+Processing by RolesController#index as HTML
+  Current user: admin (id=1)
+  Rendered roles/index.html.erb within layouts/admin (39.4ms)
+  Rendered admin/_menu.html.erb (9.3ms)
+  Rendered layouts/base.html.erb (10.3ms)
+Completed 200 OK in 73.5ms (Views: 64.9ms | ActiveRecord: 4.2ms)
+Started GET "/trackers" for 127.0.0.1 at 2016-01-07 14:24:44 +0100
+Processing by TrackersController#index as HTML
+  Current user: admin (id=1)
+  Rendered trackers/index.html.erb within layouts/admin (25.2ms)
+  Rendered admin/_menu.html.erb (4.9ms)
+  Rendered layouts/base.html.erb (11.7ms)
+Completed 200 OK in 55.8ms (Views: 48.7ms | ActiveRecord: 2.9ms)
+Started GET "/issue_statuses" for 127.0.0.1 at 2016-01-07 14:24:45 +0100
+Processing by IssueStatusesController#index as HTML
+  Current user: admin (id=1)
+  Rendered issue_statuses/index.html.erb within layouts/admin (20.5ms)
+  Rendered admin/_menu.html.erb (3.5ms)
+  Rendered layouts/base.html.erb (10.2ms)
+Completed 200 OK in 58.0ms (Views: 42.6ms | ActiveRecord: 3.5ms)
+Started GET "/admin" for 127.0.0.1 at 2016-01-07 14:24:55 +0100
+Processing by AdminController#index as HTML
+  Current user: admin (id=1)
+  Rendered admin/_menu.html.erb (7.6ms)
+  Rendered admin/index.html.erb within layouts/admin (8.3ms)
+  Rendered layouts/base.html.erb (10.4ms)
+Completed 200 OK in 25.2ms (Views: 20.2ms | ActiveRecord: 0.8ms)
+Started GET "/admin" for 127.0.0.1 at 2016-01-07 14:25:20 +0100
+Processing by AdminController#index as HTML
+  Current user: admin (id=1)
+  Rendered admin/_menu.html.erb (4.0ms)
+  Rendered admin/index.html.erb within layouts/admin (4.7ms)
+  Rendered layouts/base.html.erb (13.0ms)
+Completed 200 OK in 23.1ms (Views: 18.3ms | ActiveRecord: 1.4ms)
+Started GET "/settings" for 127.0.0.1 at 2016-01-07 14:25:23 +0100
+Processing by SettingsController#index as HTML
+  Current user: admin (id=1)
+  Rendered settings/_general.html.erb (4.2ms)
+  Rendered settings/_display.html.erb (4.1ms)
+  Rendered settings/_authentication.html.erb (4.0ms)
+  Rendered settings/_projects.html.erb (10.2ms)
+  Rendered queries/_columns.html.erb (5.8ms)
+  Rendered settings/_issues.html.erb (10.0ms)
+  Rendered settings/_notifications.html.erb (0.4ms)
+  Rendered settings/_mail_handler.html.erb (1.8ms)
+  Rendered settings/_repositories.html.erb (13.6ms)
+  Rendered common/_tabs.html.erb (60.4ms)
+  Rendered settings/edit.html.erb within layouts/admin (66.0ms)
+  Rendered admin/_menu.html.erb (3.3ms)
+  Rendered layouts/base.html.erb (14.9ms)
+Completed 200 OK in 89.3ms (Views: 84.9ms | ActiveRecord: 1.1ms)
+Started POST "/settings/edit?tab=authentication" for 127.0.0.1 at 2016-01-07 14:25:36 +0100
+Processing by SettingsController#edit as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KjkLsXRMp2yKwXwtLOGyxsDQHrxdy2Gu1o1nXKeCoyQ=", "settings"=>{"login_required"=>"0", "autologin"=>"365", "self_registration"=>"2", "unsubscribe"=>"1", "password_min_length"=>"[FILTERED]", "lost_password"=>"[FILTERED]", "openid"=>"0", "rest_api_enabled"=>"0", "jsonp_enabled"=>"0", "session_lifetime"=>"0", "session_timeout"=>"0"}, "commit"=>"Speichern", "tab"=>"authentication"}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/settings?tab=authentication
+Completed 302 Found in 112.2ms (ActiveRecord: 79.1ms)
+Started GET "/settings?tab=authentication" for 127.0.0.1 at 2016-01-07 14:25:36 +0100
+Processing by SettingsController#index as HTML
+  Parameters: {"tab"=>"authentication"}
+Settings cache cleared.
+  Current user: admin (id=1)
+  Rendered settings/_general.html.erb (19.9ms)
+  Rendered settings/_display.html.erb (9.7ms)
+  Rendered settings/_authentication.html.erb (9.0ms)
+  Rendered settings/_projects.html.erb (16.9ms)
+  Rendered queries/_columns.html.erb (15.3ms)
+  Rendered settings/_issues.html.erb (27.3ms)
+  Rendered settings/_notifications.html.erb (0.1ms)
+  Rendered settings/_mail_handler.html.erb (4.6ms)
+  Rendered settings/_repositories.html.erb (23.2ms)
+  Rendered common/_tabs.html.erb (115.1ms)
+  Rendered settings/edit.html.erb within layouts/admin (115.5ms)
+  Rendered admin/_menu.html.erb (3.0ms)
+  Rendered layouts/base.html.erb (14.0ms)
+Completed 200 OK in 220.0ms (Views: 118.6ms | ActiveRecord: 94.1ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:00 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (6.2ms)
+Completed 200 OK in 30.1ms (Views: 23.6ms | ActiveRecord: 1.0ms)
+Started POST "/logout" for 127.0.0.1 at 2016-01-07 14:26:02 +0100
+Processing by AccountController#logout as HTML
+  Parameters: {"authenticity_token"=>"KjkLsXRMp2yKwXwtLOGyxsDQHrxdy2Gu1o1nXKeCoyQ="}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/
+Completed 302 Found in 15.6ms (ActiveRecord: 9.7ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:02 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (1.8ms)
+Completed 200 OK in 25.0ms (Views: 15.7ms | ActiveRecord: 2.5ms)
+Started GET "/login" for 127.0.0.1 at 2016-01-07 14:26:03 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered account/login.html.erb within layouts/base (5.4ms)
+Completed 200 OK in 32.5ms (Views: 21.2ms | ActiveRecord: 4.3ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-01-07 14:26:08 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (5.0ms)
+Completed 200 OK in 26.4ms (Views: 23.5ms | ActiveRecord: 1.2ms)
+Started POST "/mtr/login" for 127.0.0.1 at 2016-01-07 14:26:10 +0100
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mlynHnbsJ3qaGRiueD+xaCQCb6+aObOkUAdvvPxMadE=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-01-07 13:26:10 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 30.8ms (ActiveRecord: 24.0ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-01-07 14:26:10 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (2.7ms)
+Completed 200 OK in 17.9ms (Views: 12.2ms | ActiveRecord: 1.1ms)
+Started GET "/mtr/" for 127.0.0.1 at 2016-01-07 14:26:24 +0100
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (2.5ms)
+Completed 200 OK in 72.3ms (Views: 21.2ms | ActiveRecord: 44.2ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:31 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (3.7ms)
+Completed 200 OK in 32.2ms (Views: 25.2ms | ActiveRecord: 2.6ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:51 +0100
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (61.7ms)
+Completed 200 OK in 225.8ms (Views: 107.1ms | ActiveRecord: 11.5ms)
+Started POST "/logout" for 127.0.0.1 at 2016-01-07 14:26:53 +0100
+Processing by AccountController#logout as HTML
+  Parameters: {"authenticity_token"=>"RBkJHvNlYDP0TfQw1nHI2pRz+jTVoysgN4FfmakMuwE="}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/
+Completed 302 Found in 33.4ms (ActiveRecord: 14.8ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:53 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (1.6ms)
+Completed 200 OK in 69.9ms (Views: 11.6ms | ActiveRecord: 1.8ms)
+Started GET "/" for 127.0.0.1 at 2016-01-07 14:26:55 +0100
+Processing by WelcomeController#index as HTML
+  Current user: anonymous
+  Rendered welcome/index.html.erb within layouts/base (1.5ms)
+Completed 200 OK in 29.1ms (Views: 14.2ms | ActiveRecord: 8.8ms)
+Started GET "/login" for 127.0.0.1 at 2016-01-07 14:26:56 +0100
+Processing by AccountController#login as HTML
+  Current user: anonymous
+  Rendered account/login.html.erb within layouts/base (20.5ms)
+Completed 200 OK in 43.7ms (Views: 32.2ms | ActiveRecord: 9.4ms)

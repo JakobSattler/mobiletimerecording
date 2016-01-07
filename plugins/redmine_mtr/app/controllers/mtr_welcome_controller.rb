@@ -4,7 +4,7 @@ class MtrWelcomeController < ApplicationController
   def mtr_index
     @news = News.latest User.current
     @projects = Project.latest User.current
-    if User.current.anonymous?
+    if !User.current.logged?
       redirect_back_or_default mtr_signin_url
     end
   end
