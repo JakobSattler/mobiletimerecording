@@ -1,0 +1,32 @@
+<div class="work-container row">
+  <!-- WORK START -->
+  <%= render :partial => "mtr_worktimes_row",
+             :locals => {:title => l(:mtr_work_start),
+                         :id => 'begin',
+                         :value => '{{day.begin_end_times[0].begin}}',
+                         :model => 'day.begin_end_times[0].begin',
+                         :error_msg => l(:mtr_worktime_err_empty),
+                         :id_int => 0
+             }
+  %>
+  <!-- WORK END -->
+  <%= render :partial => "mtr_worktimes_row",
+             :locals => {:title => l(:mtr_work_end),
+                         :id => 'end',
+                         :value => '{{day.begin_end_times[day.begin_end_times.length - 1].end}}',
+                         :model => 'day.begin_end_times[day.begin_end_times.length - 1].end',
+                         :error_msg => l(:mtr_worktime_err_empty),
+                         :id_int => 1
+             }
+  %>
+  <!-- WORK BREAK -->
+  <%= render :partial => "mtr_worktimes_row",
+             :locals => {:title => l(:mtr_break_duration),
+                         :id => 'break',
+                         :value => '{{day.break}}' ,
+                         :model => 'day.break',
+                         :error_msg => l(:mtr_worktime_err_empty),
+                         :id_int => 2
+             }
+  %>
+</div>

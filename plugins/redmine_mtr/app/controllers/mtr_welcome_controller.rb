@@ -7,6 +7,7 @@ class MtrWelcomeController < ApplicationController
     if !User.current.logged?
       redirect_back_or_default mtr_signin_url
     end
+
   end
 
   def robots

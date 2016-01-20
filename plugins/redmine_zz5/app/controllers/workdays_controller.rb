@@ -48,8 +48,12 @@ class WorkdaysController < ApplicationController
       @week = params[:week]
       @day  = params[:day]
 
-      @weekview = false
-
+      if @day.nil?
+        @weekview = true
+        @day = -1
+      else
+        @weekview = false
+      end
 
       if @user.zz5_user_pref.alternative_worktimes == 0
         @alternative_worktimes = false
@@ -99,10 +103,15 @@ class WorkdaysController < ApplicationController
     Rails.logger.info "year: " + @year.to_s
 
     #"wednesday" == Date.commercial(2015, 4, 3).strftime("%A").downcase
-    @curr_date = Date.commercial(@year.to_i, @week.to_i, @day.to_i)
-    @weekview = false
-    Rails.logger.info "zz5_workdays_controller, load_data, no weekview"
-
+    if @day == -1
+      @curr_date = Date.commercial(@year.to_i, @week.to_i, 1)
+      @weekview = true
+      Rails.logger.info "zz5_workdays_controller, load_data, weekview"
+    else
+      @curr_date = Date.commercial(@year.to_i, @week.to_i, @day.to_i)
+      @weekview = false
+      Rails.logger.info "zz5_workdays_controller, load_data, no weekview"
+    end
 
     employment_data = Zz5Employment.where(:user_id => @user.id).order('start ASC').first
     Rails.logger.info "zz5_workdays_controller, load_data, employment_data: " + employment_data.start.beginning_of_week.to_s
@@ -124,8 +133,11 @@ class WorkdaysController < ApplicationController
       init_controller(from, to)
       @parent_projects = @zz5_work_period.get_parent_projects
 
-      @vacation = @zz5_work_period.get_vacation_entitlement_in_days(from + 1.days)
-
+      if @weekview
+        @vacation = @zz5_work_period.get_vacation_entitlement_in_days(to)
+      else
+        @vacation = @zz5_work_period.get_vacation_entitlement_in_days(from + 1.days)
+      end
 
       favorite_issues(@user.zz5_user_pref.favorite_tickets)
 

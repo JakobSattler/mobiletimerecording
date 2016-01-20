@@ -7,6 +7,8 @@
     <%= stylesheet_link_tag 'menu.css', :plugin => 'redmine_mtr' %>
 
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+    <%= javascript_include_tag "worktime.js", :plugin => 'redmine_mtr' %>
+
 <% end %>
 
 <div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
@@ -24,10 +26,9 @@
 
     <div id="page">
       <header>
-        <h1>My New Site</h1>
-        <a href="#" id="toggle-menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+        <a href="#" id="toggle-menu"><span class="glyphicon glyphicon-menu-hamburger" style="color: #C12E2A"></span></a>
       </header>
-
+      <%= render "mtr_workdays/mtr_show" %>
     </div>
 </div>
 

@@ -1,0 +1,7 @@
+
+de:
+  mtr_work_start: "Von"
+  mtr_work_end: "Bis"
+  mtr_break_duration: "Pause"
+
+  mtr_worktime_err_empty: "Ungültige Arbeitszeit"
