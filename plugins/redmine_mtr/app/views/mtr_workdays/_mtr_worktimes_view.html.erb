@@ -1,6 +1,6 @@
 <div class="work-container row">
   <!-- WORK START -->
-  <%= render :partial => "mtr_worktimes_row",
+  <%= render :partial => "mtr_workdays/mtr_worktimes_row",
              :locals => {:title => l(:mtr_work_start),
                          :id => 'begin',
                          :value => '{{day.begin_end_times[0].begin}}',
@@ -10,7 +10,7 @@
              }
   %>
   <!-- WORK END -->
-  <%= render :partial => "mtr_worktimes_row",
+  <%= render :partial => "mtr_workdays/mtr_worktimes_row",
              :locals => {:title => l(:mtr_work_end),
                          :id => 'end',
                          :value => '{{day.begin_end_times[day.begin_end_times.length - 1].end}}',
@@ -20,7 +20,7 @@
              }
   %>
   <!-- WORK BREAK -->
-  <%= render :partial => "mtr_worktimes_row",
+  <%= render :partial => "mtr_workdays/mtr_worktimes_row",
              :locals => {:title => l(:mtr_break_duration),
                          :id => 'break',
                          :value => '{{day.break}}' ,

@@ -40,7 +40,7 @@ class MtrWorkdaysController < ApplicationController
   end
 
   # show the workday input page
-  def show
+  def mtr_show
     #Rails.logger.info "WorkdayController, show"
     if User.current.allowed_to?(:view_zz5, nil, :global => true)
       @user = User.current
@@ -48,12 +48,10 @@ class MtrWorkdaysController < ApplicationController
       @week = params[:week]
       @day  = params[:day]
 
-      if @day.nil?
-        @weekview = true
-        @day = -1
-      else
-        @weekview = false
-      end
+      @date = params[:date]
+      Rails.logger.info "@year: " + @date.to_s
+
+      @weekview = false
 
       if @user.zz5_user_pref.alternative_worktimes == 0
         @alternative_worktimes = false

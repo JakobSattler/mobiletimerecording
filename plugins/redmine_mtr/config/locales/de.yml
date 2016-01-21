@@ -3,5 +3,8 @@ de:
   mtr_work_start: "Von"
   mtr_work_end: "Bis"
   mtr_break_duration: "Pause"
+  mtr_actual_time: "Ist"
+  mtr_target_time: "Soll"
+  mtr_time_difference: "Differenz"
 
   mtr_worktime_err_empty: "Ungültige Arbeitszeit"

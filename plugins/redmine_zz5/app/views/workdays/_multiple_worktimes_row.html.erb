@@ -1,0 +1,74 @@
+<div class="worktimes-row" ng-repeat="row in days[0].begin_end_times track by $index">
+  <div class="begin-times">
+      <div class="time-title"><%= l(:zz5_come_in) %>
+      </div>
+      <div class="times">
+        <div class="time-column">
+          <div ng-class="isWeekend('{{days[0].date}}') ? 'time-data-container-weekend' : 'time-data-container'">
+            <div class="zz5-time-entry">
+              <div class="te-middle">
+                <input class="time-input" ng-disabled="setDisabled('{{days[0].id}}_begin', row.begin)" id="{{days[0].id}}_begin"
+                       ng-model="row.begin"
+                       ng-change="calculateMultipleActualHours(days[0]); calcDifference(days[0]); checkAbsenceTime(days[0]); checkWorkedHours(row);"
+                       ng-focus="hasFocus(); old_begin = row.begin; old_end = row.end; old_break = days[0].break;"
+                       ng-blur="lostFocus(); checkEndTime(row); checkWorkedHours(row); saveMultipleWorktime(days[0], $index, old_begin, old_end, old_break);"
+                       tabindex="{{computeTabindex(days[0].id, <%=id_int%>) + 1}}"
+                       size="7" maxlength="5" type="text" autocomplete="off" placeholder="00:00" time-entry-field="{show24Hours: true, defaultTime: '09:00:00'}">
+              </div>
+              <div class="te-right">
+                <img class="img-exclamation" title="<%= error_msg %>" ng-show="validateMultipleBeginEndTimes(days[0], 'begin', $index)" src="/plugin_assets/redmine_zz5/images/error.png" onMouseOut="this.title.hide"  onMouseOver="this.title">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="end-times">
+      <div class="time-title"><%= l(:zz5_leave) %>
+      </div>
+      <div class="times end">
+        <div class="time-column">
+          <div ng-class="isWeekend('{{days[0].date}}') ? 'time-data-container-weekend' : 'time-data-container'">
+            <div class="zz5-time-entry">
+              <div class="te-middle">
+                <input class="time-input" ng-disabled="setDisabled('{{days[0].id}}_end', row.begin)" id="{{days[0].id}}_end"
+                       ng-model="row.end"
+                       ng-change="calculateMultipleActualHours(days[0]); calcDifference(days[0]); checkAbsenceTime(days[0]); checkWorkedHours(row);"
+                       ng-focus="hasFocus(); old_begin = row.begin; old_end = row.end; old_break = days[0].break;"
+                       ng-blur="lostFocus(); checkBeginTime(row); checkWorkedHours(row); saveMultipleWorktime(days[0], $index, old_begin, old_end, old_break);"
+                       tabindex="{{computeTabindex(days[0].id, <%=id_int%>) + 1}}"
+                       size="7" maxlength="5" type="text" autocomplete="off" placeholder="00:00" time-entry-field="{show24Hours: true, defaultTime: '09:00:00'}">
+              </div>
+              <div class="te-right">
+                <img class="img-exclamation" title="<%= error_msg %>" ng-show="validateMultipleBeginEndTimes(days[0], 'end', $index)" src="/plugin_assets/redmine_zz5/images/error.png" onMouseOut="this.title.hide"  onMouseOver="this.title">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="worked-times">
+    <div class='time-title'><%= l(:zz5_worked) %>
+    </div>
+    <div class="times">
+      <div class="time-column">
+        <div ng-class="isWeekend('{{day.date}}') ? 'time-data-container-weekend' : 'time-data-container'" >
+          <div class="time-value">
+            <div class="time-middle">
+              <label id="{{day.id}}_worked" ng-bind="row.worked" class="time-value-label"></label>
+            </div>
+            <div class="time-right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="add-del-worktimes">
+    <!-- icon-del -->
+    <img class="icons-link icons-del" src="/plugin_assets/redmine_zz5/images/trash.png" alt="del" ng-show="!$last"
+         ng-click="removeWorktimesRow($index);">
+    <!-- icon-add -->
+    <img class="icons-link" src="/plugin_assets/redmine_zz5/images/add.png" alt="add" ng-show="$last" ng-click="addWorktimesRow()">
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<div class="work-container">
+  <!-- WORK START -->
+  <%= render :partial => "single_worktimes_row",
+             :locals => {:title => l(:zz5_work_start),
+                         :id => 'begin',
+                         :value => '{{day.begin_end_times[0].begin}}',
+                         :model => 'day.begin_end_times[0].begin',
+                         :error_msg => l(:zz5_worktime_err_empty),
+                         :id_int => 0
+             }
+  %>
+  <!-- WORK END -->
+  <%= render :partial => "single_worktimes_row",
+             :locals => {:title => l(:zz5_work_end),
+                         :id => 'end',
+                         :value => '{{day.begin_end_times[day.begin_end_times.length - 1].end}}',
+                         :model => 'day.begin_end_times[day.begin_end_times.length - 1].end',
+                         :error_msg => l(:zz5_worktime_err_empty),
+                         :id_int => 1
+             }
+  %>
+  <!-- WORK BREAK -->
+  <%= render :partial => "single_worktimes_row",
+             :locals => {:title => l(:zz5_break_duration),
+                         :id => 'break',
+                         :value => '{{day.break}}' ,
+                         :model => 'day.break',
+                         :error_msg => l(:zz5_worktime_err_empty),
+                         :id_int => 2
+             }
+  %>
+
+
+  <!-- SEPERATOR-->
+  <div class="seperator" ng-if="weekview"></div>
+
+  <!-- ACTUAL TIME -->
+  <%= render :partial => "times_row",
+             :locals => {:title => l(:zz5_actual_time),
+                         :id => 'zz5_actual_time',
+                         :message => l(:zz5_actual_sum),
+                         :bind => 'day.actual_hours',
+                         :sumModel => "sums.actual",
+                         :show => '',
+                         :warningType => 'day.actual_warning',
+                         :warningMsg => l(:zz5_wrong_work_time)
+             }
+  %>
+
+  <!-- PROJECT TIMES -->
+  <%= render :partial => "times_row",
+             :locals => {:title => l(:zz5_project_time),
+                         :id => 'zz5_project_time',
+                         :message => l(:zz5_project_sum),
+                         :bind => 'day.project_hours',
+                         :sumModel => "sums.project",
+                         :show => '',
+                         :warningType => 'day.project_warning',
+                         :warningMsg => l(:zz5_wrong_project_time)
+             }
+  %>
+  <!-- TARGET TIMES -->
+  <%= render :partial => "times_row",
+             :locals => {:title => l(:zz5_target_time),
+                         :id => 'zz5_target_time',
+                         :message => l(:zz5_target_sum),
+                         :bind => 'day.target',
+                         :sumModel => "sums.target",
+                         :show => 'false',
+                         :warningType => 'dummy',
+                         :warningMsg => ""
+             }
+  %>
+  <!-- TIME DIFFERENCES-->
+  <%= render :partial => "times_row",
+             :locals => {:title => l(:zz5_time_difference),
+                         :id => 'zz5_time_difference',
+                         :message => l(:zz5_weekly_time_difference),
+                         :bind => 'day.time_difference',
+                         :sumModel => "sums.difference",
+                         :show => 'false',
+                         :warningType => 'dummy',
+                         :warningMsg => ""
+             }
+  %>
+
+  <!-- TIME CARRY (FOR DAILY VIEW) -->
+  <% if !@weekview %>
+      <%= render :partial => "times_row",
+                 :locals => {:title => l(:zz5_time_carry),
+                             :id => 'zz5_time_carry',
+                             :message => l(:zz5_time_carry),
+                             :bind => 'day.time_carry',
+                             :sumModel => "carry_sum",
+                             :show => 'false',
+                             :warningType => 'dummy',
+                             :warningMsg => ""
+                 }
+      %>
+  <% end %>
+</div>
+<!-- ABSENCES -->
+<div class="absences-container">
+  <!-- ABSENCE REASON -->
+  <%= render :partial => "absence_reason_row",
+             :locals => {:title => l(:zz5_absence_reason),
+                         :id => 'absence_reason',
+                         :value => '{{day.id}}_zz5_absence_reason'
+             }
+  %>
+  <!-- ABSENCE TIME -->
+  <%= render :partial => "absence_duration_row",
+             :locals => {:title => l(:zz5_absence_duration),
+                         :id => 'absence_time',
+                         :value => '{{day.absence_time}}',
+                         :bind => 'day.absence_time',
+                         :calcActualHours => "calculateSingleActualHours"
+             }
+  %>
+
+  <!-- VACATION ENTITLEMENT -->
+  <% if !@weekview %>
+      <%= render :partial => "times_row",
+                 :locals => {:title => l(:zz5_vacation),
+                             :id => 'vac_entitlement',
+                             :message => l(:zz5_vacation),
+                             :bind => 'misc_data.vac_entitlement',
+                             :sumModel => "carry_sum",
+                             :show => 'false',
+                             :warningType => 'dummy',
+                             :warningMsg => ""
+                 }
+      %>
+  <% end %>
+</div>

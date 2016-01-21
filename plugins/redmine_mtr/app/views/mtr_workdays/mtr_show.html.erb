@@ -1,0 +1,34 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'bootstrap.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'bootstrap-theme.min.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
+    <%= stylesheet_link_tag 'menu.css', :plugin => 'redmine_mtr' %>
+
+    <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
+    <%= javascript_include_tag "worktime.js", :plugin => 'redmine_mtr' %>
+
+<% end %>
+<div class="modal show" aria-hidden="true">
+  <center>
+    <div style="padding-bottom: 3px">
+    <button type="button" class="btn btn-default" aria-label="Center Align" value="dec" onClick="changeDate(this)">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </button>
+      <%= label_tag 'date', params[:date], :id => 'date'%>
+    <button type="button" class="btn btn-default" aria-label="Left Align" value="inc" onClick="changeDate(this)">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </button>
+    </div>
+  </center>
+  <div class="work-absences-container">
+    <%= render :partial => "mtr_workdays/mtr_worktimes_view", :content_type => "text/html"%>
+  </div>
+
+  <script>
+      var data = {"year": <%= @year %>, "week": <%= @week %>, "day": <%= @day %>}
+
+
+  </script>
+</div>

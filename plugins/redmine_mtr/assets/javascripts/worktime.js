@@ -1,6 +1,9 @@
 /**
  * Created by apus on 20.01.16.
  */
+window.onload=function() {
+    document.getElementById("date").textContent = new Date().toLocaleDateString();
+}
 
 function changeDate(button){
         var actDateStr = document.getElementById("date").textContent;

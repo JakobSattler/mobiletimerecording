@@ -1,0 +1,35 @@
+<div class="worktimes-row <%= id %>">
+    <div class="time-title"><%= title %>
+    </div>
+  <div class="times">
+    <div class="time-column" ng-repeat="day in days track by day.id" >
+        <div ng-class="isWeekend('{{day.date}}') ? 'time-data-container-weekend' : 'time-data-container'">
+           <div class="zz5-time-entry">
+                <div class="te-middle">
+                    <input class="time-input" ng-disabled="setDisabled('{{day.id}}_<%=id%>', day.begin_end_times[0].begin)" id="{{day.id}}_<%=id%>"
+                           ng-model="<%= model %>"
+                           ng-change="updateSingleEndTime(day, '<%=id%>');
+                                    calculateSingleActualHours(day);
+                                    calcDifference(day);
+                                    checkAbsenceTime(day);"
+                           ng-focus="hasFocus(); old_begin = day.begin_end_times[0].begin; old_end = day.begin_end_times[day.begin_end_times.length-1].end; old_break = day.break; setBeginEndTime(day, '<%= id %>');"
+                           ng-blur="lostFocus(); saveSingleWorktime(day, '<%= id %>', old_begin, old_end, old_break);"
+                           tabindex="{{computeTabindex(day.id, <%=id_int%>) + 1}}"
+                           size="7" maxlength="5" type="text" autocomplete="off" placeholder="00:00" time-entry-field="{show24Hours: true, defaultTime: '09:00:00'}">
+                </div>
+                <div class="te-right">
+                    <img class="img-exclamation" title="<%= error_msg %>" ng-show="validateBeginEndTimes(day, '<%= id %>', 0)" src="/plugin_assets/redmine_zz5/images/error.png" onMouseOut="this.title.hide"  onMouseOver="this.title">
+                </div>
+           </div>
+        </div>
+    </div>
+  </div>
+  <div class="time-column sum-column" ng-if="weekview">
+    <div class="time-data-container">
+      <div class="time-value" style="width: 100%">
+        <div class="time-sum">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

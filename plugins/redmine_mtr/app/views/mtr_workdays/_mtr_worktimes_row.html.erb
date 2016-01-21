@@ -1,7 +1,7 @@
 
 <div class="col-xs-4 form-group">
-  <label><%= title %></label>
-  <input type="time" ng-disabled="setDisabled('{{day.id}}_<%=id%>', day.begin_end_times[0].begin)" id="{{day.id}}_<%=id%>"
+  <label class="col-xs-12"><%=title %></label>
+  <input class="col-xs-12" type="time" ng-disabled="setDisabled('{{day.id}}_<%=id%>', day.begin_end_times[0].begin)" id="{{day.id}}_<%=id%>"
          ng-model="<%= model %>"
          ng-change="updateSingleEndTime(day, '<%=id%>');
                                     calculateSingleActualHours(day);
