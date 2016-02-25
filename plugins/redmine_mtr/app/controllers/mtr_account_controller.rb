@@ -175,12 +175,14 @@ class MtrAccountController < ApplicationController
 
     if user.nil?
       invalid_credentials
+    elsif !user.allowed_to?(:view_zz5, nil, :global => true)
+      flash[:success] = l(:notice_not_authorized)
     elsif user.new_record?
       onthefly_creation_failed(user, {:login => user.login, :auth_source_id => user.auth_source_id })
     else
       # Valid user
       if user.active?
-        successful_authentication(user)
+          successful_authentication(user)
       else
         handle_inactive_user(user)
       end

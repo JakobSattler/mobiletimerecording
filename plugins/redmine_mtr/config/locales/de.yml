@@ -1,5 +1,6 @@
 
 de:
+  #worktime titles
   mtr_work_start: "Von"
   mtr_work_end: "Bis"
   mtr_break_duration: "Pause"
@@ -7,4 +8,8 @@ de:
   mtr_target_time: "Soll"
   mtr_time_difference: "Differenz"
 
+  #worktime errors
   mtr_worktime_err_empty: "Ungültige Arbeitszeit"
+
+  #account
+  account_no_zz5: "Nicht zum Zugriff berechtigt."
