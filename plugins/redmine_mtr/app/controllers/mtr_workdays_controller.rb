@@ -46,24 +46,48 @@ class MtrWorkdaysController < ApplicationController
       @user = User.current
       @year = params[:year]
       @week = params[:week]
+      @month = params[:month]
       @day  = params[:day]
-      @end = params[:end]
+      @date = nil
+
       @begin = params[:begin]
+      @end = params[:end]
       @break = params[:break]
-      @date = params[:date]
+
+
+      if @year == nil
+        Rails.logger.info "today: " + Date.today.to_s
+        @date = Date.today
+        params[:year] = @date.year.to_s
+        params[:month] = @date.mon.to_s
+        params[:day] = @date.mday.to_s
+      else
+        @date = Date.new(@year.to_i, @month.to_i, @day.to_i);
+      end
+      params[:date_label] = @date.strftime("%d.%m.%Y")
+      params[:date] = "#{@date.mday}.#{@date.mon}.#{@date.year}"
+
+
 
       Rails.logger.info "@date: " + @date.to_s
       Rails.logger.info "@year: " + @year.to_s
+      Rails.logger.info "@month: " + @month.to_s
       Rails.logger.info "@week: " + @week.to_s
       Rails.logger.info "@day: " + @day.to_s
       Rails.logger.info "@begin: " + @begin.to_s
       Rails.logger.info "@end: " + @end.to_s
       Rails.logger.info "@break: " + @break.to_s
 
-      params[:begin] = '01:00'
+      zz5_workdays_id = Zz5Workday.where("user_id = ? and date = ?", @user.id, @date).first.id
+      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workdays_id).first
 
-
-
+      if zz5_begin_end_times != nil
+        params[:begin] = zz5_begin_end_times.begin.strftime("%H:%M")
+        params[:end] = zz5_begin_end_times.end.strftime("%H:%M")
+      else
+        params[:begin] = "00:00"
+        params[:end] = "00:00"
+      end
     else
       render_403
     end

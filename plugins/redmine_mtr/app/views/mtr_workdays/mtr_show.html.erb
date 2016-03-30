@@ -23,10 +23,11 @@
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
       </button>
         <%= label_tag 'date_label', params[:date_label], :id => 'date_label', :name => 'date_label'%>
-        <input type="hidden" id="date" name="date"/>
-        <input type="hidden" id="year" name="year"/>
-        <input type="hidden" id="week" name="week"/>
-        <input type="hidden" id="day" name="day"/>
+        <%= hidden_field_tag 'date', params[:date], :id => 'date', :name => 'date'%>
+        <%= hidden_field_tag 'year', params[:year], :id => 'year', :name => 'year'%>
+        <%= hidden_field_tag 'week', params[:week], :id => 'week', :name => 'week'%>
+        <%= hidden_field_tag 'month', params[:month], :id => 'month', :name => 'month'%>
+        <%= hidden_field_tag 'day', params[:day], :id => 'day', :name => 'day'%>
       <button type="button" class="btn btn-default" aria-label="Left Align" value="inc" onClick="changeDate(this)">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       </button>

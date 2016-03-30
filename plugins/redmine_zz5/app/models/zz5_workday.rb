@@ -4,4 +4,5 @@ class Zz5Workday < ActiveRecord::Base
   belongs_to :user
   has_many :zz5_absences
   
+
 end
