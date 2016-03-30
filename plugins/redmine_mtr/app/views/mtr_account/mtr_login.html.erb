@@ -9,39 +9,41 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
-    <meta name="viewport" content="width=20, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
 
 
 <% end %>
-<div id="login-form" class="col-sm-12 modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true" width="100%">
     <%= form_tag(mtr_signin_path) do %>
         <%= back_url_hidden_field_tag %>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="container col-md-12">Login</h1>
+        <div class="modal-dialog" width="100%">
+            <div class="modal-content" width="100$">
+                <div class="modal-header" width="100%">
+                    <h1 class="container" width="80%">Login</h1>
+                    <h5 class="container" width="80%">Mobile Time Recording</h5>
                 </div>
-                <div class="modal-body form-group">
-                    <div style="padding-top: 5px;">
+                <div class="modal-body form-group" width="100%">
+                    <div style="padding-top: 5px;" width="80%">
                         <%= text_field_tag 'username', params[:username], :tabindex => '1', :class => 'form-control input-lg',
-                                           :class => 'login-input', :style => 'width: 100%'%>
+                                           :class => 'login-input', :style => 'width: 80%'%>
                     </div>
-                    <div style="padding-top: 5px;">
+                    <div style="padding-top: 5px;" width="80%">
                         <%= password_field_tag 'password', nil, :tabindex => '2', :class => 'form-control input-lg',
-                                               :class => 'login-input', :style => 'width: 100%'%>
+                                               :class => 'login-input', :style => 'width: 80%'%>
                     </div>
-                    <div style="padding-top: 5px;">
+                    <div style="padding-top: 5px;" width="80%">
                         <input type="submit" style="height: 38px" class="form-control input-lg btn btn-danger"
-                               name="loginMtr" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
+                               name="loginMtr" value="<%=l(:button_login)%> &#187;" tabindex="5" width="80%"/>
                     </div>
                     <% flash.each do |key, value| %>
-                    <div style="padding-top: 5px;">
-                      <label class="mtr-error"><%= value %></label>
-                    </div>
-                  </div>
+                      <div style="padding-top: 5px;">
+                        <label class="mtr-error"><%= value %></label>
+                      </div>
                     <% end %>
+                  </div>
+
               </div>
           </div>
         </div>

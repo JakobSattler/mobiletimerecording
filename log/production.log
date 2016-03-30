@@ -73388,3 +73388,1886 @@ Processing by MtrWorkdaysController#mtr_show as HTML
 @break: 
   Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.2ms)
 Completed 200 OK in 25.7ms (Views: 18.4ms | ActiveRecord: 1.3ms)
+Started POST "/zz5/save_absence" for 127.0.0.1 at 2016-03-30 19:21:43 +0200
+Processing by WorkdaysController#save_absence as JSON
+  Parameters: {"date"=>"01-04-2016", "absence_time"=>"07:42", "absence_reason"=>1}
+  Current user: admin (id=1)
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_times, get_break_per_day_in_hours: 00:00
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.5
+initialize_my, hours_missing: 16.5
+calculate_carries, old_carry_forward: -545640
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -545640
+calculate_carries, new_carry_forward: -545640
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+absence type: #<Zz5AbsenceType:0x000000036e1538>
+create_or_update_absence_for_week_day_and_type started
+create_or_update_absence_for_week_day_and_type, absence_t  ype.id: 1
+create_or_update_absence_for_week_day_and_type, update_absence: 27720
+create_absence_for_week_day_and_type finished
+calculate_carries, old_carry_forward: -545640
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 27720
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -517920
+calculate_carries, new_carry_forward: -517920
+calculate_carries, update_carry: 27720
+saveWorkWeek started
+saveWorkWeek finished
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.1ms)
+Completed 200 OK in 432.2ms (Views: 0.9ms | ActiveRecord: 357.0ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/zz5/2016/13/5" for 127.0.0.1 at 2016-03-30 19:23:53 +0200
+Processing by WorkdaysController#show as HTML
+  Parameters: {"year"=>"2016", "week"=>"13", "day"=>"5"}
+  Current user: admin (id=1)
+@weekview: false
+@alt_view: false
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (3.0ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.2ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.7ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_reason_row.html.erb (11.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_duration_row.html.erb (0.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_view.html.erb (27.2ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_favorite_issue_row.html.erb (1.5ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/show.html.erb within layouts/base (86.0ms)
+Completed 200 OK in 409.7ms (Views: 234.4ms | ActiveRecord: 20.7ms)
+Started POST "/zz5/load_data" for 127.0.0.1 at 2016-03-30 19:23:54 +0200
+Processing by WorkdaysController#load_data as JSON
+  Parameters: {"year"=>2016, "week"=>13, "day"=>5}
+  Current user: admin (id=1)
+year: 2016
+zz5_workdays_controller, load_data, no weekview
+zz5_workdays_controller, load_data, employment_data: 2015-10-05
+zz5_workdays_controller, load_data, curr_date: 2016-04-01
+workdays_controller, load_data from: 2016-04-01
+workdays_controller, load_data to: 0
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_times, get_break_per_day_in_hours: 00:00
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.5
+initialize_my, hours_missing: 16.5
+calculate_carries, old_carry_forward: -517920
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 27720
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -517920
+calculate_carries, new_carry_forward: -517920
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+append root project: Test
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+get_employment, employment start: 2015-10-11
+get_employment, employment: 138600.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_data.json.erb (14.1ms)
+Completed 200 OK in 279.4ms (Views: 14.8ms | ActiveRecord: 29.3ms)
+Started POST "/zz5/save_single_worktime" for 127.0.0.1 at 2016-03-30 19:24:00 +0200
+Processing by WorkdaysController#save_single_worktime as JSON
+  Parameters: {"date"=>"01-04-2016", "id"=>"7", "type"=>"break", "begin"=>"01:00", "end"=>"01:10", "break"=>"00:10"}
+  Current user: admin (id=1)
+save_day, Begin: 01:00
+save_day, End: 01:10
+save_day, Date: 01-04-2016
+save_day, ID: 7
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_times, get_break_per_day_in_hours: 00:00
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.5
+initialize_my, hours_missing: 16.5
+calculate_carries, old_carry_forward: -517920
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 27720
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -517920
+calculate_carries, new_carry_forward: -517920
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+set_single_workday_data started
+set_single_workday_data, type: break
+update_break_time, old_break_in_s: 0
+update_break_time, new_break_in_s: 600
+update_break_time, diff: 600
+update_break_time, be_times.size: 1
+calculate_carries, old_carry_forward: -517920
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:40:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 27720
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -517920
+calculate_carries, new_carry_forward: -517920
+calculate_carries, update_carry: 0
+saveWorkWeek started
+saveWorkWeek finished
+save_day, @carry: -143:52
+save_day, @be_id: 1
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.6ms)
+Completed 200 OK in 108.4ms (Views: 1.9ms | ActiveRecord: 43.3ms)
+Started POST "/zz5/save_absence" for 127.0.0.1 at 2016-03-30 19:24:07 +0200
+Processing by WorkdaysController#save_absence as JSON
+  Parameters: {"date"=>"01-04-2016", "absence_time"=>"", "absence_reason"=>""}
+  Current user: admin (id=1)
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:40:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:10
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:40:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:10:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:40:00 +0100
+initialize_my, wd: 16.5
+initialize_my, hours_missing: 16.5
+calculate_carries, old_carry_forward: -517920
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:40:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 27720
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -517920
+calculate_carries, new_carry_forward: -517920
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+absence type: 
+create_or_update_absence_for_week_day_and_type started
+create_absence_for_week_day_and_type finished
+calculate_carries, old_carry_forward: -517920
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:40:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -545640
+calculate_carries, new_carry_forward: -545640
+calculate_carries, update_carry: -27720
+saveWorkWeek started
+saveWorkWeek finished
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.1ms)
+Completed 200 OK in 125.2ms (Views: 0.9ms | ActiveRecord: 63.9ms)
+Started POST "/zz5/save_single_worktime" for 127.0.0.1 at 2016-03-30 19:24:12 +0200
+Processing by WorkdaysController#save_single_worktime as JSON
+  Parameters: {"date"=>"01-04-2016", "id"=>"1", "type"=>"end", "begin"=>"01:00", "end"=>"17:10", "break"=>"00:10"}
+  Current user: admin (id=1)
+save_day, Begin: 01:00
+save_day, End: 17:10
+save_day, Date: 01-04-2016
+save_day, ID: 1
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:40:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:10
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:40:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:10:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:40:00 +0100
+initialize_my, wd: 16.5
+initialize_my, hours_missing: 16.5
+calculate_carries, old_carry_forward: -545640
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:40:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 59400.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 59400.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -545640
+calculate_carries, new_carry_forward: -545640
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+set_single_workday_data started
+set_single_workday_data, type: end
+update_begin_time, date: 01-04-2016 user id: 1
+get_break_per_day_in_seconds, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_seconds, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_seconds, break_seconds: 600
+get_break_per_day_in_seconds, end: 2000-01-01 17:40:00 +0100
+update_end_time, new_end_in_s: 61800
+update_end_time, old_end_in_s: 63600
+update_end_time, update_time: -1800
+update_end_time, the end time has decreased!
+update_end_time, last_worked_time_in_s: 59400
+update_end_time, update_time: 1800
+update_end_time, old_end_in_s: 63600
+update_end_time, last_break: 0
+calculate_carries, old_carry_forward: -545640
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:10:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: -1800
+saveWorkWeek started
+saveWorkWeek finished
+save_day, @carry: -152:04
+save_day, @be_id: 1
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.1ms)
+Completed 200 OK in 127.0ms (Views: 0.8ms | ActiveRecord: 55.0ms)
+Started POST "/zz5/save_single_worktime" for 127.0.0.1 at 2016-03-30 19:24:15 +0200
+Processing by WorkdaysController#save_single_worktime as JSON
+  Parameters: {"date"=>"01-04-2016", "id"=>"1", "type"=>"break", "begin"=>"01:00", "end"=>"01:30", "break"=>"00:30"}
+  Current user: admin (id=1)
+save_day, Begin: 01:00
+save_day, End: 01:30
+save_day, Date: 01-04-2016
+save_day, ID: 1
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:10:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:10
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_hours, break_seconds: 600
+get_break_per_day_in_hours, end: 2000-01-01 17:10:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:10:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:10:00 +0100
+initialize_my, wd: 16.0
+initialize_my, hours_missing: 16.0
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:10:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:10:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+set_single_workday_data started
+set_single_workday_data, type: break
+get_break_per_day_in_seconds, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_seconds, next begin: 2000-01-01 01:10:00 +0100
+get_break_per_day_in_seconds, break_seconds: 600
+get_break_per_day_in_seconds, end: 2000-01-01 17:10:00 +0100
+update_break_time, old_break_in_s: 600
+update_break_time, new_break_in_s: 1800
+update_break_time, diff: 1200
+update_break_time, be_times.size: 2
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:30:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+saveWorkWeek started
+saveWorkWeek finished
+save_day, @carry: -152:04
+save_day, @be_id: 1
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.1ms)
+Completed 200 OK in 76.8ms (Views: 0.8ms | ActiveRecord: 14.8ms)
+Started POST "/zz5/save_single_worktime" for 127.0.0.1 at 2016-03-30 19:24:22 +0200
+Processing by WorkdaysController#save_single_worktime as JSON
+  Parameters: {"date"=>"01-04-2016", "id"=>"1", "type"=>"end", "begin"=>"01:00", "end"=>"17:30", "break"=>"00:30"}
+  Current user: admin (id=1)
+save_day, Begin: 01:00
+save_day, End: 17:30
+save_day, Date: 01-04-2016
+save_day, ID: 1
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:30
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:30:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.0
+initialize_my, hours_missing: 16.0
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:30:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+set_single_workday_data started
+set_single_workday_data, type: end
+update_begin_time, date: 01-04-2016 user id: 1
+get_break_per_day_in_seconds, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_seconds, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_seconds, break_seconds: 1800
+get_break_per_day_in_seconds, end: 2000-01-01 17:30:00 +0100
+update_end_time, new_end_in_s: 63000
+update_end_time, old_end_in_s: 63000
+update_end_time, update_time: 0
+update_end_time, the end time has decreased!
+update_end_time, last_worked_time_in_s: 57600
+update_end_time, update_time: 0
+update_end_time, old_end_in_s: 63000
+update_end_time, last_break: 0
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:30:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+saveWorkWeek started
+saveWorkWeek finished
+save_day, @carry: -152:04
+save_day, @be_id: 1
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_saved_msg.json.erb (0.1ms)
+Completed 200 OK in 68.7ms (Views: 0.7ms | ActiveRecord: 10.1ms)
+Started GET "/zz5/2016/13/5" for 127.0.0.1 at 2016-03-30 19:24:28 +0200
+Processing by WorkdaysController#show as HTML
+  Parameters: {"year"=>"2016", "week"=>"13", "day"=>"5"}
+  Current user: admin (id=1)
+@weekview: false
+@alt_view: false
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_reason_row.html.erb (1.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_duration_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_view.html.erb (11.8ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_favorite_issue_row.html.erb (0.2ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/show.html.erb within layouts/base (21.2ms)
+Completed 200 OK in 45.5ms (Views: 36.5ms | ActiveRecord: 1.7ms)
+Started POST "/zz5/load_data" for 127.0.0.1 at 2016-03-30 19:24:29 +0200
+Processing by WorkdaysController#load_data as JSON
+  Parameters: {"year"=>2016, "week"=>13, "day"=>5}
+  Current user: admin (id=1)
+year: 2016
+zz5_workdays_controller, load_data, no weekview
+zz5_workdays_controller, load_data, employment_data: 2015-10-05
+zz5_workdays_controller, load_data, curr_date: 2016-04-01
+workdays_controller, load_data from: 2016-04-01
+workdays_controller, load_data to: 0
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:30
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:30:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.0
+initialize_my, hours_missing: 16.0
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:30:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+append root project: Test
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+get_employment, employment start: 2015-10-11
+get_employment, employment: 138600.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_data.json.erb (6.1ms)
+Completed 200 OK in 70.0ms (Views: 6.1ms | ActiveRecord: 17.4ms)
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:24:32 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 13.0ms
+
+NameError (undefined local variable or method `zz5' for #<MtrWorkdaysController:0x007f83ed55c468>):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__1340891893434256292__process_action__1112357709958911703__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2580929068790129482__call__4584046618909959084__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:24:56 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 122.6ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2988820294507425647__process_action__4209909291819387261__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2577942829586953365__call__3111455407873103728__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:24:58 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 7.2ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2988820294507425647__process_action__4209909291819387261__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2577942829586953365__call__3111455407873103728__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:24:58 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 5.3ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2988820294507425647__process_action__4209909291819387261__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2577942829586953365__call__3111455407873103728__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:24:59 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 5.3ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2988820294507425647__process_action__4209909291819387261__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2577942829586953365__call__3111455407873103728__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=01%3A00&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 19:25:00 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"01:00", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 01:00
+@end: 17:30
+@break: 
+Completed 500 Internal Server Error in 6.1ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2988820294507425647__process_action__4209909291819387261__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__2577942829586953365__call__3111455407873103728__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Started GET "/zz5/2016/13/5" for 127.0.0.1 at 2016-03-30 19:27:51 +0200
+Processing by WorkdaysController#show as HTML
+  Parameters: {"year"=>"2016", "week"=>"13", "day"=>"5"}
+  Current user: admin (id=1)
+@weekview: false
+@alt_view: false
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (1.0ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_reason_row.html.erb (9.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_absence_duration_row.html.erb (0.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_times_row.html.erb (0.1ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_single_worktimes_view.html.erb (22.9ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/_favorite_issue_row.html.erb (1.2ms)
+  Rendered plugins/redmine_zz5/app/views/workdays/show.html.erb within layouts/base (71.4ms)
+Completed 200 OK in 258.6ms (Views: 162.0ms | ActiveRecord: 12.7ms)
+Started POST "/zz5/load_data" for 127.0.0.1 at 2016-03-30 19:27:52 +0200
+Processing by WorkdaysController#load_data as JSON
+  Parameters: {"year"=>2016, "week"=>13, "day"=>5}
+  Current user: admin (id=1)
+year: 2016
+zz5_workdays_controller, load_data, no weekview
+zz5_workdays_controller, load_data, employment_data: 2015-10-05
+zz5_workdays_controller, load_data, curr_date: 2016-04-01
+workdays_controller, load_data from: 2016-04-01
+workdays_controller, load_data to: 0
+initialize Zz5Workperiod for from date 2016-04-01 to date 0
+Zz5WorkPeriod, initialize @last_day: 2016-04-01
+no gaps to fill
+get_or_create_workdays_for_dates with date 2016-04-01
+get_or_create_workdays_for_dates, date: 2016-04-01
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+get_break_times, get_break_per_day_in_hours: 00:30
+get_break_per_day_in_hours, end: 2000-01-01 01:00:00 +0100
+get_break_per_day_in_hours, next begin: 2000-01-01 01:30:00 +0100
+get_break_per_day_in_hours, break_seconds: 1800
+get_break_per_day_in_hours, end: 2000-01-01 17:30:00 +0100
+Datum: 2016-04-01
+initialize_my, hours_on_date: 0.0
+initialize_my, additional_time.begin: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.end: 2000-01-01 01:00:00 +0100
+initialize_my, additional_time.begin: 2000-01-01 01:30:00 +0100
+initialize_my, additional_time.end: 2000-01-01 17:30:00 +0100
+initialize_my, wd: 16.0
+initialize_my, hours_missing: 16.0
+calculate_carries, old_carry_forward: -547440
+employment in calculate carries:  2016-04-012015-10-11
+---------------------------------------
+get_time_worked_in_seconds, additional end: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:00:00 +0100
+get_time_worked_in_seconds, additional end: 2000-01-01 17:30:00 +0100
+get_time_worked_in_seconds, additional begin: 2000-01-01 01:30:00 +0100
+get_time_worked_in_seconds,k worked: 57600.0
+calculate_carries, 2016-04-01 is a regular working day
+calculate_carries, worked: 57600.0
+calculate_carries, target: 27720
+calculate_carries, absences: 0
+calculate_carries, carry_forward: -577320
+calculate_carries, carry_over: -547440
+calculate_carries, new_carry_forward: -547440
+calculate_carries, update_carry: 0
+target for 2016-04-01 = 2000-01-01 07:42:00 +0100
+first_day: 2016-04-01
+@last_day: 2016-04-01
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-01
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+consumed_vacation: 0
+added_vacation: 0.0
+employment_data.vacation_entitlement: 693000
+this is your vacation entitlement: 693000
+this is your vacation entitlement: 693000.0
+append root project: Test
+get_vacation_entitlement_in_days, employment.vacation_entitlement: 693000
+get_vacation_entitlement_in_days, consumed_vacation: 0
+calculate_vacation, first_employment.start: 2015-10-11
+calculate_vacation, until_date: 2016-04-02
+calculate_vacation, last_employment.start: 2015-10-11
+calculate_vacation, current_date.year: 2016
+calculate_vacation, calc_year: 2015
+calculate_vacation, years: 1
+calculate_vacation, employment: 138600.0
+calculate_vacation, effective_date > until_date: 0
+calculate_vacation, years to compute for: 0
+get_vacation_entitlement_in_days, added_vacation: 0.0
+get_vacation_entitlement_in_days, vacation_entitlement: 693000.0
+get_vacation_entitlement_in_days, daily_target: 27720.0
+get_employment, employment start: 2015-10-11
+get_employment, employment: 138600.0
+  Rendered plugins/redmine_zz5/app/views/workdays/_data.json.erb (10.3ms)
+Completed 200 OK in 120.0ms (Views: 11.4ms | ActiveRecord: 20.9ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/" for 127.0.0.1 at 2016-03-30 19:30:01 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (6.5ms)
+Completed 200 OK in 251.7ms (Views: 115.9ms | ActiveRecord: 12.6ms)
+Started POST "/mtr/logout" for 127.0.0.1 at 2016-03-30 19:30:04 +0200
+Processing by MtrAccountController#mtr_logout as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HU4XhCnZWrz4HLsGBN96b6RZCZM0F4Df6ImGi3eshvM="}
+  Current user: admin (id=1)
+Redirected to http://localhost:3000/mtr/login
+Completed 302 Found in 55.6ms (ActiveRecord: 19.0ms)
+Started GET "/mtr/login" for 127.0.0.1 at 2016-03-30 19:30:04 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (11.4ms)
+Completed 200 OK in 51.6ms (Views: 39.3ms | ActiveRecord: 8.0ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2016-03-30 19:30:25 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (43.1ms)
+Completed 200 OK in 252.1ms (Views: 128.7ms | ActiveRecord: 12.2ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 127.0.0.1 at 2016-03-30 19:31:18 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (34.5ms)
+Completed 200 OK in 225.7ms (Views: 109.9ms | ActiveRecord: 16.4ms)
+Started POST "/mtr/login" for 127.0.0.1 at 2016-03-30 19:31:54 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z0YlNrUm4MJzEGByJj+km/z99uC5jHVoy1lEOGwgJrw=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 127.0.0.1 at 2016-03-30 17:31:54 UTC
+Redirected to http://localhost:3000/mtr
+Completed 302 Found in 159.4ms (ActiveRecord: 76.3ms)
+Started GET "/mtr" for 127.0.0.1 at 2016-03-30 19:31:54 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (5.4ms)
+Completed 200 OK in 74.7ms (Views: 43.7ms | ActiveRecord: 5.4ms)
+Started GET "/mtr/show" for 127.0.0.1 at 2016-03-30 19:32:02 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+Completed 500 Internal Server Error in 48.7ms
+
+NoMethodError (undefined method `strftime' for nil:NilClass):
+  plugins/redmine_mtr/app/controllers/mtr_workdays_controller.rb:87:in `mtr_show'
+  actionpack (3.2.22) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:167:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:491:in `_run__2133276092218357189__process_action__2879680354028092532__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_process_action_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `block in instrument'
+  activesupport (3.2.22) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (3.2.22) lib/active_support/notifications.rb:123:in `instrument'
+  actionpack (3.2.22) lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+  actionpack (3.2.22) lib/action_controller/metal/params_wrapper.rb:207:in `process_action'
+  activerecord (3.2.22) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (3.2.22) lib/abstract_controller/base.rb:121:in `process'
+  actionpack (3.2.22) lib/abstract_controller/rendering.rb:45:in `process'
+  actionpack (3.2.22) lib/action_controller/metal.rb:203:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+  actionpack (3.2.22) lib/action_controller/metal.rb:246:in `block in action'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:36:in `call'
+  journey (1.0.4) lib/journey/router.rb:68:in `block in call'
+  journey (1.0.4) lib/journey/router.rb:56:in `each'
+  journey (1.0.4) lib/journey/router.rb:56:in `call'
+  actionpack (3.2.22) lib/action_dispatch/routing/route_set.rb:608:in `call'
+  rack-openid (1.4.2) lib/rack/openid.rb:98:in `call'
+  request_store (1.0.5) lib/request_store/middleware.rb:9:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+  rack (1.4.7) lib/rack/etag.rb:23:in `call'
+  rack (1.4.7) lib/rack/conditionalget.rb:25:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/head.rb:14:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/flash.rb:242:in `call'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:210:in `context'
+  rack (1.4.7) lib/rack/session/abstract/id.rb:205:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/cookies.rb:341:in `call'
+  activerecord (3.2.22) lib/active_record/query_cache.rb:64:in `call'
+  activerecord (3.2.22) lib/active_record/connection_adapters/abstract/connection_pool.rb:479:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `_run__3423252707904185118__call__1223621907352538356__callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:405:in `__run_callback'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:385:in `_run_call_callbacks'
+  activesupport (3.2.22) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (3.2.22) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/remote_ip.rb:31:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/debug_exceptions.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:140:in `forward'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:249:in `fetch'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:189:in `lookup'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:66:in `call!'
+  rack-cache (1.5.0) lib/rack/cache/context.rb:51:in `call'
+  railties (3.2.22) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22) lib/rails/application.rb:231:in `call'
+  rack (1.4.7) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.22) lib/rails/rack/log_tailer.rb:17:in `call'
+  rack (1.4.7) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /usr/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /usr/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/show" for 127.0.0.1 at 2016-03-30 19:32:26 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (37.0ms)
+Completed 200 OK in 324.8ms (Views: 155.5ms | ActiveRecord: 35.0ms)
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=09%3A00&end=09%3A40&break=" for 127.0.0.1 at 2016-03-30 19:32:35 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"09:00", "end"=>"09:40", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 09:00
+@end: 09:40
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (5.0ms)
+Completed 200 OK in 29.2ms (Views: 19.4ms | ActiveRecord: 2.9ms)
+Started GET "/mtr/show?date=1.4.2016&year=2016&week=13&month=4&day=1&begin=09%3A00&end=09%3A40&break=" for 127.0.0.1 at 2016-03-30 19:32:37 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"1.4.2016", "year"=>"2016", "week"=>"13", "month"=>"4", "day"=>"1", "begin"=>"09:00", "end"=>"09:40", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-04-01
+@year: 2016
+@month: 4
+@week: 13
+@day: 1
+@begin: 09:00
+@end: 09:40
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (3.9ms)
+Completed 200 OK in 26.2ms (Views: 17.3ms | ActiveRecord: 4.0ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr" for 10.0.0.1 at 2016-03-30 19:33:14 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://10.0.0.20:3000/mtr/login
+Completed 302 Found in 215.0ms (ActiveRecord: 12.0ms)
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 19:33:14 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (59.9ms)
+Completed 200 OK in 117.0ms (Views: 109.3ms | ActiveRecord: 3.7ms)
+Started GET "/mtr/show" for 127.0.0.1 at 2016-03-30 21:32:16 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (6.8ms)
+Completed 200 OK in 153.2ms (Views: 37.6ms | ActiveRecord: 5.0ms)
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=09%3A00&end=09%3A40&break=" for 127.0.0.1 at 2016-03-30 21:32:25 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"09:00", "end"=>"09:40", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 09:00
+@end: 09:40
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (3.9ms)
+Completed 200 OK in 24.0ms (Views: 17.8ms | ActiveRecord: 0.9ms)
+Started GET "/mtr/show?date=1.4.2016&year=2016&week=13&month=4&day=1&begin=09%3A00&end=09%3A40&break=" for 127.0.0.1 at 2016-03-30 21:32:27 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"1.4.2016", "year"=>"2016", "week"=>"13", "month"=>"4", "day"=>"1", "begin"=>"09:00", "end"=>"09:40", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-04-01
+@year: 2016
+@month: 4
+@week: 13
+@day: 1
+@begin: 09:00
+@end: 09:40
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (5.9ms)
+Completed 200 OK in 25.6ms (Views: 19.7ms | ActiveRecord: 0.9ms)
+Started GET "/mtr/show?date=2.4.2016&year=2016&week=13&month=4&day=2&begin=01%3A30&end=17%3A30&break=" for 127.0.0.1 at 2016-03-30 21:32:29 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"2.4.2016", "year"=>"2016", "week"=>"13", "month"=>"4", "day"=>"2", "begin"=>"01:30", "end"=>"17:30", "break"=>""}
+  Current user: admin (id=1)
+@date: 2016-04-02
+@year: 2016
+@month: 4
+@week: 13
+@day: 2
+@begin: 01:30
+@end: 17:30
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.9ms)
+Completed 200 OK in 23.7ms (Views: 17.9ms | ActiveRecord: 1.4ms)
+Started GET "/mtr/show" for 127.0.0.1 at 2016-03-30 21:33:42 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (5.7ms)
+Completed 200 OK in 36.2ms (Views: 23.0ms | ActiveRecord: 8.4ms)
+Started GET "/mtr" for 10.0.0.1 at 2016-03-30 21:33:54 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://10.0.0.20:3000/mtr/login
+Completed 302 Found in 9.7ms (ActiveRecord: 1.3ms)
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:33:54 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (2.2ms)
+Completed 200 OK in 15.3ms (Views: 11.8ms | ActiveRecord: 0.9ms)
+Started POST "/mtr/login" for 10.0.0.1 at 2016-03-30 21:33:57 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zAhdWOwD3KiOanSXnXiNPIT0NzBRFQwbsH1y4wkiqww=", "username"=>"admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 10.0.0.1 at 2016-03-30 19:33:57 UTC
+Redirected to http://10.0.0.20:3000/mtr
+Completed 302 Found in 282.0ms (ActiveRecord: 255.4ms)
+Started GET "/mtr" for 10.0.0.1 at 2016-03-30 21:33:58 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (4.8ms)
+Completed 200 OK in 29.6ms (Views: 20.6ms | ActiveRecord: 2.1ms)
+Started GET "/mtr/show" for 10.0.0.1 at 2016-03-30 21:34:02 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (3.7ms)
+Completed 200 OK in 23.2ms (Views: 16.5ms | ActiveRecord: 1.5ms)
+Started GET "/mtr" for 10.0.0.18 at 2016-03-30 21:36:25 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: anonymous
+Redirected to http://10.0.0.20:3000/mtr/login
+Completed 302 Found in 10.2ms (ActiveRecord: 2.1ms)
+Started GET "/mtr/login" for 10.0.0.18 at 2016-03-30 21:36:25 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (2.0ms)
+Completed 200 OK in 14.3ms (Views: 11.0ms | ActiveRecord: 0.9ms)
+Started POST "/mtr/login" for 10.0.0.18 at 2016-03-30 21:36:34 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aPPBr37QOkFqzIH83HbXhJ/8GR3nqsnhO9t3iW87vic=", "username"=>"Admin", "password"=>"[FILTERED]", "loginMtr"=>"Anmelden »"}
+  Current user: anonymous
+Successful authentication for 'admin' from 10.0.0.18 at 2016-03-30 19:36:34 UTC
+Redirected to http://10.0.0.20:3000/mtr
+Completed 302 Found in 16.8ms (ActiveRecord: 7.7ms)
+Started GET "/mtr" for 10.0.0.18 at 2016-03-30 21:36:34 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (3.1ms)
+Completed 200 OK in 23.6ms (Views: 15.4ms | ActiveRecord: 2.0ms)
+Started GET "/mtr/show" for 10.0.0.18 at 2016-03-30 21:36:47 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-30
+@date: 2016-03-30
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.2ms)
+Completed 200 OK in 23.1ms (Views: 17.0ms | ActiveRecord: 1.5ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/" for 10.0.0.1 at 2016-03-30 21:38:03 +0200
+Processing by MtrWelcomeController#mtr_index as HTML
+  Current user: admin (id=1)
+  Rendered plugins/redmine_mtr/app/views/mtr_welcome/mtr_index.html.erb within layouts/base (5.8ms)
+Completed 200 OK in 189.9ms (Views: 94.5ms | ActiveRecord: 12.7ms)
+Started POST "/mtr/logout" for 10.0.0.1 at 2016-03-30 21:38:08 +0200
+Processing by MtrAccountController#mtr_logout as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HCNAUfSbIKTfVwXsrhxjx4T2jDPpGCQ+9BcZ/UZYfSk="}
+  Current user: admin (id=1)
+Redirected to http://10.0.0.20:3000/mtr/login
+Completed 302 Found in 29.0ms (ActiveRecord: 3.3ms)
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:38:08 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (4.0ms)
+Completed 200 OK in 25.6ms (Views: 20.3ms | ActiveRecord: 1.6ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:39:35 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (33.6ms)
+Completed 200 OK in 200.7ms (Views: 102.0ms | ActiveRecord: 10.9ms)
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:39:37 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (2.3ms)
+Completed 200 OK in 15.5ms (Views: 11.8ms | ActiveRecord: 1.1ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:45:00 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (34.3ms)
+Completed 200 OK in 203.5ms (Views: 102.4ms | ActiveRecord: 10.9ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:46:12 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (33.6ms)
+Completed 200 OK in 205.7ms (Views: 104.7ms | ActiveRecord: 10.6ms)
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:46:14 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (2.6ms)
+Completed 200 OK in 16.1ms (Views: 12.1ms | ActiveRecord: 1.2ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/mtr/login" for 10.0.0.1 at 2016-03-30 21:47:25 +0200
+Processing by MtrAccountController#mtr_login as HTML
+  Current user: anonymous
+  Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (33.3ms)
+Completed 200 OK in 205.0ms (Views: 101.0ms | ActiveRecord: 13.6ms)

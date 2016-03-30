@@ -69,6 +69,21 @@ class MtrWorkdaysController < ApplicationController
 
 
 
+
+
+      zz5_workday = Zz5Workday.where("user_id = ? and date = ?", @user.id, @date).first
+      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id).first
+
+      if zz5_begin_end_times != nil
+        params[:begin] = zz5_begin_end_times.begin.strftime("%H:%M")
+        params[:end] = zz5_begin_end_times.end.strftime("%H:%M")
+        params[:break] = "00:00"
+      else
+        params[:begin] = "00:00"
+        params[:end] = "00:00"
+        params[:break] = "00:00"
+      end
+
       Rails.logger.info "@date: " + @date.to_s
       Rails.logger.info "@year: " + @year.to_s
       Rails.logger.info "@month: " + @month.to_s
@@ -77,17 +92,6 @@ class MtrWorkdaysController < ApplicationController
       Rails.logger.info "@begin: " + @begin.to_s
       Rails.logger.info "@end: " + @end.to_s
       Rails.logger.info "@break: " + @break.to_s
-
-      zz5_workdays_id = Zz5Workday.where("user_id = ? and date = ?", @user.id, @date).first.id
-      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workdays_id).first
-
-      if zz5_begin_end_times != nil
-        params[:begin] = zz5_begin_end_times.begin.strftime("%H:%M")
-        params[:end] = zz5_begin_end_times.end.strftime("%H:%M")
-      else
-        params[:begin] = "00:00"
-        params[:end] = "00:00"
-      end
     else
       render_403
     end
