@@ -47,44 +47,23 @@ class MtrWorkdaysController < ApplicationController
       @year = params[:year]
       @week = params[:week]
       @day  = params[:day]
-
+      @end = params[:end]
+      @begin = params[:begin]
+      @break = params[:break]
       @date = params[:date]
-      Rails.logger.info "@year: " + @date.to_s
 
-      @weekview = false
+      Rails.logger.info "@date: " + @date.to_s
+      Rails.logger.info "@year: " + @year.to_s
+      Rails.logger.info "@week: " + @week.to_s
+      Rails.logger.info "@day: " + @day.to_s
+      Rails.logger.info "@begin: " + @begin.to_s
+      Rails.logger.info "@end: " + @end.to_s
+      Rails.logger.info "@break: " + @break.to_s
 
-      if @user.zz5_user_pref.alternative_worktimes == 0
-        @alternative_worktimes = false
-      else
-        @alternative_worktimes = true
-      end
+      params[:begin] = '01:00'
 
-      @zz5_calculation_labels = ['zz5_actual_time','zz5_target_time','zz5_time_difference','zz5_vacation']
-      @activity_array = TimeEntryActivity.select("id, name")
-      @default_activity = TimeEntryActivity.where("is_default = true").first
-      if @default_activity.nil?
-        @default_activity = @activity_array.first
-      end
 
-      employment_data = Zz5Employment.where(:user_id => @user.id).order('start ASC').first
 
-      if !employment_data.nil?
-        @min_date_absence = "#{employment_data.start.beginning_of_week.day}-#{employment_data.start.beginning_of_week.month}-#{employment_data.start.beginning_of_week.year}"
-        @min_date = "#{employment_data.start.beginning_of_week.year}-#{employment_data.start.beginning_of_week.month}-#{employment_data.start.beginning_of_week.day}"
-        max_date  = Date.today + 6.months
-        @max_date = max_date.end_of_week.to_s
-        @max_date_absence = Date.parse(@max_date).strftime("%d-%m-%Y")
-      end
-
-      if @alternative_worktimes
-        @weekview = false
-      end
-
-      Rails.logger.info "@weekview: " + @weekview.to_s
-      Rails.logger.info "@alt_view: " + @alternative_worktimes.to_s
-      respond_to do |format|
-        format.html
-      end
     else
       render_403
     end

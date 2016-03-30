@@ -8,24 +8,51 @@
 
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
     <%= javascript_include_tag "worktime.js", :plugin => 'redmine_mtr' %>
+    <%= javascript_include_tag "zz5_angular.js", :plugin => 'redmine_zz5' %>
 
+    <meta name="viewport" content="width=20, initial-scale=1">
 <% end %>
 <div class="modal show" aria-hidden="true">
+  <form id="worktime_form" name="date_form" method="get">
   <center>
-    <div style="padding-bottom: 3px">
-    <button type="button" class="btn btn-default" aria-label="Center Align" value="dec" onClick="changeDate(this)">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    </button>
-      <%= label_tag 'date', params[:date], :id => 'date'%>
-    <button type="button" class="btn btn-default" aria-label="Left Align" value="inc" onClick="changeDate(this)">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    </button>
-    </div>
+
+    <!-- dateform -->
+
+      <div style="padding-bottom: 3px">
+      <button type="button" class="btn btn-default" aria-label="Center Align" value="dec" onClick="changeDate(this)">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      </button>
+        <%= label_tag 'date_label', params[:date_label], :id => 'date_label', :name => 'date_label'%>
+        <input type="hidden" id="date" name="date"/>
+        <input type="hidden" id="year" name="year"/>
+        <input type="hidden" id="week" name="week"/>
+        <input type="hidden" id="day" name="day"/>
+      <button type="button" class="btn btn-default" aria-label="Left Align" value="inc" onClick="changeDate(this)">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </button>
+      </div>
+
+
   </center>
   <div class="work-absences-container">
-    <%= render :partial => "mtr_workdays/mtr_worktimes_view", :content_type => "text/html"%>
-  </div>
 
+    <!-- begin field -->
+    <div class="col-xs-4 form-group">
+      <label class="col-xs-12"><%=l(:mtr_work_start) %></label>
+      <%= text_field_tag 'begin', params[:begin], :class => 'col-xs-12', :type => 'time' %>
+    </div>
+    <!-- end field -->
+    <div class="col-xs-4 form-group">
+      <label class="col-xs-12"><%=l(:mtr_work_end)%></label>
+      <%= text_field_tag 'end', params[:end], :class => 'col-xs-12', :type => 'time' %>
+    </div>
+    <!-- break field -->
+    <div class="col-xs-4 form-group">
+      <label class="col-xs-12"><%=l(:mtr_break_duration) %></label>
+      <%= text_field_tag 'break', params[:break], :class => 'col-xs-12', :type => 'time' %>
+    </div>
+  </div>
+  </form>
   <script>
       var data = {"year": <%= @year %>, "week": <%= @week %>, "day": <%= @day %>}
 

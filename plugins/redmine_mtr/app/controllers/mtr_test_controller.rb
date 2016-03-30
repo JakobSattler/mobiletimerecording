@@ -13,7 +13,7 @@ class MtrTestController < ApplicationController
     Rails.logger.info 'begin: ' + zz5_begin_end_times.begin.to_s
     Rails.logger.info 'end: ' + zz5_begin_end_times.end.to_s
 
-
+    params[:test] = @curr_date
 
 
 

@@ -1,14 +1,21 @@
 <% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'bootstrap.css', :plugin => 'redmine_mtr' %>
-    <%= stylesheet_link_tag 'bootstrap.min.css', :plugin => 'redmine_mtr' %>
-    <%= stylesheet_link_tag 'bootstrap-theme.css', :plugin => 'redmine_mtr' %>
-    <%= stylesheet_link_tag 'bootstrap-theme.min.css', :plugin => 'redmine_mtr' %>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'styles.css', :plugin => 'redmine_mtr' %>
+    <meta name="viewport" content="width=20, initial-scale=1">
 
     <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" %>
-<% end %>
 
-<div id="login-form" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+
+<% end %>
+<div id="login-form" class="col-sm-12 modal show" tabindex="-1" role="dialog" aria-hidden="true">
     <%= form_tag(mtr_signin_path) do %>
         <%= back_url_hidden_field_tag %>
         <div class="modal-dialog">
@@ -30,12 +37,13 @@
                                name="loginMtr" value="<%=l(:button_login)%> &#187;" tabindex="5"/>
                     </div>
                     <% flash.each do |key, value| %>
-                      <div style="padding-top: 5px;">
-                        <label class="mtr-error"><%= value %></div>
-                      </div>
+                    <div style="padding-top: 5px;">
+                      <label class="mtr-error"><%= value %></label>
+                    </div>
+                  </div>
                     <% end %>
-                </div>
-            </div>
+              </div>
+          </div>
         </div>
     <% end %>
 </div>

@@ -1,14 +1,5 @@
 
 <div class="col-xs-4 form-group">
   <label class="col-xs-12"><%=title %></label>
-  <input class="col-xs-12" type="time" ng-disabled="setDisabled('{{day.id}}_<%=id%>', day.begin_end_times[0].begin)" id="{{day.id}}_<%=id%>"
-         ng-model="<%= model %>"
-         ng-change="updateSingleEndTime(day, '<%=id%>');
-                                    calculateSingleActualHours(day);
-                                    calcDifference(day);
-                                    checkAbsenceTime(day);"
-         ng-focus="hasFocus(); old_begin = day.begin_end_times[0].begin; old_end = day.begin_end_times[day.begin_end_times.length-1].end; old_break = day.break; setBeginEndTime(day, '<%= id %>');"
-         ng-blur="lostFocus(); saveSingleWorktime(day, '<%= id %>', old_begin, old_end, old_break);"
-         tabindex="{{computeTabindex(day.id, <%=id_int%>) + 1}}"
-         size="7" maxlength="5" type="text" autocomplete="off" placeholder="00:00" time-entry-field="{show24Hours: true, defaultTime: '09:00:00'}"/>
+  <%= text_field_tag '<%=id', params[:test], :class => 'col-xs-12', :type => 'time' %>
 </div>
