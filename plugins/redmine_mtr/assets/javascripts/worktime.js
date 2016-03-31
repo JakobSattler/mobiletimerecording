@@ -30,7 +30,6 @@ function changeDate(button){
     else if (button.value === "dec") {
         var newDate = new Date(actDate.getTime() - 86400000);
     }
-    document.getElementById("date_label").textContent = newDate.toLocaleDateString();
     document.getElementById("date").value = newDate.toLocaleDateString();
     document.getElementById("year").value = newDate.getFullYear();
     document.getElementById("month").value = newDate.getMonth()+1;

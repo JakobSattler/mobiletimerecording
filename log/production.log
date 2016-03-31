@@ -75271,3 +75271,110 @@ Processing by MtrAccountController#mtr_login as HTML
   Current user: anonymous
   Rendered plugins/redmine_mtr/app/views/mtr_account/mtr_login.html.erb within layouts/base (33.3ms)
 Completed 200 OK in 205.0ms (Views: 101.0ms | ActiveRecord: 13.6ms)
+Connecting to database specified by database.yml
+Creating scope :sorted. Overwriting existing method Group.sorted.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :system. Overwriting existing method Enumeration.system.
+Started GET "/" for 10.151.2.216 at 2016-03-31 08:59:47 +0200
+Processing by WelcomeController#index as HTML
+  Current user: admin (id=1)
+  Rendered welcome/index.html.erb within layouts/base (153.2ms)
+Completed 200 OK in 518.7ms (Views: 276.1ms | ActiveRecord: 64.8ms)
+Started GET "/mtr/show" for 10.151.2.216 at 2016-03-31 08:59:54 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Current user: admin (id=1)
+today: 2016-03-31
+@date: 2016-03-31
+@year: 
+@month: 
+@week: 
+@day: 
+@begin: 
+@end: 
+@break: 
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (6.5ms)
+Completed 200 OK in 198.4ms (Views: 21.8ms | ActiveRecord: 3.2ms)
+Started GET "/mtr/show?date=1.4.2016&year=2016&week=13&month=4&day=1&begin=00%3A00&end=00%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:01 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"1.4.2016", "year"=>"2016", "week"=>"13", "month"=>"4", "day"=>"1", "begin"=>"00:00", "end"=>"00:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-04-01
+@year: 2016
+@month: 4
+@week: 13
+@day: 1
+@begin: 00:00
+@end: 00:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.3ms)
+Completed 200 OK in 21.7ms (Views: 16.5ms | ActiveRecord: 1.0ms)
+Started GET "/mtr/show?date=31.3.2016&year=2016&week=13&month=3&day=31&begin=00%3A00&end=00%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:02 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"31.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"31", "begin"=>"00:00", "end"=>"00:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-03-31
+@year: 2016
+@month: 3
+@week: 13
+@day: 31
+@begin: 00:00
+@end: 00:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.0ms)
+Completed 200 OK in 21.3ms (Views: 16.2ms | ActiveRecord: 0.8ms)
+Started GET "/mtr/show?date=30.3.2016&year=2016&week=13&month=3&day=30&begin=00%3A00&end=00%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:03 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"30.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"30", "begin"=>"00:00", "end"=>"00:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-03-30
+@year: 2016
+@month: 3
+@week: 13
+@day: 30
+@begin: 00:00
+@end: 00:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.7ms)
+Completed 200 OK in 30.3ms (Views: 19.9ms | ActiveRecord: 1.3ms)
+Started GET "/mtr/show?date=29.3.2016&year=2016&week=13&month=3&day=29&begin=12%3A00&end=12%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:04 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"29.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"29", "begin"=>"12:00", "end"=>"12:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-03-29
+@year: 2016
+@month: 3
+@week: 13
+@day: 29
+@begin: 12:00
+@end: 12:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.1ms)
+Completed 200 OK in 21.8ms (Views: 15.9ms | ActiveRecord: 2.0ms)
+Started GET "/mtr/show?date=28.3.2016&year=2016&week=13&month=3&day=28&begin=00%3A00&end=00%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:05 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"28.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"28", "begin"=>"00:00", "end"=>"00:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-03-28
+@year: 2016
+@month: 3
+@week: 13
+@day: 28
+@begin: 00:00
+@end: 00:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.4ms)
+Completed 200 OK in 21.1ms (Views: 16.4ms | ActiveRecord: 1.0ms)
+Started GET "/mtr/show?date=26.3.2016&year=2016&week=13&month=3&day=26&begin=00%3A00&end=00%3A00&break=00%3A00" for 10.151.2.216 at 2016-03-31 09:00:06 +0200
+Processing by MtrWorkdaysController#mtr_show as HTML
+  Parameters: {"date"=>"26.3.2016", "year"=>"2016", "week"=>"13", "month"=>"3", "day"=>"26", "begin"=>"00:00", "end"=>"00:00", "break"=>"00:00"}
+  Current user: admin (id=1)
+@date: 2016-03-26
+@year: 2016
+@month: 3
+@week: 13
+@day: 26
+@begin: 00:00
+@end: 00:00
+@break: 00:00
+  Rendered plugins/redmine_mtr/app/views/mtr_workdays/mtr_show.html.erb within layouts/base (4.3ms)
+Completed 200 OK in 20.9ms (Views: 16.3ms | ActiveRecord: 1.0ms)
