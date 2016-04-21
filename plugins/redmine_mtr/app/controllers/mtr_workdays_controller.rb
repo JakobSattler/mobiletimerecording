@@ -68,16 +68,30 @@ class MtrWorkdaysController < ApplicationController
       params[:date] = "#{@date.mday}.#{@date.mon}.#{@date.year}"
 
 
-
-
-
       zz5_workday = Zz5Workday.where("user_id = ? and date = ?", @user.id, @date).first
-      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id).first
+      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id)
+
+      @index = 0
+      @begin = DateTime.parse("00:00")
+      @end = DateTime.parse("00:00")
+      @break = DateTime.parse("00:00")
 
       if zz5_begin_end_times != nil
-        params[:begin] = zz5_begin_end_times.begin.strftime("%H:%M")
-        params[:end] = zz5_begin_end_times.end.strftime("%H:%M")
-        params[:break] = "00:00"
+        zz5_begin_end_times.each_with_index do |i,index |
+          Rails.logger.info "end"+ @end.to_s
+          if @index == 0
+            @begin = i.begin
+          end
+            @break += i.begin-@end;
+          @end = i.end
+          @index+=1
+        end
+      end
+
+      if !zz5_begin_end_times.nil?
+        params[:begin] = @begin.strftime("%H:%M")
+        params[:end] = @end.strftime("%H:%M")
+        params[:break] = Time.at(@break).utc.strftime("%H:%M")
       else
         params[:begin] = "00:00"
         params[:end] = "00:00"
