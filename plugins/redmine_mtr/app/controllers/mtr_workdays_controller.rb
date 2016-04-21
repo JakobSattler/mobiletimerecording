@@ -74,7 +74,7 @@ class MtrWorkdaysController < ApplicationController
       @index = 0
       @begin = DateTime.parse("00:00")
       @end = DateTime.parse("00:00")
-      @break = DateTime.parse("00:00")
+      @break = 0
 
       if zz5_begin_end_times != nil
         zz5_begin_end_times.each_with_index do |i,index |
@@ -82,7 +82,10 @@ class MtrWorkdaysController < ApplicationController
           if @index == 0
             @begin = i.begin
           end
+          if @index > 0
             @break += i.begin-@end;
+          end
+
           @end = i.end
           @index+=1
         end
@@ -97,6 +100,14 @@ class MtrWorkdaysController < ApplicationController
         params[:end] = "00:00"
         params[:break] = "00:00"
       end
+
+      @sollzeit = zz5_workday.target.strftime("%H:%M")
+      Rails.logger.info "Sollzeit:"+@sollzeit
+
+      @istzeit = @end - @begin - @break;
+      @istzeit = Time.at(@istzeit).utc.strftime("%H:%M")
+
+      Rails.logger.info "Istzeit:"+@istzeit.to_s
 
       Rails.logger.info "@date: " + @date.to_s
       Rails.logger.info "@year: " + @year.to_s
