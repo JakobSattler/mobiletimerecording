@@ -107,6 +107,12 @@ class MtrWorkdaysController < ApplicationController
       @istzeit = @end - @begin - @break;
       @istzeit = Time.at(@istzeit).utc.strftime("%H:%M")
 
+      @ueberstunden = zz5_workday.carry_forward
+      #@ueberstunden = Time.at(@ueberstunden).utc.strftime("%H:%M")
+      @ueberstundenMin = (@ueberstunden/60)%60
+      @ueberstundenHour = (@ueberstunden/3600)
+      Rails.logger.info "Ueberstunden:"+format("%02d:%02d",@ueberstundenHour,@ueberstundenMin)
+
       Rails.logger.info "Istzeit:"+@istzeit.to_s
 
       Rails.logger.info "@date: " + @date.to_s
