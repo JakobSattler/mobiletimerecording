@@ -52,11 +52,31 @@
       <label class="col-xs-12"><%=l(:mtr_break_duration) %></label>
       <%= text_field_tag 'break', params[:break], :class => 'col-xs-12', :type => 'time' %>
     </div>
+
+    <!-- actual time -->
+    <div class="col-xs-3 form-group">
+      <label class="col-xs-12"><%=l(:mtr_actual_time) %></label>
+      <%= text_field_tag 'actual', params[:actual], :class => 'col-xs-12', :type => 'time', :readonly => 'readonly' %>
+    </div>
+    <!-- target time -->
+    <div class="col-xs-3 form-group">
+      <label class="col-xs-12"><%=l(:mtr_target_time)%></label>
+      <%= text_field_tag 'target', params[:target], :class => 'col-xs-12', :type => 'time', :readonly => 'readonly' %>
+    </div>
+    <!-- time difference-->
+    <div class="col-xs-3 form-group">
+      <label class="col-xs-12"><%=l(:mtr_time_difference) %></label>
+      <%= text_field_tag 'difference', params[:difference], :class => 'col-xs-12', :type => 'time', :readonly => 'readonly' %>
+    </div>
+    <!-- time carry over -->
+    <div class="col-xs-3 form-group">
+      <label class="col-xs-12"><%=l(:mtr_time_over) %></label>
+      <%= text_field_tag 'difference', params[:over], :class => 'col-xs-12', :type => 'time', :readonly => 'readonly' %>
+    </div>
+
   </div>
   </form>
   <script>
       var data = {"year": <%= @year %>, "week": <%= @week %>, "day": <%= @day %>}
-
-
   </script>
 </div>

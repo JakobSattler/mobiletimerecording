@@ -7,6 +7,7 @@ de:
   mtr_actual_time: "Ist"
   mtr_target_time: "Soll"
   mtr_time_difference: "Differenz"
+  mtr_time_over: "Übertrag"
 
   #worktime errors
   mtr_worktime_err_empty: "Ungültige Arbeitszeit"

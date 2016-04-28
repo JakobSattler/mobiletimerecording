@@ -42,7 +42,9 @@ class MtrWorkdaysController < ApplicationController
   # show the workday input page
   def mtr_show
     #Rails.logger.info "WorkdayController, show"
-    if User.current.allowed_to?(:view_zz5, nil, :global => true)
+    if !User.current.logged?
+      redirect_back_or_default mtr_signin_url
+    elsif User.current.allowed_to?(:view_zz5, nil, :global => true)
       @user = User.current
       @year = params[:year]
       @week = params[:week]
@@ -73,60 +75,80 @@ class MtrWorkdaysController < ApplicationController
         zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id)
 
 
-      @index = 0
-      @begin = DateTime.parse("00:00")
-      @end = DateTime.parse("00:00")
-      @break = 0
+        @index = 0
+        @begin = DateTime.parse("00:00")
+        @end = DateTime.parse("00:00")
+        @break = 0
 
-      if zz5_begin_end_times != nil
-        zz5_begin_end_times.each_with_index do |i,index |
-          Rails.logger.info "end"+ @end.to_s
-          if @index == 0
-            @begin = i.begin
-          end
-          if @index > 0
-            @break += i.begin-@end;
-          end
+        if zz5_begin_end_times != nil
+          zz5_begin_end_times.each_with_index do |i,index |
+            Rails.logger.info "end"+ @end.to_s
+            if @index == 0
+              @begin = i.begin
+            end
+            if @index > 0
+              @break += i.begin-@end;
+            end
 
-          @end = i.end
-          @index+=1
+            @end = i.end
+            @index+=1
+          end
         end
+
+        if !zz5_begin_end_times.nil?
+          params[:begin] = @begin.strftime("%H:%M")
+          params[:end] = @end.strftime("%H:%M")
+          params[:break] = Time.at(@break).utc.strftime("%H:%M")
+        else
+          params[:begin] = "00:00"
+          params[:end] = "00:00"
+          params[:break] = "00:00"
+        end
+
+        @sollzeit = zz5_workday.target.strftime("%H:%M")
+        Rails.logger.info "Sollzeit:"+@sollzeit
+        params[:target] = @sollzeit
+
+        @istzeit = @end - @begin - @break;
+        @istzeit = Time.at(@istzeit).utc.strftime("%H:%M")
+        params[:actual] = @istzeit
+
+        #carry_forward --> Übertrag for Woche
+        #carry_over --> Überstunden am Tag
+        @ueberstunden = zz5_workday.carry_forward
+        Rails.logger.info "carry forward: " + @ueberstunden.to_s
+        #@ueberstunden = Time.at(@ueberstunden).utc.strftime("%H:%M")
+        @ueberstundenMin = (@ueberstunden/60)%60
+        @ueberstundenHour = (@ueberstunden/3600)
+        params[:difference] = format("%02d:%02d", @ueberstundenHour, @ueberstundenMin)
+
+        @uebertrag = zz5_workday.carry_over
+        @uebertragMin = (@uebertrag/60)%60
+        @uebertragHour = (@uebertrag/3600)
+        params[:over] = format("%02d:%02d", @uebertragHour, @uebertragMin)
+
+
+
+        Rails.logger.info "Ueberstunden: "+format("%02d:%02d",@ueberstundenHour,@ueberstundenMin)
+
+        Rails.logger.info "Istzeit: "+@istzeit.to_s
+
+        Rails.logger.info "@date: " + @date.to_s
+        Rails.logger.info "@year: " + @year.to_s
+        Rails.logger.info "@month: " + @month.to_s
+        Rails.logger.info "@week: " + @week.to_s
+        Rails.logger.info "@day: " + @day.to_s
+        Rails.logger.info "@begin: " + @begin.to_s
+        Rails.logger.info "@end: " + @end.to_s
+        Rails.logger.info "@break: " + @break.to_s
       end
 
-      if !zz5_begin_end_times.nil?
-        params[:begin] = @begin.strftime("%H:%M")
-        params[:end] = @end.strftime("%H:%M")
-        params[:break] = Time.at(@break).utc.strftime("%H:%M")
-      else
-        params[:begin] = "00:00"
-        params[:end] = "00:00"
-        params[:break] = "00:00"
-      end
+      zz5_employment = Zz5Employment.where("user_id = ?", @user.id).first
+      @urlaubsanspruch = zz5_employment.vacation_entitlement
+      @urlaubsanspruchMin = (@urlaubsanspruch/60)%60
+      @urlaubsanspruchHour = (@urlaubsanspruch/3600)
+      Rails.logger.info("Urlaubsanspruch: " + format("%02d:%02d", @urlaubsanspruchMin, @urlaubsanspruchHour))
 
-      @sollzeit = zz5_workday.target.strftime("%H:%M")
-      Rails.logger.info "Sollzeit:"+@sollzeit
-
-      @istzeit = @end - @begin - @break;
-      @istzeit = Time.at(@istzeit).utc.strftime("%H:%M")
-
-      @ueberstunden = zz5_workday.carry_forward
-      #@ueberstunden = Time.at(@ueberstunden).utc.strftime("%H:%M")
-      @ueberstundenMin = (@ueberstunden/60)%60
-      @ueberstundenHour = (@ueberstunden/3600)
-
-      Rails.logger.info "Ueberstunden:"+format("%02d:%02d",@ueberstundenHour,@ueberstundenMin)
-
-      Rails.logger.info "Istzeit:"+@istzeit.to_s
-
-      Rails.logger.info "@date: " + @date.to_s
-      Rails.logger.info "@year: " + @year.to_s
-      Rails.logger.info "@month: " + @month.to_s
-      Rails.logger.info "@week: " + @week.to_s
-      Rails.logger.info "@day: " + @day.to_s
-      Rails.logger.info "@begin: " + @begin.to_s
-      Rails.logger.info "@end: " + @end.to_s
-      Rails.logger.info "@break: " + @break.to_s
-      end
     else
       render_403
     end

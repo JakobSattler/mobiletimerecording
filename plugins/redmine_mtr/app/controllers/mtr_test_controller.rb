@@ -15,11 +15,6 @@ class MtrTestController < ApplicationController
 
     params[:test] = @curr_date
 
-
-
     employment_data = Zz5Employment.where(:user_id => @user.id).order('start ASC').first
-
-
-
   end
 end

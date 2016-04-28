@@ -17,6 +17,7 @@ class MtrAccountController < ApplicationController
   def mtr_login
     if request.get?
       if User.current.logged?
+        Rails.logger.info "user logged in"
         redirect_back_or_default mtr_home_url, :referer => true
       end
     else
