@@ -69,7 +69,9 @@ class MtrWorkdaysController < ApplicationController
 
 
       zz5_workday = Zz5Workday.where("user_id = ? and date = ?", @user.id, @date).first
-      zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id)
+      if(zz5_workday != nil)
+        zz5_begin_end_times = Zz5BeginEndTimes.where("zz5_workdays_id = ?", zz5_workday.id)
+
 
       @index = 0
       @begin = DateTime.parse("00:00")
@@ -111,6 +113,7 @@ class MtrWorkdaysController < ApplicationController
       #@ueberstunden = Time.at(@ueberstunden).utc.strftime("%H:%M")
       @ueberstundenMin = (@ueberstunden/60)%60
       @ueberstundenHour = (@ueberstunden/3600)
+
       Rails.logger.info "Ueberstunden:"+format("%02d:%02d",@ueberstundenHour,@ueberstundenMin)
 
       Rails.logger.info "Istzeit:"+@istzeit.to_s
@@ -123,10 +126,10 @@ class MtrWorkdaysController < ApplicationController
       Rails.logger.info "@begin: " + @begin.to_s
       Rails.logger.info "@end: " + @end.to_s
       Rails.logger.info "@break: " + @break.to_s
+      end
     else
       render_403
     end
-
   end
 
   def load_data
